@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Blinkart Wholesale Store</title>
+
+<style>
+
+:root{
+--primary:#ff6600;
+--accent:#fff200;
+--sale:#ff3300;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Segoe UI',sans-serif;
+background:white;
+padding-bottom:30px;
+}
+
+/* LOADING SCREEN */
+
+#loadingScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:var(--accent);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:99999;
+transition:0.4s;
+}
+
+.loader-logo{
+font-size:45px;
+font-weight:800;
+color:var(--primary);
+margin-bottom:20px;
+}
+
+.spinner{
+width:60px;
+height:60px;
+border:6px solid white;
+border-top:6px solid var(--primary);
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+/* HEADER */
+
+header{
+background:var(--accent);
+padding:15px;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+border-bottom:3px solid var(--primary);
+}
+
+.header-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+color:var(--primary);
+}
+
+.top-nav-actions{
+display:flex;
+gap:10px;
+}
+
+.nav-item{
+background:white;
+padding:8px 14px;
+border-radius:20px;
+font-size:14px;
+font-weight:bold;
+cursor:pointer;
+position:relative;
+border:2px solid var(--primary);
+}
+
+.badge{
+position:absolute;
+top:-8px;
+right:-8px;
+background:red;
+color:white;
+padding:2px 6px;
+border-radius:50%;
+font-size:10px;
+display:none;
+}
+
+/* SEARCH */
+
+.search-box input{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:2px solid var(--primary);
+font-size:15px;
+outline:none;
+}
+
+/* SALE */
+
+#saleBanner{
+background:var(--sale);
+color:white;
+text-align:center;
+padding:12px;
+font-weight:bold;
+font-size:16px;
+border-top:2px solid var(--primary);
+border-bottom:2px solid var(--primary);
+}
+
+/* NOTIFICATION */
+
+#appNotification{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%) translateY(-100px);
+background:#222;
+color:white;
+padding:12px 25px;
+border-radius:30px;
+font-weight:bold;
+transition:0.4s;
+z-index:9999;
+border:2px solid var(--primary);
+}
+
+#appNotification.show{
+transform:translateX(-50%) translateY(0);
+}
+
+/* CATEGORY */
+
+.category-title{
+background:#fff4b3;
+padding:12px 20px;
+font-size:20px;
+font-weight:bold;
+border-left:6px solid var(--primary);
+margin:25px 15px 15px;
+border-radius:6px;
+}
+
+/* PRODUCT GRID */
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+gap:15px;
+padding:0 15px;
+}
+
+.card{
+background:white;
+border-radius:14px;
+padding:14px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+text-align:center;
+border:2px solid var(--primary);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+}
+
+.card h4{
+font-size:15px;
+height:40px;
+margin-bottom:10px;
+}
+
+.price-old{
+text-decoration:line-through;
+color:#777;
+font-size:12px;
+}
+
+.price-new{
+display:block;
+font-size:20px;
+font-weight:bold;
+color:var(--primary);
+margin:8px 0;
+}
+
+/* BUTTONS */
+
+.btn-group{
+display:flex;
+gap:6px;
+}
+
+.add-btn{
+flex:2;
+background:var(--primary);
+color:white;
+border:none;
+padding:9px;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+border:2px solid var(--primary);
+}
+
+.remove-btn{
+flex:1;
+background:#ddd;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+border:2px solid var(--primary);
+}
+
+.remove-btn.active{
+background:red;
+color:white;
+}
+
+/* MODAL */
+
+.modal-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:5000;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+border-radius:15px;
+width:92%;
+max-width:420px;
+max-height:85vh;
+overflow-y:auto;
+border:3px solid var(--primary);
+}
+
+.modal-content h3{
+margin-bottom:15px;
+color:var(--primary);
+}
+
+.form-group{
+margin-bottom:12px;
+}
+
+.form-group label{
+display:block;
+margin-bottom:5px;
+font-weight:bold;
+font-size:14px;
+}
+
+.form-group input,
+.form-group textarea{
+width:100%;
+padding:10px;
+border-radius:8px;
+border:2px solid var(--primary);
+}
+
+.cart-summary-item{
+display:flex;
+justify-content:space-between;
+padding:8px 0;
+border-bottom:1px dashed #ddd;
+font-size:14px;
+}
+
+.cart-del-btn{
+background:none;
+border:none;
+color:red;
+font-weight:bold;
+cursor:pointer;
+}
+
+.modal-actions{
+display:flex;
+gap:10px;
+margin-top:15px;
+}
+
+.submit-btn{
+flex:1;
+padding:11px;
+background:var(--primary);
+color:white;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+border:2px solid var(--primary);
+}
+
+.close-btn{
+flex:1;
+padding:11px;
+background:#eee;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+border:2px solid var(--primary);
+}
+
+.cod-box{
+background:#fff3cd;
+padding:12px;
+border-radius:8px;
+font-weight:bold;
+text-align:center;
+margin-bottom:15px;
+border:2px solid var(--primary);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOADING -->
+
+<div id="loadingScreen">
+
+<div class="loader-logo">
+🛒 Blinkart
+</div>
+
+<div class="spinner"></div>
+
+<p style="margin-top:15px;font-weight:bold;color:#444;">
+Loading Wholesale Store...
+</p>
+
+</div>
+
+<!-- NOTIFICATION -->
+
+<div id="appNotification">
+Notification
+</div>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="header-top">
+
+<div class="logo">
+🛒 Blinkart
+</div>
+
+<div class="top-nav-actions">
+
+<div class="nav-item"
+onclick="showInlineNotification('☀️ Summer Sale: 17 May to 5 June | UPTO 30% OFF!')">
+
+🔔 Alert
+
+<span class="badge" id="nBadge">0</span>
+
+</div>
+
+<div class="nav-item"
+onclick="checkout()">
+
+🛍️ Cart (<span id="cCount">0</span>)
+
+</div>
+
+</div>
+</div>
+
+<div class="search-box">
+
+<input type="text"
+id="findInput"
+placeholder="Search stationery items...">
+
+</div>
+
+</header>
+
+<!-- SALE -->
+
+<div id="saleBanner">
+☀️ SUMMER SALE 17 MAY — 5 JUNE | UPTO 30% OFF ☀️
+</div>
+
+<!-- PRODUCTS -->
+
+<div id="main-content"></div>
+
+<!-- CHECKOUT -->
+
+<div class="modal-overlay" id="checkoutModal">
+
+<div class="modal-content">
+
+<h3>🛍️ Your Cart</h3>
+
+<div id="cartItemsList"></div>
+
+<div id="cartTotalBill"
+style="font-weight:bold;
+margin:15px 0;
+text-align:right;
+color:var(--primary);">
+
+Total: ₹0
+
+</div>
+
+<div class="cod-box">
+💵 Payment Method: Cash on Delivery
+</div>
+
+<h3>👤 Delivery Details</h3>
+
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" id="custName">
+</div>
+
+<div class="form-group">
+<label>Phone Number</label>
+<input type="tel" id="custPhone">
+</div>
+
+<div class="form-group">
+<label>Delivery Address</label>
+<textarea rows="3" id="custAddress"></textarea>
+</div>
+
+<div class="modal-actions">
+
+<button class="close-btn"
+onclick="closeModal()">
+Back
+</button>
+
+<button class="submit-btn"
+onclick="submitOrder()">
+Place Order
+</button>
+
+</div>
+
+</div>
+</div>
+
+<script>
+
+/* PRODUCTS */
+
+const inventory={
+
+"Premium Pens":[
+{name:"Parker",price:2000},
+{name:"Perie Cardian",price:449},
+{name:"Trimax Gold",price:120},
+{name:"Trimax",price:60},
+{name:"Pilot v7",price:60},
+{name:"Pilot v5",price:67},
+{name:"Pilot Hitectpoint",price:55},
+{name:"Pilot v2",price:20},
+{name:"Fountain Pen",price:60}
+],
+
+"Budget Pens":[
+{name:"Jotex Gel Pen",price:40},
+{name:"Octane Fountain",price:40},
+{name:"Jeter Ballpoint Pens",price:32},
+{name:"Writo Meter Gel",price:25},
+{name:"Writo Meter Silky Ball",price:20},
+{name:"Classmate Octane Ball",price:10},
+{name:"Unomax Ultron Ball",price:10},
+{name:"Unomax Geltron",price:10},
+{name:"Unomax Pearl Ball",price:10},
+{name:"Unomax Pearl Gel",price:10},
+{name:"Doms Inxo",price:10},
+{name:"Flair Breeze Ball",price:10},
+{name:"Flair Move Gel",price:10},
+{name:"Classmate Octane Gel",price:10},
+{name:"Hauser XO Ball",price:10},
+{name:"Doms Inxon",price:10},
+{name:"Hauser XO Gel",price:10},
+{name:"Doms Inxify Ball",price:5},
+{name:"Doms Inxify Gel",price:5},
+{name:"Supra His Ball",price:10},
+{name:"Linc Ocean Gel",price:10}
+],
+
+"Kits & Sets":[
+{name:"Art Kit",price:1000},
+{name:"Stationery Kit",price:150},
+{name:"Stationery Kit Small",price:50}
+],
+
+"Pencils & Mechanical":[
+{name:"Apsara Princess Pencils",price:90},
+{name:"Doms Groove",price:65},
+{name:"Apsara Spacekids",price:60},
+{name:"Doms Xi Pencils",price:50},
+{name:"Apsara Platinum",price:50},
+{name:"Natraj Bold",price:50},
+{name:"Flair Penpencil 0.7",price:20},
+{name:"Hauser 2.0 Penpencils",price:20},
+{name:"Flair Penpencil 2.0",price:10},
+{name:"Rynolds 0.5 Penpencil",price:6}
+],
+
+"Colors & Art":[
+{name:"Fabric Colour",price:400},
+{name:"Brush Pen",price:200},
+{name:"Luxor Pastel",price:125},
+{name:"Luxor Flouroscent",price:100},
+{name:"Doms Colour Pencils",price:60},
+{name:"Drawing Pencils",price:50},
+{name:"Paint Brush",price:50},
+{name:"Sketch Pens",price:40},
+{name:"Water Colour",price:20},
+{name:"Crayons",price:10}
+],
+
+"Essentials":[
+{name:"Origami Paper",price:20},
+{name:"Stencil",price:15},
+{name:"Pocket Diary",price:10},
+{name:"Gliters (all colors)",price:10},
+{name:"Scale",price:5},
+{name:"Eraser",price:5},
+{name:"Sharpner",price:5},
+{name:"Science Calculator",price:500},
+{name:"Calculator",price:670}
+]
+
+};
+
+let cart=[];
+
+/* NOTIFICATION */
+
+function showInlineNotification(text){
+
+const banner=document.getElementById("appNotification");
+
+banner.innerText=text;
+
+banner.classList.add("show");
+
+setTimeout(()=>{
+banner.classList.remove("show");
+},3000);
+}
+
+/* AUTO NOTIFICATION */
+
+setInterval(()=>{
+showInlineNotification(
+'☀️ Summer Sale: 17 May to 5 June | UPTO 30% OFF!'
+);
+},15000);
+
+/* SALE SYSTEM */
+
+function isSale(){
+
+const now=new Date();
+
+const start=new Date(now.getFullYear(),4,17,0,0,0);
+
+const end=new Date(now.getFullYear(),5,5,23,59,59);
+
+return now>=start && now<=end;
+}
+
+/* RENDER */
+
+function render(filter=""){
+
+const main=document.getElementById("main-content");
+
+main.innerHTML="";
+
+const active=isSale();
+
+for(const cat in inventory){
+
+const filteredItems=
+inventory[cat].filter(p=>
+p.name.toLowerCase().includes(filter.toLowerCase())
+);
+
+if(filteredItems.length>0){
+
+main.innerHTML+=
+`<div class="category-title">${cat}</div>`;
+
+let gridHTML='<div class="container">';
+
+filteredItems.forEach(p=>{
+
+let fPrice=p.price;
+
+let pHTML=
+`<span class="price-new">₹${fPrice}</span>`;
+
+if(active){
+
+fPrice=Math.round(p.price*0.7);
+
+pHTML=
+`<span class="price-old">₹${p.price}</span>
+<span class="price-new">₹${fPrice}</span>`;
+}
+
+const countInCart=
+cart.filter(item=>item.name===p.name).length;
+
+const isRemovable=
+countInCart>0?"active":"";
+
+gridHTML+=`
+
+<div class="card">
+
+<h4>${p.name}</h4>
+
+${pHTML}
+
+<div class="btn-group">
+
+<button class="add-btn"
+onclick="add('${p.name}',${fPrice})">
+
+Add (${countInCart})
+
+</button>
+
+<button class="remove-btn ${isRemovable}"
+onclick="removeOne('${p.name}')">
+
+-
+
+</button>
+
+</div>
+
+</div>
+`;
+});
+
+gridHTML+='</div>';
+
+main.innerHTML+=gridHTML;
+}
+}
+}
+
+/* ADD */
+
+function add(name,price){
+
+cart.push({name,price});
+
+updateCartUI();
+
+showInlineNotification(`🛒 ${name} added`);
+
+render(document.getElementById("findInput").value);
+}
+
+/* REMOVE */
+
+function removeOne(name){
+
+const index=
+cart.findLastIndex(item=>item.name===name);
+
+if(index!==-1){
+
+cart.splice(index,1);
+
+updateCartUI();
+
+showInlineNotification(`❌ Removed ${name}`);
+
+render(document.getElementById("findInput").value);
+}
+}
+
+/* UPDATE CART */
+
+function updateCartUI(){
+
+document.getElementById("cCount").innerText=
+cart.length;
+
+document.getElementById("nBadge").innerText=
+cart.length;
+
+document.getElementById("nBadge").style.display=
+cart.length>0?"block":"none";
+}
+
+/* CHECKOUT */
+
+function checkout(){
+
+if(cart.length===0){
+
+showInlineNotification("⚠️ Cart Empty");
+
+return;
+}
+
+const listDiv=
+document.getElementById("cartItemsList");
+
+listDiv.innerHTML="";
+
+let itemCounts={};
+
+cart.forEach(item=>{
+
+itemCounts[item.name]=
+(itemCounts[item.name]||
+{count:0,price:item.price});
+
+itemCounts[item.name].count++;
+});
+
+for(let name in itemCounts){
+
+listDiv.innerHTML+=`
+
+<div class="cart-summary-item">
+
+<span>${name}
+(x${itemCounts[name].count})</span>
+
+<span>
+
+₹${itemCounts[name].price*
+itemCounts[name].count}
+
+<button class="cart-del-btn"
+onclick="removeOne('${name}');
+checkout();">
+
+✖
+
+</button>
+
+</span>
+
+</div>
+`;
+}
+
+let total=
+cart.reduce((s,i)=>s+i.price,0);
+
+document.getElementById("cartTotalBill").innerText=
+"Total Bill: ₹"+total;
+
+document.getElementById("checkoutModal").style.display=
+"flex";
+}
+
+/* CLOSE */
+
+function closeModal(){
+
+document.getElementById("checkoutModal").style.display=
+"none";
+}
+
+/* WHATSAPP ORDER */
+
+function submitOrder(){
+
+const name=
+document.getElementById("custName").value.trim();
+
+const phone=
+document.getElementById("custPhone").value.trim();
+
+const addr=
+document.getElementById("custAddress").value.trim();
+
+if(!name || !phone || !addr){
+
+alert("Please fill all details!");
+
+return;
+}
+
+let total=
+cart.reduce((s,i)=>s+i.price,0);
+
+let items="";
+
+cart.forEach((item,index)=>{
+
+items+=`${index+1}. ${item.name}
+- ₹${item.price}%0A`;
+});
+
+const message=
+`🛒 *NEW BLINKART ORDER* %0A
+👤 Name: ${name}%0A
+📞 Phone: ${phone}%0A
+📍 Address: ${addr}%0A
+💵 Payment: Cash on Delivery %0A
+━━━━━━━━━━━━━━%0A
+📦 ITEMS:%0A${items}
+━━━━━━━━━━━━━━%0A
+💰 Total Bill: ₹${total}`;
+
+window.open(
+`https://wa.me/919334115122?text=${message}`,
+'_blank'
+);
+
+alert("🎉 Order Sent Successfully!");
+
+cart=[];
+
+updateCartUI();
+
+closeModal();
+
+render();
+}
+
+/* SEARCH */
+
+document.getElementById("findInput")
+.oninput=(e)=>render(e.target.value);
+
+/* START */
+
+window.onload=()=>{
+
+setTimeout(()=>{
+
+document.getElementById("loadingScreen")
+.style.opacity="0";
+
+setTimeout(()=>{
+document.getElementById("loadingScreen")
+.style.display="none";
+},400);
+
+},2200);
+
+render();
+};
+
+</script>
+
+</body>
+</html>
