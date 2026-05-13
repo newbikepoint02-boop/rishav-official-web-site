@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Blinkart Wholesale Store</title>
 
 <style>
@@ -23,7 +22,28 @@ box-sizing:border-box;
 body{
 font-family:'Segoe UI',sans-serif;
 background:white;
-padding-bottom:30px;
+padding-bottom:40px;
+transition:0.3s;
+}
+
+/* DARK MODE */
+
+body.dark{
+background:#111;
+color:white;
+}
+
+body.dark .card,
+body.dark .modal-content,
+body.dark .nav-item,
+body.dark .search-box input{
+background:#1e1e1e;
+color:white;
+}
+
+body.dark .category-title{
+background:#333;
+color:white;
 }
 
 /* LOADING SCREEN */
@@ -73,8 +93,8 @@ padding:15px;
 position:sticky;
 top:0;
 z-index:1000;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
 border-bottom:3px solid var(--primary);
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
 }
 
 .header-top{
@@ -82,6 +102,7 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 margin-bottom:10px;
+flex-wrap:wrap;
 }
 
 .logo{
@@ -93,6 +114,7 @@ color:var(--primary);
 .top-nav-actions{
 display:flex;
 gap:10px;
+flex-wrap:wrap;
 }
 
 .nav-item{
@@ -175,7 +197,7 @@ margin:25px 15px 15px;
 border-radius:6px;
 }
 
-/* PRODUCT GRID */
+/* PRODUCTS */
 
 .container{
 display:grid;
@@ -191,11 +213,6 @@ padding:14px;
 box-shadow:0 4px 10px rgba(0,0,0,0.08);
 text-align:center;
 border:2px solid var(--primary);
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-3px);
 }
 
 .card h4{
@@ -234,7 +251,6 @@ padding:9px;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
-border:2px solid var(--primary);
 }
 
 .remove-btn{
@@ -244,7 +260,6 @@ border:none;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
-border:2px solid var(--primary);
 }
 
 .remove-btn.active{
@@ -252,7 +267,7 @@ background:red;
 color:white;
 }
 
-/* MODAL */
+/* MODALS */
 
 .modal-overlay{
 position:fixed;
@@ -305,17 +320,10 @@ border:2px solid var(--primary);
 .cart-summary-item{
 display:flex;
 justify-content:space-between;
-padding:8px 0;
+padding:10px 0;
 border-bottom:1px dashed #ddd;
 font-size:14px;
-}
-
-.cart-del-btn{
-background:none;
-border:none;
-color:red;
-font-weight:bold;
-cursor:pointer;
+align-items:center;
 }
 
 .modal-actions{
@@ -324,37 +332,42 @@ gap:10px;
 margin-top:15px;
 }
 
-.submit-btn{
-flex:1;
-padding:11px;
-background:var(--primary);
-color:white;
+.submit-btn,
+.close-btn,
+.setting-btn{
+padding:10px 14px;
 border:none;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
-border:2px solid var(--primary);
+}
+
+.submit-btn{
+background:var(--primary);
+color:white;
+flex:1;
 }
 
 .close-btn{
+background:#ddd;
 flex:1;
-padding:11px;
-background:#eee;
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-border:2px solid var(--primary);
 }
 
-.cod-box{
-background:#fff3cd;
-padding:12px;
-border-radius:8px;
-font-weight:bold;
-text-align:center;
-margin-bottom:15px;
+.setting-btn{
+background:var(--primary);
+color:white;
+}
+
+/* SETTINGS */
+
+.setting-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
+padding:10px;
 border:2px solid var(--primary);
+border-radius:10px;
 }
 
 </style>
@@ -373,7 +386,7 @@ border:2px solid var(--primary);
 <div class="spinner"></div>
 
 <p style="margin-top:15px;font-weight:bold;color:#444;">
-Loading Wholesale Store...
+Loading Blinkart Store...
 </p>
 
 </div>
@@ -397,7 +410,7 @@ Notification
 <div class="top-nav-actions">
 
 <div class="nav-item"
-onclick="showInlineNotification('☀️ Summer Sale: 17 May to 5 June | UPTO 30% OFF!')">
+onclick="showInlineNotification('☀️ Summer Sale 17 May - 5 June | UPTO 30% OFF')">
 
 🔔 Alert
 
@@ -412,14 +425,22 @@ onclick="checkout()">
 
 </div>
 
+<div class="nav-item"
+onclick="openSettings()">
+
+⚙️ Settings
+
 </div>
+
+</div>
+
 </div>
 
 <div class="search-box">
 
 <input type="text"
 id="findInput"
-placeholder="Search stationery items...">
+placeholder="Search Products...">
 
 </div>
 
@@ -441,25 +462,22 @@ placeholder="Search stationery items...">
 
 <div class="modal-content">
 
-<h3>🛍️ Your Cart</h3>
+<h3>🛍️ Your Shopping Cart</h3>
 
 <div id="cartItemsList"></div>
 
-<div id="cartTotalBill"
-style="font-weight:bold;
+<div style="
+font-weight:bold;
 margin:15px 0;
 text-align:right;
-color:var(--primary);">
+color:var(--primary);
+" id="cartTotalBill">
 
 Total: ₹0
 
 </div>
 
-<div class="cod-box">
-💵 Payment Method: Cash on Delivery
-</div>
-
-<h3>👤 Delivery Details</h3>
+<h3>👤 Customer Details</h3>
 
 <div class="form-group">
 <label>Full Name</label>
@@ -467,13 +485,13 @@ Total: ₹0
 </div>
 
 <div class="form-group">
-<label>Phone Number</label>
+<label>Mobile Number</label>
 <input type="tel" id="custPhone">
 </div>
 
 <div class="form-group">
 <label>Delivery Address</label>
-<textarea rows="3" id="custAddress"></textarea>
+<textarea rows="2" id="custAddress"></textarea>
 </div>
 
 <div class="modal-actions">
@@ -491,11 +509,68 @@ Place Order
 </div>
 
 </div>
+
+</div>
+
+<!-- SETTINGS -->
+
+<div class="modal-overlay" id="settingsModal">
+
+<div class="modal-content">
+
+<h3>⚙️ Blinkart Settings</h3>
+
+<div class="setting-row">
+<span>🌙 Dark Mode</span>
+<button class="setting-btn"
+onclick="toggleDarkMode()"
+id="darkBtn">
+OFF
+</button>
+</div>
+
+<div class="setting-row">
+<span>🔔 Notifications</span>
+<button class="setting-btn"
+onclick="toggleNotifications()"
+id="notifBtn">
+ON
+</button>
+</div>
+
+<div class="setting-row">
+<span>☀️ Summer Sale</span>
+<button class="setting-btn"
+onclick="toggleSale()"
+id="saleBtn">
+ON
+</button>
+</div>
+
+<div class="setting-row">
+<span>🛒 Clear Cart</span>
+<button class="setting-btn"
+onclick="clearCart()">
+CLEAR
+</button>
+</div>
+
+<div class="modal-actions">
+
+<button class="close-btn"
+onclick="closeSettings()">
+Close
+</button>
+
+</div>
+
+</div>
+
 </div>
 
 <script>
 
-/* PRODUCTS */
+/* INVENTORY */
 
 const inventory={
 
@@ -508,7 +583,7 @@ const inventory={
 {name:"Pilot v5",price:67},
 {name:"Pilot Hitectpoint",price:55},
 {name:"Pilot v2",price:20},
-{name:"Fountain Pen",price:60}
+{name:"Fountain",price:60}
 ],
 
 "Budget Pens":[
@@ -568,24 +643,28 @@ const inventory={
 ],
 
 "Essentials":[
+{name:"Science Calculator",price:500},
+{name:"Calculator",price:670},
 {name:"Origami Paper",price:20},
 {name:"Stencil",price:15},
 {name:"Pocket Diary",price:10},
-{name:"Gliters (all colors)",price:10},
+{name:"Gliters",price:10},
 {name:"Scale",price:5},
 {name:"Eraser",price:5},
-{name:"Sharpner",price:5},
-{name:"Science Calculator",price:500},
-{name:"Calculator",price:670}
+{name:"Sharpner",price:5}
 ]
 
 };
 
 let cart=[];
+let notificationsOn=true;
+let saleEnabled=true;
 
 /* NOTIFICATION */
 
 function showInlineNotification(text){
+
+if(!notificationsOn) return;
 
 const banner=document.getElementById("appNotification");
 
@@ -598,23 +677,17 @@ banner.classList.remove("show");
 },3000);
 }
 
-/* AUTO NOTIFICATION */
-
-setInterval(()=>{
-showInlineNotification(
-'☀️ Summer Sale: 17 May to 5 June | UPTO 30% OFF!'
-);
-},15000);
-
-/* SALE SYSTEM */
+/* SALE */
 
 function isSale(){
 
+if(!saleEnabled) return false;
+
 const now=new Date();
 
-const start=new Date(now.getFullYear(),4,17,0,0,0);
+const start=new Date(now.getFullYear(),4,17);
 
-const end=new Date(now.getFullYear(),5,5,23,59,59);
+const end=new Date(now.getFullYear(),5,5);
 
 return now>=start && now<=end;
 }
@@ -626,8 +699,6 @@ function render(filter=""){
 const main=document.getElementById("main-content");
 
 main.innerHTML="";
-
-const active=isSale();
 
 for(const cat in inventory){
 
@@ -645,25 +716,25 @@ let gridHTML='<div class="container">';
 
 filteredItems.forEach(p=>{
 
-let fPrice=p.price;
+let finalPrice=p.price;
 
 let pHTML=
-`<span class="price-new">₹${fPrice}</span>`;
+`<span class="price-new">₹${finalPrice}</span>`;
 
-if(active){
+if(isSale()){
 
-fPrice=Math.round(p.price*0.7);
+finalPrice=Math.round(p.price*0.7);
 
 pHTML=
 `<span class="price-old">₹${p.price}</span>
-<span class="price-new">₹${fPrice}</span>`;
+<span class="price-new">₹${finalPrice}</span>`;
 }
 
-const countInCart=
+const count=
 cart.filter(item=>item.name===p.name).length;
 
-const isRemovable=
-countInCart>0?"active":"";
+const removable=
+count>0?"active":"";
 
 gridHTML+=`
 
@@ -676,13 +747,13 @@ ${pHTML}
 <div class="btn-group">
 
 <button class="add-btn"
-onclick="add('${p.name}',${fPrice})">
+onclick="add('${p.name}',${finalPrice})">
 
-Add (${countInCart})
+Add (${count})
 
 </button>
 
-<button class="remove-btn ${isRemovable}"
+<button class="remove-btn ${removable}"
 onclick="removeOne('${p.name}')">
 
 -
@@ -728,7 +799,7 @@ cart.splice(index,1);
 
 updateCartUI();
 
-showInlineNotification(`❌ Removed ${name}`);
+showInlineNotification(`❌ ${name} removed`);
 
 render(document.getElementById("findInput").value);
 }
@@ -764,64 +835,40 @@ document.getElementById("cartItemsList");
 
 listDiv.innerHTML="";
 
-let itemCounts={};
+let total=0;
 
 cart.forEach(item=>{
 
-itemCounts[item.name]=
-(itemCounts[item.name]||
-{count:0,price:item.price});
-
-itemCounts[item.name].count++;
-});
-
-for(let name in itemCounts){
+total+=item.price;
 
 listDiv.innerHTML+=`
 
 <div class="cart-summary-item">
 
-<span>${name}
-(x${itemCounts[name].count})</span>
+<span>${item.name}</span>
 
-<span>
-
-₹${itemCounts[name].price*
-itemCounts[name].count}
-
-<button class="cart-del-btn"
-onclick="removeOne('${name}');
-checkout();">
-
-✖
-
-</button>
-
-</span>
+<span>₹${item.price}</span>
 
 </div>
 `;
-}
+});
 
-let total=
-cart.reduce((s,i)=>s+i.price,0);
+document.getElementById("cartTotalBill")
+.innerText=`Total Bill: ₹${total}`;
 
-document.getElementById("cartTotalBill").innerText=
-"Total Bill: ₹"+total;
-
-document.getElementById("checkoutModal").style.display=
-"flex";
+document.getElementById("checkoutModal")
+.style.display="flex";
 }
 
 /* CLOSE */
 
 function closeModal(){
 
-document.getElementById("checkoutModal").style.display=
-"none";
+document.getElementById("checkoutModal")
+.style.display="none";
 }
 
-/* WHATSAPP ORDER */
+/* WHATSAPP ORDER SYSTEM */
 
 function submitOrder(){
 
@@ -831,52 +878,119 @@ document.getElementById("custName").value.trim();
 const phone=
 document.getElementById("custPhone").value.trim();
 
-const addr=
+const address=
 document.getElementById("custAddress").value.trim();
 
-if(!name || !phone || !addr){
+if(!name || !phone || !address){
 
-alert("Please fill all details!");
+alert("Please fill all details");
 
 return;
 }
 
-let total=
-cart.reduce((s,i)=>s+i.price,0);
+/* TOTAL */
 
-let items="";
+let total=cart.reduce((s,i)=>s+i.price,0);
+
+/* PRODUCTS */
+
+let productText="";
 
 cart.forEach((item,index)=>{
 
-items+=`${index+1}. ${item.name}
-- ₹${item.price}%0A`;
+productText +=
+(index+1)+". "+item.name+
+" - ₹"+item.price+"\n";
+
 });
 
-const message=
-`🛒 *NEW BLINKART ORDER* %0A
-👤 Name: ${name}%0A
-📞 Phone: ${phone}%0A
-📍 Address: ${addr}%0A
-💵 Payment: Cash on Delivery %0A
-━━━━━━━━━━━━━━%0A
-📦 ITEMS:%0A${items}
-━━━━━━━━━━━━━━%0A
-💰 Total Bill: ₹${total}`;
+/* MESSAGE */
+
+let message=
+"🛒 *NEW BLINKART ORDER* %0A%0A"+
+"👤 Customer: "+name+"%0A"+
+"📞 Mobile: "+phone+"%0A"+
+"📍 Address: "+address+"%0A%0A"+
+"📦 PRODUCTS:%0A"+
+productText.replace(/\n/g,"%0A")+
+"%0A💵 Payment: Cash On Delivery"+
+"%0A%0A💰 Total Bill: ₹"+total;
+
+/* YOUR NUMBER */
+
+let whatsappNumber="919334115122";
+
+/* OPEN WHATSAPP */
 
 window.open(
-`https://wa.me/919334115122?text=${message}`,
-'_blank'
+"https://wa.me/"+whatsappNumber+"?text="+message,
+"_blank"
 );
 
-alert("🎉 Order Sent Successfully!");
+alert("🎉 Order Sent To WhatsApp!");
 
 cart=[];
 
 updateCartUI();
 
+render();
+
 closeModal();
+}
+
+/* SETTINGS */
+
+function openSettings(){
+
+document.getElementById("settingsModal")
+.style.display="flex";
+}
+
+function closeSettings(){
+
+document.getElementById("settingsModal")
+.style.display="none";
+}
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark");
+
+document.getElementById("darkBtn")
+.innerText=
+document.body.classList.contains("dark")
+?"ON":"OFF";
+}
+
+function toggleNotifications(){
+
+notificationsOn=!notificationsOn;
+
+document.getElementById("notifBtn")
+.innerText=
+notificationsOn?"ON":"OFF";
+}
+
+function toggleSale(){
+
+saleEnabled=!saleEnabled;
+
+document.getElementById("saleBtn")
+.innerText=
+saleEnabled?"ON":"OFF";
 
 render();
+}
+
+function clearCart(){
+
+cart=[];
+
+updateCartUI();
+
+render();
+
+showInlineNotification("🛒 Cart Cleared");
 }
 
 /* SEARCH */
