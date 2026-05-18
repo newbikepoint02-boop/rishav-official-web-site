@@ -10,7 +10,6 @@
 :root{
 --primary:#ff6600;
 --accent:#fff200;
---sale:#ff3300;
 }
 
 *{
@@ -23,30 +22,9 @@ body{
 font-family:'Segoe UI',sans-serif;
 background:white;
 padding-bottom:40px;
-transition:0.3s;
 }
 
-/* DARK MODE */
-
-body.dark{
-background:#111;
-color:white;
-}
-
-body.dark .card,
-body.dark .modal-content,
-body.dark .nav-item,
-body.dark .search-box input{
-background:#1e1e1e;
-color:white;
-}
-
-body.dark .category-title{
-background:#333;
-color:white;
-}
-
-/* LOADING */
+/* LOADING SCREEN */
 
 #loadingScreen{
 position:fixed;
@@ -64,7 +42,7 @@ transition:0.4s;
 }
 
 .loader-logo{
-font-size:48px;
+font-size:45px;
 font-weight:800;
 color:var(--primary);
 margin-bottom:20px;
@@ -154,7 +132,7 @@ outline:none;
 /* SALE */
 
 #saleBanner{
-background:var(--sale);
+background:#ff3300;
 color:white;
 text-align:center;
 padding:12px;
@@ -217,7 +195,7 @@ border:2px solid var(--primary);
 
 .card h4{
 font-size:15px;
-height:45px;
+height:40px;
 margin-bottom:10px;
 }
 
@@ -265,7 +243,7 @@ background:red;
 color:white;
 }
 
-/* MODAL */
+/* CHECKOUT */
 
 .modal-overlay{
 position:fixed;
@@ -291,20 +269,8 @@ overflow-y:auto;
 border:3px solid var(--primary);
 }
 
-.modal-content h3{
-margin-bottom:15px;
-color:var(--primary);
-}
-
 .form-group{
 margin-bottom:12px;
-}
-
-.form-group label{
-display:block;
-margin-bottom:5px;
-font-weight:bold;
-font-size:14px;
 }
 
 .form-group input,
@@ -315,24 +281,8 @@ border-radius:8px;
 border:2px solid var(--primary);
 }
 
-.cart-summary-item{
-display:flex;
-justify-content:space-between;
-padding:10px 0;
-border-bottom:1px dashed #ddd;
-font-size:14px;
-align-items:center;
-}
-
-.modal-actions{
-display:flex;
-gap:10px;
-margin-top:15px;
-}
-
 .submit-btn,
-.close-btn,
-.setting-btn{
+.close-btn{
 padding:10px 14px;
 border:none;
 border-radius:8px;
@@ -343,29 +293,10 @@ cursor:pointer;
 .submit-btn{
 background:var(--primary);
 color:white;
-flex:1;
 }
 
 .close-btn{
 background:#ddd;
-flex:1;
-}
-
-.setting-btn{
-background:var(--primary);
-color:white;
-}
-
-/* SETTINGS */
-
-.setting-row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:12px;
-padding:10px;
-border:2px solid var(--primary);
-border-radius:10px;
 }
 
 </style>
@@ -408,10 +339,9 @@ Notification
 <div class="top-nav-actions">
 
 <div class="nav-item"
-onclick="showInlineNotification('☀️ Summer Sale Active | Flat 2.5% OFF')">
+onclick="showInlineNotification('☀️ Summer Sale Active | 2.5% OFF')">
 
 🔔 Alert
-
 <span class="badge" id="nBadge">0</span>
 
 </div>
@@ -420,13 +350,6 @@ onclick="showInlineNotification('☀️ Summer Sale Active | Flat 2.5% OFF')">
 onclick="checkout()">
 
 🛍️ Cart (<span id="cCount">0</span>)
-
-</div>
-
-<div class="nav-item"
-onclick="openSettings()">
-
-⚙️ Settings
 
 </div>
 
@@ -447,7 +370,7 @@ placeholder="Search Products...">
 <!-- SALE -->
 
 <div id="saleBanner">
-☀️ SUMMER SALE 17 MAY — 25 MAY | FLAT 2.5% OFF ☀️
+☀️ SUMMER SALE 17 MAY — 25 MAY | 2.5% OFF ☀️
 </div>
 
 <!-- PRODUCTS -->
@@ -460,94 +383,35 @@ placeholder="Search Products...">
 
 <div class="modal-content">
 
-<h3>🛍️ Your Shopping Cart</h3>
+<h3 style="color:#ff6600;margin-bottom:15px;">
+🛍️ Blinkart Checkout
+</h3>
 
 <div id="cartItemsList"></div>
 
-<div style="
-font-weight:bold;
-margin:15px 0;
-text-align:right;
-color:var(--primary);
-" id="cartTotalBill">
-
+<div style="margin-top:15px;font-weight:bold;color:#ff6600;" id="cartTotalBill">
 Total: ₹0
-
 </div>
 
-<h3>👤 Customer Details</h3>
+<br>
 
 <div class="form-group">
-<label>Full Name</label>
-<input type="text" id="custName">
+<input type="text" id="custName" placeholder="Full Name">
 </div>
 
 <div class="form-group">
-<label>Mobile Number</label>
-<input type="tel" id="custPhone">
+<input type="tel" id="custPhone" placeholder="Mobile Number">
 </div>
 
 <div class="form-group">
-<label>Delivery Address</label>
-<textarea rows="2" id="custAddress"></textarea>
+<textarea rows="3" id="custAddress" placeholder="Delivery Address"></textarea>
 </div>
 
-<div class="modal-actions">
-
-<button class="close-btn"
-onclick="closeModal()">
-Back
-</button>
-
-<button class="submit-btn"
-onclick="submitOrder()">
+<button class="submit-btn" onclick="submitOrder()">
 Place Order
 </button>
 
-</div>
-
-</div>
-
-</div>
-
-<!-- SETTINGS -->
-
-<div class="modal-overlay" id="settingsModal">
-
-<div class="modal-content">
-
-<h3>⚙️ Blinkart Settings</h3>
-
-<div class="setting-row">
-<span>🌙 Dark Mode</span>
-<button class="setting-btn"
-onclick="toggleDarkMode()"
-id="darkBtn">
-OFF
-</button>
-</div>
-
-<div class="setting-row">
-<span>🔔 Notifications</span>
-<button class="setting-btn"
-onclick="toggleNotifications()"
-id="notifBtn">
-ON
-</button>
-</div>
-
-<div class="setting-row">
-<span>🛒 Clear Cart</span>
-<button class="setting-btn"
-onclick="clearCart()">
-CLEAR
-</button>
-</div>
-
-<div class="modal-actions">
-
-<button class="close-btn"
-onclick="closeSettings()">
+<button class="close-btn" onclick="closeModal()">
 Close
 </button>
 
@@ -555,74 +419,99 @@ Close
 
 </div>
 
-</div>
-
 <script>
 
-/* INVENTORY */
+/* FULL STATIONERY MASTER LIST */
 
 const inventory={
 
 "Premium Pens":[
-{name:"Parker",price:2100},
-{name:"Trimax Gold",price:130},
-{name:"Pilot v7",price:65},
-{name:"Pilot v5",price:70},
-{name:"Fountain Pen",price:65}
+{name:"Parker",price:2000},
+{name:"Perie Cardian",price:449},
+{name:"Trimax Gold",price:120},
+{name:"Trimax",price:60},
+{name:"Pilot v7",price:60},
+{name:"Pilot v5",price:67},
+{name:"Pilot Hitectpoint",price:55},
+{name:"Pilot v2",price:20},
+{name:"Fountain Pen",price:60}
 ],
 
 "Budget Pens":[
-{name:"Jotex Gel Pen",price:45},
-{name:"Octane Fountain",price:45},
-{name:"Writo Meter Gel",price:28},
-{name:"Classmate Octane Ball",price:12},
-{name:"Unomax Geltron",price:12},
-{name:"Flair Move Gel",price:12},
-{name:"Hauser XO Ball",price:12}
-],
-
-"Kits & Sets":[
-{name:"Art Kit",price:1050},
-{name:"Stationery Kit",price:160},
-{name:"Stationery Kit Small",price:55}
+{name:"Jotex Gel Pen",price:40},
+{name:"Octane Fountain",price:40},
+{name:"Jeter Ballpoint Pens",price:32},
+{name:"Writo Meter Gel",price:25},
+{name:"Writo Meter Silky Ball",price:20},
+{name:"Classmate Octane Ball",price:10},
+{name:"Unomax Ultron Ball",price:10},
+{name:"Unomax Geltron",price:10},
+{name:"Unomax Pearl Ball",price:10},
+{name:"Unomax Pearl Gel",price:10},
+{name:"Doms Inxo",price:10},
+{name:"Flair Breeze Ball",price:10},
+{name:"Flair Move Gel",price:10},
+{name:"Classmate Octane Gel",price:10},
+{name:"Hauser XO Ball",price:10},
+{name:"Doms Inxon",price:10},
+{name:"Hauser XO Gel",price:10},
+{name:"Doms Inxify Ball",price:5},
+{name:"Doms Inxify Gel",price:5},
+{name:"Supra His Ball",price:10},
+{name:"Linc Ocean Gel",price:10}
 ],
 
 "Pencils & Mechanical":[
-{name:"Apsara Princess Pencils",price:95},
-{name:"Doms Groove",price:70},
-{name:"Natraj Bold",price:55},
-{name:"Flair Penpencil 0.7",price:22}
+{name:"Apsara Princess",price:90},
+{name:"Doms Groove",price:65},
+{name:"Apsara Spacekids",price:60},
+{name:"Doms Xi",price:50},
+{name:"Apsara Platinum",price:50},
+{name:"Natraj Bold",price:50},
+{name:"Flair Penpencil 0.7",price:20},
+{name:"Hauser 2.0 Penpencil",price:20},
+{name:"Flair Penpencil 2.0",price:10},
+{name:"Rynolds 0.5",price:6}
 ],
 
-"Colors & Art":[
-{name:"Fabric Colour",price:420},
-{name:"Brush Pen",price:220},
-{name:"Sketch Pens",price:45},
-{name:"Water Colour",price:25},
-{name:"Crayons",price:15}
+"Colours & Art":[
+{name:"Fabric Colour",price:400},
+{name:"Brush Pen",price:200},
+{name:"Luxor Pastel",price:125},
+{name:"Luxor Flouroscent",price:100},
+{name:"Doms Colour Pencils",price:60},
+{name:"Drawing Pencils",price:50},
+{name:"Paint Brush",price:50},
+{name:"Sketch Pens",price:40},
+{name:"Water Colour",price:20},
+{name:"Crayons",price:10}
 ],
 
 "Essentials":[
-{name:"Science Calculator",price:520},
-{name:"Calculator",price:690},
-{name:"Origami Paper",price:25},
-{name:"Stencil",price:20},
-{name:"Pocket Diary",price:15},
-{name:"Scale",price:10},
-{name:"Eraser",price:10},
-{name:"Sharpner",price:10}
+{name:"Science Calculator",price:500},
+{name:"Calculator",price:670},
+{name:"Origami Paper",price:20},
+{name:"Stencil",price:15},
+{name:"Pocket Diary",price:10},
+{name:"Gliters",price:10},
+{name:"Scale",price:5},
+{name:"Eraser",price:5},
+{name:"Sharpner",price:5}
+],
+
+"Kits & Sets":[
+{name:"Art Kit",price:1000},
+{name:"Stationery Kit",price:150},
+{name:"Stationery Kit Small",price:50}
 ]
 
 };
 
 let cart=[];
-let notificationsOn=true;
 
 /* NOTIFICATION */
 
 function showInlineNotification(text){
-
-if(!notificationsOn) return;
 
 const banner=document.getElementById("appNotification");
 
@@ -637,15 +526,9 @@ banner.classList.remove("show");
 
 /* SALE */
 
-function isSale(){
+function getSalePrice(price){
 
-const now=new Date();
-
-const start=new Date(now.getFullYear(),4,17);
-
-const end=new Date(now.getFullYear(),4,25);
-
-return now>=start && now<=end;
+return Math.round(price - (price*2.5/100));
 }
 
 /* RENDER */
@@ -672,19 +555,7 @@ let gridHTML='<div class="container">';
 
 filteredItems.forEach(p=>{
 
-let finalPrice=p.price;
-
-let pHTML=
-`<span class="price-new">₹${finalPrice}</span>`;
-
-if(isSale()){
-
-finalPrice=Math.round(p.price*0.975);
-
-pHTML=
-`<span class="price-old">₹${p.price}</span>
-<span class="price-new">₹${finalPrice}</span>`;
-}
+let finalPrice=getSalePrice(p.price);
 
 const count=
 cart.filter(item=>item.name===p.name).length;
@@ -698,7 +569,8 @@ gridHTML+=`
 
 <h4>${p.name}</h4>
 
-${pHTML}
+<span class="price-old">₹${p.price}</span>
+<span class="price-new">₹${finalPrice}</span>
 
 <div class="btn-group">
 
@@ -737,7 +609,7 @@ cart.push({name,price});
 
 updateCartUI();
 
-showInlineNotification(`🛒 ${name} added`);
+showInlineNotification("🛒 "+name+" added");
 
 render(document.getElementById("findInput").value);
 }
@@ -755,13 +627,13 @@ cart.splice(index,1);
 
 updateCartUI();
 
-showInlineNotification(`❌ ${name} removed`);
+showInlineNotification("❌ "+name+" removed");
 
 render(document.getElementById("findInput").value);
 }
 }
 
-/* UPDATE */
+/* CART */
 
 function updateCartUI(){
 
@@ -798,19 +670,15 @@ cart.forEach(item=>{
 total+=item.price;
 
 listDiv.innerHTML+=`
-
-<div class="cart-summary-item">
-
+<div style="display:flex;justify-content:space-between;padding:8px 0;">
 <span>${item.name}</span>
-
 <span>₹${item.price}</span>
-
 </div>
 `;
 });
 
 document.getElementById("cartTotalBill")
-.innerText=`Total Bill: ₹${total}`;
+.innerText="Total Bill: ₹"+total;
 
 document.getElementById("checkoutModal")
 .style.display="flex";
@@ -829,48 +697,50 @@ document.getElementById("checkoutModal")
 function submitOrder(){
 
 const name=
-document.getElementById("custName").value.trim();
+document.getElementById("custName").value;
 
 const phone=
-document.getElementById("custPhone").value.trim();
+document.getElementById("custPhone").value;
 
 const address=
-document.getElementById("custAddress").value.trim();
+document.getElementById("custAddress").value;
 
 if(!name || !phone || !address){
 
-alert("Please fill all details");
+alert("Fill all details");
 
 return;
 }
 
-let total=cart.reduce((s,i)=>s+i.price,0);
-
-let productText="";
+let total=0;
+let products="";
 
 cart.forEach((item,index)=>{
 
-productText +=
+total+=item.price;
+
+products +=
 (index+1)+". "+item.name+
 " - ₹"+item.price+"\n";
 
 });
 
-const subject="New Blinkart Order";
+const subject=
+encodeURIComponent("New Blinkart Order");
 
 const body=
+encodeURIComponent(
 "Customer: "+name+"\n"+
 "Phone: "+phone+"\n"+
 "Address: "+address+"\n\n"+
-"Products:\n"+productText+
-"\nTotal Bill: ₹"+total;
+"Products:\n"+products+
+"\nTotal Bill: ₹"+total
+);
 
 window.location.href=
-"mailto:newbikepoint02@gmail.com?subject="
-+encodeURIComponent(subject)+
-"&body="+encodeURIComponent(body);
+"mailto:newbikepoint02@gmail.com?subject="+subject+"&body="+body;
 
-alert("🎉 Order Ready For Email!");
+alert("✅ Order Ready In Email");
 
 cart=[];
 
@@ -879,50 +749,6 @@ updateCartUI();
 render();
 
 closeModal();
-}
-
-/* SETTINGS */
-
-function openSettings(){
-
-document.getElementById("settingsModal")
-.style.display="flex";
-}
-
-function closeSettings(){
-
-document.getElementById("settingsModal")
-.style.display="none";
-}
-
-function toggleDarkMode(){
-
-document.body.classList.toggle("dark");
-
-document.getElementById("darkBtn")
-.innerText=
-document.body.classList.contains("dark")
-?"ON":"OFF";
-}
-
-function toggleNotifications(){
-
-notificationsOn=!notificationsOn;
-
-document.getElementById("notifBtn")
-.innerText=
-notificationsOn?"ON":"OFF";
-}
-
-function clearCart(){
-
-cart=[];
-
-updateCartUI();
-
-render();
-
-showInlineNotification("🛒 Cart Cleared");
 }
 
 /* SEARCH */
