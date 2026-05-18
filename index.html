@@ -1,6 +1,12 @@
+<!-- ========================= -->
+<!-- BLINKART MASTERCODE -->
+<!-- ========================= -->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -268,7 +274,7 @@ background:red;
 color:white;
 }
 
-/* MODALS */
+/* MODAL */
 
 .modal-overlay{
 position:fixed;
@@ -324,7 +330,6 @@ justify-content:space-between;
 padding:10px 0;
 border-bottom:1px dashed #ddd;
 font-size:14px;
-align-items:center;
 }
 
 .modal-actions{
@@ -411,7 +416,7 @@ Notification
 <div class="top-nav-actions">
 
 <div class="nav-item"
-onclick="summerSaleNotification()">
+onclick="showInlineNotification('🔥 Summer Sale Active | 5% OFF')">
 
 🔔 Alert
 
@@ -450,8 +455,7 @@ placeholder="Search Products...">
 <!-- SALE -->
 
 <div id="saleBanner">
-☀️ SUMMER SALE ACTIVE ☀️<br>
-17 MAY — 25 MAY | EXTRA 5% OFF
+☀️ SUMMER SALE 17 MAY — 25 MAY | FLAT 5% OFF ☀️
 </div>
 
 <!-- PRODUCTS -->
@@ -464,7 +468,7 @@ placeholder="Search Products...">
 
 <div class="modal-content">
 
-<h3>🛍️ Your Shopping Cart</h3>
+<h3>🛒 Your Cart</h3>
 
 <div id="cartItemsList"></div>
 
@@ -474,9 +478,7 @@ margin:15px 0;
 text-align:right;
 color:var(--primary);
 " id="cartTotalBill">
-
 Total: ₹0
-
 </div>
 
 <h3>👤 Customer Details</h3>
@@ -610,6 +612,50 @@ const inventory={
 {name:"Doms Inxify Gel",price:5},
 {name:"Supra His Ball",price:10},
 {name:"Linc Ocean Gel",price:10}
+],
+
+"Kits & Sets":[
+{name:"Art Kit",price:1000},
+{name:"Stationery Kit",price:150},
+{name:"Stationery Kit Small",price:50}
+],
+
+"Pencils & Mechanical":[
+{name:"Apsara Princess Pencils",price:90},
+{name:"Doms Groove",price:65},
+{name:"Apsara Spacekids",price:60},
+{name:"Doms Xi Pencils",price:50},
+{name:"Apsara Platinum",price:50},
+{name:"Natraj Bold",price:50},
+{name:"Flair Penpencil 0.7",price:20},
+{name:"Hauser 2.0 Penpencils",price:20},
+{name:"Flair Penpencil 2.0",price:10},
+{name:"Rynolds 0.5 Penpencil",price:6}
+],
+
+"Colors & Art":[
+{name:"Fabric Colour",price:400},
+{name:"Brush Pen",price:200},
+{name:"Luxor Pastel",price:125},
+{name:"Luxor Flouroscent",price:100},
+{name:"Doms Colour Pencils",price:60},
+{name:"Drawing Pencils",price:50},
+{name:"Paint Brush",price:50},
+{name:"Sketch Pens",price:40},
+{name:"Water Colour",price:20},
+{name:"Crayons",price:10}
+],
+
+"Essentials":[
+{name:"Science Calculator",price:500},
+{name:"Calculator",price:670},
+{name:"Origami Paper",price:20},
+{name:"Stencil",price:15},
+{name:"Pocket Diary",price:10},
+{name:"Gliters",price:10},
+{name:"Scale",price:5},
+{name:"Eraser",price:5},
+{name:"Sharpner",price:5}
 ]
 
 };
@@ -617,33 +663,6 @@ const inventory={
 let cart=[];
 let notificationsOn=true;
 let saleEnabled=true;
-
-/* SALE DATE */
-
-function isSale(){
-
-const now=new Date();
-
-const start=new Date(now.getFullYear(),4,17);
-const end=new Date(now.getFullYear(),4,25,23,59,59);
-
-return saleEnabled && now>=start && now<=end;
-}
-
-/* PRICE */
-
-function getFinalPrice(price){
-
-let finalPrice=Math.round(price*1.025);
-
-if(isSale()){
-
-finalPrice=Math.round(finalPrice*0.95);
-
-}
-
-return finalPrice;
-}
 
 /* NOTIFICATION */
 
@@ -663,11 +682,19 @@ banner.classList.remove("show");
 
 }
 
-function summerSaleNotification(){
+/* SALE */
 
-showInlineNotification(
-"☀️ Summer Sale Active | Extra 5% OFF"
-);
+function isSale(){
+
+if(!saleEnabled) return false;
+
+const now=new Date();
+
+const start=new Date(now.getFullYear(),4,17);
+
+const end=new Date(now.getFullYear(),4,25);
+
+return now>=start && now<=end;
 
 }
 
@@ -695,11 +722,20 @@ let gridHTML='<div class="container">';
 
 filteredItems.forEach(p=>{
 
-let finalPrice=getFinalPrice(p.price);
+let finalPrice=p.price;
 
 let pHTML=
+`<span class="price-new">₹${finalPrice}</span>`;
+
+if(isSale()){
+
+finalPrice=Math.round(p.price*0.95);
+
+pHTML=
 `<span class="price-old">₹${p.price}</span>
 <span class="price-new">₹${finalPrice}</span>`;
+
+}
 
 const count=
 cart.filter(item=>item.name===p.name).length;
@@ -734,7 +770,9 @@ onclick="removeOne('${p.name}')">
 </div>
 
 </div>
+
 `;
+
 });
 
 gridHTML+='</div>';
@@ -782,7 +820,7 @@ render(document.getElementById("findInput").value);
 
 }
 
-/* UPDATE */
+/* CART */
 
 function updateCartUI(){
 
@@ -829,6 +867,7 @@ listDiv.innerHTML+=`
 <span>₹${item.price}</span>
 
 </div>
+
 `;
 
 });
@@ -883,20 +922,19 @@ productText +=
 
 });
 
-const subject="Blinkart New Order";
+const subject="New Blinkart Order";
 
 const body=
 "Customer: "+name+"\n"+
-"Phone: "+phone+"\n"+
+"Mobile: "+phone+"\n"+
 "Address: "+address+"\n\n"+
 "Products:\n"+productText+
-"\nTotal: ₹"+total;
+"\nTotal Bill: ₹"+total;
 
 window.location.href=
-"mailto:newbikepoint02@gmail.com?subject="+
-encodeURIComponent(subject)+
-"&body="+
-encodeURIComponent(body);
+"mailto:newbikepoint02@gmail.com?subject="
++encodeURIComponent(subject)+
+"&body="+encodeURIComponent(body);
 
 alert("🎉 Order Ready For Email!");
 
@@ -986,17 +1024,15 @@ document.getElementById("loadingScreen")
 .style.opacity="0";
 
 setTimeout(()=>{
+
 document.getElementById("loadingScreen")
 .style.display="none";
+
 },400);
 
 },2200);
 
 render();
-
-setTimeout(()=>{
-summerSaleNotification();
-},3000);
 
 };
 
