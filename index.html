@@ -46,7 +46,7 @@ background:#333;
 color:white;
 }
 
-/* LOADING SCREEN */
+/* LOADING */
 
 #loadingScreen{
 position:fixed;
@@ -64,7 +64,7 @@ transition:0.4s;
 }
 
 .loader-logo{
-font-size:45px;
+font-size:48px;
 font-weight:800;
 color:var(--primary);
 margin-bottom:20px;
@@ -106,7 +106,7 @@ flex-wrap:wrap;
 }
 
 .logo{
-font-size:28px;
+font-size:30px;
 font-weight:800;
 color:var(--primary);
 }
@@ -217,7 +217,7 @@ border:2px solid var(--primary);
 
 .card h4{
 font-size:15px;
-height:40px;
+height:45px;
 margin-bottom:10px;
 }
 
@@ -234,8 +234,6 @@ font-weight:bold;
 color:var(--primary);
 margin:8px 0;
 }
-
-/* BUTTONS */
 
 .btn-group{
 display:flex;
@@ -267,7 +265,7 @@ background:red;
 color:white;
 }
 
-/* MODALS */
+/* MODAL */
 
 .modal-overlay{
 position:fixed;
@@ -410,7 +408,7 @@ Notification
 <div class="top-nav-actions">
 
 <div class="nav-item"
-onclick="showInlineNotification('☀️ Summer Sale 17 May - 5 June | UPTO 30% OFF')">
+onclick="showInlineNotification('☀️ Summer Sale Active | Flat 2.5% OFF')">
 
 🔔 Alert
 
@@ -449,7 +447,7 @@ placeholder="Search Products...">
 <!-- SALE -->
 
 <div id="saleBanner">
-☀️ SUMMER SALE 17 MAY — 5 JUNE | UPTO 30% OFF ☀️
+☀️ SUMMER SALE 17 MAY — 25 MAY | FLAT 2.5% OFF ☀️
 </div>
 
 <!-- PRODUCTS -->
@@ -539,15 +537,6 @@ ON
 </div>
 
 <div class="setting-row">
-<span>☀️ Summer Sale</span>
-<button class="setting-btn"
-onclick="toggleSale()"
-id="saleBtn">
-ON
-</button>
-</div>
-
-<div class="setting-row">
 <span>🛒 Clear Cart</span>
 <button class="setting-btn"
 onclick="clearCart()">
@@ -575,90 +564,59 @@ Close
 const inventory={
 
 "Premium Pens":[
-{name:"Parker",price:2000},
-{name:"Perie Cardian",price:449},
-{name:"Trimax Gold",price:120},
-{name:"Trimax",price:60},
-{name:"Pilot v7",price:60},
-{name:"Pilot v5",price:67},
-{name:"Pilot Hitectpoint",price:55},
-{name:"Pilot v2",price:20},
-{name:"Fountain",price:60}
+{name:"Parker",price:2100},
+{name:"Trimax Gold",price:130},
+{name:"Pilot v7",price:65},
+{name:"Pilot v5",price:70},
+{name:"Fountain Pen",price:65}
 ],
 
 "Budget Pens":[
-{name:"Jotex Gel Pen",price:40},
-{name:"Octane Fountain",price:40},
-{name:"Jeter Ballpoint Pens",price:32},
-{name:"Writo Meter Gel",price:25},
-{name:"Writo Meter Silky Ball",price:20},
-{name:"Classmate Octane Ball",price:10},
-{name:"Unomax Ultron Ball",price:10},
-{name:"Unomax Geltron",price:10},
-{name:"Unomax Pearl Ball",price:10},
-{name:"Unomax Pearl Gel",price:10},
-{name:"Doms Inxo",price:10},
-{name:"Flair Breeze Ball",price:10},
-{name:"Flair Move Gel",price:10},
-{name:"Classmate Octane Gel",price:10},
-{name:"Hauser XO Ball",price:10},
-{name:"Doms Inxon",price:10},
-{name:"Hauser XO Gel",price:10},
-{name:"Doms Inxify Ball",price:5},
-{name:"Doms Inxify Gel",price:5},
-{name:"Supra His Ball",price:10},
-{name:"Linc Ocean Gel",price:10}
+{name:"Jotex Gel Pen",price:45},
+{name:"Octane Fountain",price:45},
+{name:"Writo Meter Gel",price:28},
+{name:"Classmate Octane Ball",price:12},
+{name:"Unomax Geltron",price:12},
+{name:"Flair Move Gel",price:12},
+{name:"Hauser XO Ball",price:12}
 ],
 
 "Kits & Sets":[
-{name:"Art Kit",price:1000},
-{name:"Stationery Kit",price:150},
-{name:"Stationery Kit Small",price:50}
+{name:"Art Kit",price:1050},
+{name:"Stationery Kit",price:160},
+{name:"Stationery Kit Small",price:55}
 ],
 
 "Pencils & Mechanical":[
-{name:"Apsara Princess Pencils",price:90},
-{name:"Doms Groove",price:65},
-{name:"Apsara Spacekids",price:60},
-{name:"Doms Xi Pencils",price:50},
-{name:"Apsara Platinum",price:50},
-{name:"Natraj Bold",price:50},
-{name:"Flair Penpencil 0.7",price:20},
-{name:"Hauser 2.0 Penpencils",price:20},
-{name:"Flair Penpencil 2.0",price:10},
-{name:"Rynolds 0.5 Penpencil",price:6}
+{name:"Apsara Princess Pencils",price:95},
+{name:"Doms Groove",price:70},
+{name:"Natraj Bold",price:55},
+{name:"Flair Penpencil 0.7",price:22}
 ],
 
 "Colors & Art":[
-{name:"Fabric Colour",price:400},
-{name:"Brush Pen",price:200},
-{name:"Luxor Pastel",price:125},
-{name:"Luxor Flouroscent",price:100},
-{name:"Doms Colour Pencils",price:60},
-{name:"Drawing Pencils",price:50},
-{name:"Paint Brush",price:50},
-{name:"Sketch Pens",price:40},
-{name:"Water Colour",price:20},
-{name:"Crayons",price:10}
+{name:"Fabric Colour",price:420},
+{name:"Brush Pen",price:220},
+{name:"Sketch Pens",price:45},
+{name:"Water Colour",price:25},
+{name:"Crayons",price:15}
 ],
 
 "Essentials":[
-{name:"Science Calculator",price:500},
-{name:"Calculator",price:670},
-{name:"Origami Paper",price:20},
-{name:"Stencil",price:15},
-{name:"Pocket Diary",price:10},
-{name:"Gliters",price:10},
-{name:"Scale",price:5},
-{name:"Eraser",price:5},
-{name:"Sharpner",price:5}
+{name:"Science Calculator",price:520},
+{name:"Calculator",price:690},
+{name:"Origami Paper",price:25},
+{name:"Stencil",price:20},
+{name:"Pocket Diary",price:15},
+{name:"Scale",price:10},
+{name:"Eraser",price:10},
+{name:"Sharpner",price:10}
 ]
 
 };
 
 let cart=[];
 let notificationsOn=true;
-let saleEnabled=true;
 
 /* NOTIFICATION */
 
@@ -681,13 +639,11 @@ banner.classList.remove("show");
 
 function isSale(){
 
-if(!saleEnabled) return false;
-
 const now=new Date();
 
 const start=new Date(now.getFullYear(),4,17);
 
-const end=new Date(now.getFullYear(),5,5);
+const end=new Date(now.getFullYear(),4,25);
 
 return now>=start && now<=end;
 }
@@ -723,7 +679,7 @@ let pHTML=
 
 if(isSale()){
 
-finalPrice=Math.round(p.price*0.7);
+finalPrice=Math.round(p.price*0.975);
 
 pHTML=
 `<span class="price-old">₹${p.price}</span>
@@ -805,7 +761,7 @@ render(document.getElementById("findInput").value);
 }
 }
 
-/* UPDATE CART */
+/* UPDATE */
 
 function updateCartUI(){
 
@@ -868,7 +824,7 @@ document.getElementById("checkoutModal")
 .style.display="none";
 }
 
-/* WHATSAPP ORDER SYSTEM */
+/* EMAIL ORDER */
 
 function submitOrder(){
 
@@ -888,11 +844,7 @@ alert("Please fill all details");
 return;
 }
 
-/* TOTAL */
-
 let total=cart.reduce((s,i)=>s+i.price,0);
-
-/* PRODUCTS */
 
 let productText="";
 
@@ -904,30 +856,21 @@ productText +=
 
 });
 
-/* MESSAGE */
+const subject="New Blinkart Order";
 
-let message=
-"🛒 *NEW BLINKART ORDER* %0A%0A"+
-"👤 Customer: "+name+"%0A"+
-"📞 Mobile: "+phone+"%0A"+
-"📍 Address: "+address+"%0A%0A"+
-"📦 PRODUCTS:%0A"+
-productText.replace(/\n/g,"%0A")+
-"%0A💵 Payment: Cash On Delivery"+
-"%0A%0A💰 Total Bill: ₹"+total;
+const body=
+"Customer: "+name+"\n"+
+"Phone: "+phone+"\n"+
+"Address: "+address+"\n\n"+
+"Products:\n"+productText+
+"\nTotal Bill: ₹"+total;
 
-/* YOUR NUMBER */
+window.location.href=
+"mailto:newbikepoint02@gmail.com?subject="
++encodeURIComponent(subject)+
+"&body="+encodeURIComponent(body);
 
-let whatsappNumber="919334115122";
-
-/* OPEN WHATSAPP */
-
-window.open(
-"https://wa.me/"+whatsappNumber+"?text="+message,
-"_blank"
-);
-
-alert("🎉 Order Sent To WhatsApp!");
+alert("🎉 Order Ready For Email!");
 
 cart=[];
 
@@ -969,17 +912,6 @@ notificationsOn=!notificationsOn;
 document.getElementById("notifBtn")
 .innerText=
 notificationsOn?"ON":"OFF";
-}
-
-function toggleSale(){
-
-saleEnabled=!saleEnabled;
-
-document.getElementById("saleBtn")
-.innerText=
-saleEnabled?"ON":"OFF";
-
-render();
 }
 
 function clearCart(){
