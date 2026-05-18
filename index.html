@@ -11,6 +11,7 @@
 :root{
 --primary:#ff6600;
 --accent:#fff200;
+--sale:#ff3300;
 }
 
 *{
@@ -46,7 +47,7 @@ background:#333;
 color:white;
 }
 
-/* LOADING SCREEN */
+/* LOADING */
 
 #loadingScreen{
 position:fixed;
@@ -64,7 +65,7 @@ transition:0.4s;
 }
 
 .loader-logo{
-font-size:48px;
+font-size:45px;
 font-weight:800;
 color:var(--primary);
 margin-bottom:20px;
@@ -106,7 +107,7 @@ flex-wrap:wrap;
 }
 
 .logo{
-font-size:30px;
+font-size:28px;
 font-weight:800;
 color:var(--primary);
 }
@@ -154,7 +155,7 @@ outline:none;
 /* SALE */
 
 #saleBanner{
-background:#ff3300;
+background:var(--sale);
 color:white;
 text-align:center;
 padding:12px;
@@ -235,6 +236,8 @@ color:var(--primary);
 margin:8px 0;
 }
 
+/* BUTTONS */
+
 .btn-group{
 display:flex;
 gap:6px;
@@ -291,6 +294,71 @@ overflow-y:auto;
 border:3px solid var(--primary);
 }
 
+.modal-content h3{
+margin-bottom:15px;
+color:var(--primary);
+}
+
+.form-group{
+margin-bottom:12px;
+}
+
+.form-group label{
+display:block;
+margin-bottom:5px;
+font-weight:bold;
+font-size:14px;
+}
+
+.form-group input,
+.form-group textarea{
+width:100%;
+padding:10px;
+border-radius:8px;
+border:2px solid var(--primary);
+}
+
+.cart-summary-item{
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px dashed #ddd;
+font-size:14px;
+align-items:center;
+}
+
+.modal-actions{
+display:flex;
+gap:10px;
+margin-top:15px;
+}
+
+.submit-btn,
+.close-btn,
+.setting-btn{
+padding:10px 14px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.submit-btn{
+background:var(--primary);
+color:white;
+flex:1;
+}
+
+.close-btn{
+background:#ddd;
+flex:1;
+}
+
+.setting-btn{
+background:var(--primary);
+color:white;
+}
+
 /* SETTINGS */
 
 .setting-row{
@@ -301,28 +369,6 @@ margin-bottom:12px;
 padding:10px;
 border:2px solid var(--primary);
 border-radius:10px;
-background:#fff7b0;
-}
-
-.setting-btn{
-background:var(--primary);
-color:white;
-border:none;
-padding:8px 14px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.close-btn{
-background:#ddd;
-border:none;
-padding:10px 14px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-width:100%;
-margin-top:10px;
 }
 
 </style>
@@ -365,7 +411,7 @@ Notification
 <div class="top-nav-actions">
 
 <div class="nav-item"
-onclick="showInlineNotification('☀️ Summer Sale Active | 2.5% OFF')">
+onclick="summerSaleNotification()">
 
 🔔 Alert
 
@@ -404,12 +450,69 @@ placeholder="Search Products...">
 <!-- SALE -->
 
 <div id="saleBanner">
-☀️ SUMMER SALE 17 MAY — 25 MAY | 2.5% OFF ☀️
+☀️ SUMMER SALE ACTIVE ☀️<br>
+17 MAY — 25 MAY | EXTRA 5% OFF
 </div>
 
 <!-- PRODUCTS -->
 
 <div id="main-content"></div>
+
+<!-- CHECKOUT -->
+
+<div class="modal-overlay" id="checkoutModal">
+
+<div class="modal-content">
+
+<h3>🛍️ Your Shopping Cart</h3>
+
+<div id="cartItemsList"></div>
+
+<div style="
+font-weight:bold;
+margin:15px 0;
+text-align:right;
+color:var(--primary);
+" id="cartTotalBill">
+
+Total: ₹0
+
+</div>
+
+<h3>👤 Customer Details</h3>
+
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" id="custName">
+</div>
+
+<div class="form-group">
+<label>Mobile Number</label>
+<input type="tel" id="custPhone">
+</div>
+
+<div class="form-group">
+<label>Delivery Address</label>
+<textarea rows="2" id="custAddress"></textarea>
+</div>
+
+<div class="modal-actions">
+
+<button class="close-btn"
+onclick="closeModal()">
+Back
+</button>
+
+<button class="submit-btn"
+onclick="submitOrder()">
+Place Order
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 <!-- SETTINGS -->
 
@@ -417,9 +520,7 @@ placeholder="Search Products...">
 
 <div class="modal-content">
 
-<h2 style="color:#ff6600;margin-bottom:15px;">
-⚙️ Blinkart Settings
-</h2>
+<h3>⚙️ Blinkart Settings</h3>
 
 <div class="setting-row">
 <span>🌙 Dark Mode</span>
@@ -440,10 +541,12 @@ ON
 </div>
 
 <div class="setting-row">
-<span>📧 Store Email</span>
-<span style="font-size:13px;font-weight:bold;">
-newbikepoint02@gmail.com
-</span>
+<span>☀️ Summer Sale</span>
+<button class="setting-btn"
+onclick="toggleSale()"
+id="saleBtn">
+ON
+</button>
 </div>
 
 <div class="setting-row">
@@ -454,10 +557,14 @@ CLEAR
 </button>
 </div>
 
+<div class="modal-actions">
+
 <button class="close-btn"
 onclick="closeSettings()">
 Close
 </button>
+
+</div>
 
 </div>
 
@@ -478,7 +585,7 @@ const inventory={
 {name:"Pilot v5",price:67},
 {name:"Pilot Hitectpoint",price:55},
 {name:"Pilot v2",price:20},
-{name:"Fountain Pen",price:60}
+{name:"Fountain",price:60}
 ],
 
 "Budget Pens":[
@@ -503,63 +610,39 @@ const inventory={
 {name:"Doms Inxify Gel",price:5},
 {name:"Supra His Ball",price:10},
 {name:"Linc Ocean Gel",price:10}
-],
-
-"Pencils & Mechanical":[
-{name:"Apsara Princess",price:90},
-{name:"Doms Groove",price:65},
-{name:"Apsara Spacekids",price:60},
-{name:"Doms Xi",price:50},
-{name:"Apsara Platinum",price:50},
-{name:"Natraj Bold",price:50},
-{name:"Flair Penpencil 0.7",price:20},
-{name:"Hauser 2.0 Penpencil",price:20},
-{name:"Flair Penpencil 2.0",price:10},
-{name:"Rynolds 0.5",price:6}
-],
-
-"Colours & Art":[
-{name:"Fabric Colour",price:400},
-{name:"Brush Pen",price:200},
-{name:"Luxor Pastel",price:125},
-{name:"Luxor Flouroscent",price:100},
-{name:"Doms Colour Pencils",price:60},
-{name:"Drawing Pencils",price:50},
-{name:"Paint Brush",price:50},
-{name:"Sketch Pens",price:40},
-{name:"Water Colour",price:20},
-{name:"Crayons",price:10}
-],
-
-"Essentials":[
-{name:"Science Calculator",price:500},
-{name:"Calculator",price:670},
-{name:"Origami Paper",price:20},
-{name:"Stencil",price:15},
-{name:"Pocket Diary",price:10},
-{name:"Gliters",price:10},
-{name:"Scale",price:5},
-{name:"Eraser",price:5},
-{name:"Sharpner",price:5}
-],
-
-"Kits & Sets":[
-{name:"Art Kit",price:1000},
-{name:"Stationery Kit",price:150},
-{name:"Stationery Kit Small",price:50}
 ]
 
 };
 
 let cart=[];
 let notificationsOn=true;
+let saleEnabled=true;
 
-/* SALE PRICE */
+/* SALE DATE */
 
-function getSalePrice(price){
+function isSale(){
 
-return Math.round(price-(price*2.5/100));
+const now=new Date();
 
+const start=new Date(now.getFullYear(),4,17);
+const end=new Date(now.getFullYear(),4,25,23,59,59);
+
+return saleEnabled && now>=start && now<=end;
+}
+
+/* PRICE */
+
+function getFinalPrice(price){
+
+let finalPrice=Math.round(price*1.025);
+
+if(isSale()){
+
+finalPrice=Math.round(finalPrice*0.95);
+
+}
+
+return finalPrice;
 }
 
 /* NOTIFICATION */
@@ -577,6 +660,14 @@ banner.classList.add("show");
 setTimeout(()=>{
 banner.classList.remove("show");
 },3000);
+
+}
+
+function summerSaleNotification(){
+
+showInlineNotification(
+"☀️ Summer Sale Active | Extra 5% OFF"
+);
 
 }
 
@@ -604,7 +695,11 @@ let gridHTML='<div class="container">';
 
 filteredItems.forEach(p=>{
 
-let finalPrice=getSalePrice(p.price);
+let finalPrice=getFinalPrice(p.price);
+
+let pHTML=
+`<span class="price-old">₹${p.price}</span>
+<span class="price-new">₹${finalPrice}</span>`;
 
 const count=
 cart.filter(item=>item.name===p.name).length;
@@ -618,9 +713,7 @@ gridHTML+=`
 
 <h4>${p.name}</h4>
 
-<span class="price-old">₹${p.price}</span>
-
-<span class="price-new">₹${finalPrice}</span>
+${pHTML}
 
 <div class="btn-group">
 
@@ -662,7 +755,7 @@ cart.push({name,price});
 
 updateCartUI();
 
-showInlineNotification("🛒 "+name+" added");
+showInlineNotification(`🛒 ${name} added`);
 
 render(document.getElementById("findInput").value);
 
@@ -681,7 +774,7 @@ cart.splice(index,1);
 
 updateCartUI();
 
-showInlineNotification("❌ "+name+" removed");
+showInlineNotification(`❌ ${name} removed`);
 
 render(document.getElementById("findInput").value);
 
@@ -701,6 +794,119 @@ cart.length;
 
 document.getElementById("nBadge").style.display=
 cart.length>0?"block":"none";
+
+}
+
+/* CHECKOUT */
+
+function checkout(){
+
+if(cart.length===0){
+
+showInlineNotification("⚠️ Cart Empty");
+
+return;
+
+}
+
+const listDiv=
+document.getElementById("cartItemsList");
+
+listDiv.innerHTML="";
+
+let total=0;
+
+cart.forEach(item=>{
+
+total+=item.price;
+
+listDiv.innerHTML+=`
+
+<div class="cart-summary-item">
+
+<span>${item.name}</span>
+
+<span>₹${item.price}</span>
+
+</div>
+`;
+
+});
+
+document.getElementById("cartTotalBill")
+.innerText=`Total Bill: ₹${total}`;
+
+document.getElementById("checkoutModal")
+.style.display="flex";
+
+}
+
+/* CLOSE */
+
+function closeModal(){
+
+document.getElementById("checkoutModal")
+.style.display="none";
+
+}
+
+/* EMAIL ORDER */
+
+function submitOrder(){
+
+const name=
+document.getElementById("custName").value.trim();
+
+const phone=
+document.getElementById("custPhone").value.trim();
+
+const address=
+document.getElementById("custAddress").value.trim();
+
+if(!name || !phone || !address){
+
+alert("Please fill all details");
+
+return;
+
+}
+
+let total=cart.reduce((s,i)=>s+i.price,0);
+
+let productText="";
+
+cart.forEach((item,index)=>{
+
+productText +=
+(index+1)+". "+item.name+
+" - ₹"+item.price+"\n";
+
+});
+
+const subject="Blinkart New Order";
+
+const body=
+"Customer: "+name+"\n"+
+"Phone: "+phone+"\n"+
+"Address: "+address+"\n\n"+
+"Products:\n"+productText+
+"\nTotal: ₹"+total;
+
+window.location.href=
+"mailto:newbikepoint02@gmail.com?subject="+
+encodeURIComponent(subject)+
+"&body="+
+encodeURIComponent(body);
+
+alert("🎉 Order Ready For Email!");
+
+cart=[];
+
+updateCartUI();
+
+render();
+
+closeModal();
 
 }
 
@@ -726,7 +932,6 @@ document.body.classList.toggle("dark");
 
 document.getElementById("darkBtn")
 .innerText=
-
 document.body.classList.contains("dark")
 ?"ON":"OFF";
 
@@ -738,8 +943,19 @@ notificationsOn=!notificationsOn;
 
 document.getElementById("notifBtn")
 .innerText=
-
 notificationsOn?"ON":"OFF";
+
+}
+
+function toggleSale(){
+
+saleEnabled=!saleEnabled;
+
+document.getElementById("saleBtn")
+.innerText=
+saleEnabled?"ON":"OFF";
+
+render();
 
 }
 
@@ -770,15 +986,17 @@ document.getElementById("loadingScreen")
 .style.opacity="0";
 
 setTimeout(()=>{
-
 document.getElementById("loadingScreen")
 .style.display="none";
-
 },400);
 
 },2200);
 
 render();
+
+setTimeout(()=>{
+summerSaleNotification();
+},3000);
 
 };
 
