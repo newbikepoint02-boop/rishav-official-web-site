@@ -1,10 +1,5 @@
-<!-- ========================= -->
-<!-- BLINKART MASTERCODE -->
-<!-- ========================= -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -595,7 +590,7 @@ const inventory={
 {name:"Octane Fountain",price:40},
 {name:"Jeter Ballpoint Pens",price:32},
 {name:"Writo Meter Gel",price:25},
-{name:"Writo Meter Silky Ball",price:32},
+{name:"Writo Meter Silky Ball",price:20},
 {name:"Classmate Octane Ball",price:10},
 {name:"Unomax Ultron Ball",price:10},
 {name:"Unomax Geltron",price:10},
@@ -604,6 +599,7 @@ const inventory={
 {name:"Doms Inxo",price:10},
 {name:"Flair Breeze Ball",price:10},
 {name:"Flair Move Gel",price:10},
+{name:"Flair Glow Gel Pen",price:10},
 {name:"Classmate Octane Gel",price:10},
 {name:"Hauser XO Ball",price:10},
 {name:"Doms Inxon",price:10},
@@ -611,10 +607,10 @@ const inventory={
 {name:"Doms Inxify Ball",price:5},
 {name:"Doms Inxify Gel",price:5},
 {name:"Supra His Ball",price:10},
-{name:"Linc Ocean Gel",price:10}
-{name:"hauser xo glow",price:11}
-  {name:"flair woody ballpoint pen",price:10}
-  ],
+{name:"Linc Ocean Gel",price:10},
+{name:"Hauser XO Glow",price:11},
+{name:"Flair Woody Ballpoint",price:10}
+],
 
 "Kits & Sets":[
 {name:"Art Kit",price:1000},
@@ -680,7 +676,7 @@ banner.classList.add("show");
 
 setTimeout(()=>{
 banner.classList.remove("show");
-},3000);
+},2000);
 
 }
 
@@ -806,7 +802,7 @@ render(document.getElementById("findInput").value);
 function removeOne(name){
 
 const index=
-cart.findLastIndex(item=>item.name===name);
+cart.findIndex(item=>item.name===name);
 
 if(index!==-1){
 
@@ -1030,9 +1026,9 @@ setTimeout(()=>{
 document.getElementById("loadingScreen")
 .style.display="none";
 
-},400);
+},200);
 
-},2200);
+},800);
 
 render();
 
