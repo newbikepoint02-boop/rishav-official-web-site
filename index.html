@@ -1,7 +1,6 @@
-<DOCTYPE! html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,6 +12,7 @@
 --primary:#ff6600;
 --accent:#fff200;
 --sale:#ff3300;
+--dark:#111;
 }
 
 *{
@@ -24,7 +24,7 @@ box-sizing:border-box;
 body{
 font-family:'Segoe UI',sans-serif;
 background:white;
-padding-bottom:40px;
+padding-bottom:50px;
 transition:0.3s;
 }
 
@@ -39,7 +39,7 @@ body.dark .card,
 body.dark .modal-content,
 body.dark .nav-item,
 body.dark .search-box input{
-background:#1e1e1e;
+background:#1f1f1f;
 color:white;
 }
 
@@ -62,23 +62,23 @@ justify-content:center;
 align-items:center;
 flex-direction:column;
 z-index:99999;
-transition:0.4s;
+transition:0.3s;
 }
 
 .loader-logo{
-font-size:45px;
-font-weight:800;
+font-size:50px;
+font-weight:900;
 color:var(--primary);
-margin-bottom:20px;
 }
 
 .spinner{
+margin-top:20px;
 width:60px;
 height:60px;
 border:6px solid white;
 border-top:6px solid var(--primary);
 border-radius:50%;
-animation:spin 1s linear infinite;
+animation:spin 0.8s linear infinite;
 }
 
 @keyframes spin{
@@ -96,20 +96,19 @@ position:sticky;
 top:0;
 z-index:1000;
 border-bottom:3px solid var(--primary);
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
 }
 
 .header-top{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:10px;
 flex-wrap:wrap;
+margin-bottom:10px;
 }
 
 .logo{
-font-size:28px;
-font-weight:800;
+font-size:30px;
+font-weight:900;
 color:var(--primary);
 }
 
@@ -121,13 +120,13 @@ flex-wrap:wrap;
 
 .nav-item{
 background:white;
-padding:8px 14px;
+padding:10px 15px;
 border-radius:20px;
 font-size:14px;
 font-weight:bold;
 cursor:pointer;
-position:relative;
 border:2px solid var(--primary);
+position:relative;
 }
 
 .badge{
@@ -136,9 +135,9 @@ top:-8px;
 right:-8px;
 background:red;
 color:white;
+font-size:10px;
 padding:2px 6px;
 border-radius:50%;
-font-size:10px;
 display:none;
 }
 
@@ -158,12 +157,10 @@ outline:none;
 #saleBanner{
 background:var(--sale);
 color:white;
-text-align:center;
 padding:12px;
+text-align:center;
 font-weight:bold;
 font-size:16px;
-border-top:2px solid var(--primary);
-border-bottom:2px solid var(--primary);
 }
 
 /* NOTIFICATION */
@@ -175,7 +172,7 @@ left:50%;
 transform:translateX(-50%) translateY(-100px);
 background:#222;
 color:white;
-padding:12px 25px;
+padding:12px 24px;
 border-radius:30px;
 font-weight:bold;
 transition:0.4s;
@@ -190,13 +187,13 @@ transform:translateX(-50%) translateY(0);
 /* CATEGORY */
 
 .category-title{
-background:#fff4b3;
-padding:12px 20px;
+background:#fff3ad;
+padding:12px 18px;
+margin:20px 15px 10px;
+border-left:6px solid var(--primary);
 font-size:20px;
 font-weight:bold;
-border-left:6px solid var(--primary);
-margin:25px 15px 15px;
-border-radius:6px;
+border-radius:8px;
 }
 
 /* PRODUCTS */
@@ -210,16 +207,16 @@ padding:0 15px;
 
 .card{
 background:white;
+padding:15px;
 border-radius:14px;
-padding:14px;
 box-shadow:0 4px 10px rgba(0,0,0,0.08);
-text-align:center;
 border:2px solid var(--primary);
+text-align:center;
 }
 
 .card h4{
 font-size:15px;
-height:40px;
+height:42px;
 margin-bottom:10px;
 }
 
@@ -269,7 +266,7 @@ background:red;
 color:white;
 }
 
-/* MODAL */
+/* MODALS */
 
 .modal-overlay{
 position:fixed;
@@ -308,7 +305,6 @@ margin-bottom:12px;
 display:block;
 margin-bottom:5px;
 font-weight:bold;
-font-size:14px;
 }
 
 .form-group input,
@@ -324,7 +320,6 @@ display:flex;
 justify-content:space-between;
 padding:10px 0;
 border-bottom:1px dashed #ddd;
-font-size:14px;
 }
 
 .modal-actions{
@@ -371,6 +366,76 @@ border:2px solid var(--primary);
 border-radius:10px;
 }
 
+/* GAME BUTTON */
+
+#gameButton{
+position:fixed;
+bottom:20px;
+right:20px;
+width:70px;
+height:70px;
+border-radius:50%;
+background:#111;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+cursor:pointer;
+z-index:999;
+border:4px solid red;
+box-shadow:0 0 15px red;
+}
+
+/* GAME */
+
+#gameScreen{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+z-index:999999;
+color:white;
+overflow:auto;
+padding:20px;
+}
+
+.game-house{
+margin-top:30px;
+background:#1a1a1a;
+padding:20px;
+border:3px solid red;
+border-radius:20px;
+text-align:center;
+}
+
+.game-house h1{
+color:red;
+font-size:40px;
+margin-bottom:20px;
+}
+
+.scary-box{
+background:#2a0000;
+padding:20px;
+border-radius:15px;
+margin-top:20px;
+}
+
+.scary-btn{
+margin-top:20px;
+padding:15px 20px;
+background:red;
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
 </style>
 </head>
 
@@ -385,10 +450,6 @@ border-radius:10px;
 </div>
 
 <div class="spinner"></div>
-
-<p style="margin-top:15px;font-weight:bold;color:#444;">
-Loading Blinkart Store...
-</p>
 
 </div>
 
@@ -411,9 +472,9 @@ Notification
 <div class="top-nav-actions">
 
 <div class="nav-item"
-onclick="showInlineNotification('🔥 Summer Sale Active | 5% OFF')">
+onclick="showInlineNotification('🔥 Summer Sale Active Till 25 May')">
 
-🔔 Alert
+🔔 Notification
 
 <span class="badge" id="nBadge">0</span>
 
@@ -450,12 +511,60 @@ placeholder="Search Products...">
 <!-- SALE -->
 
 <div id="saleBanner">
-☀️ SUMMER SALE 17 MAY — 25 MAY | FLAT 5% OFF ☀️
+☀️ SUMMER SALE LIVE TILL 25 MAY • OWNER'S BIRTHDAY SALE STARTS 27 MAY 11:59 PM • UPTO 25% OFF 🎉
 </div>
 
 <!-- PRODUCTS -->
 
 <div id="main-content"></div>
+
+<!-- GAME BUTTON -->
+
+<div id="gameButton" onclick="openGame()">
+👻
+</div>
+
+<!-- GAME -->
+
+<div id="gameScreen">
+
+<h1 style="text-align:center;color:red;">
+🏚️ Haunted Blinkart House
+</h1>
+
+<div class="game-house">
+
+<h1>GRANNY STYLE HORROR</h1>
+
+<p>
+You entered the haunted Blinkart warehouse...
+</p>
+
+<div class="scary-box">
+
+<p>
+💀 Strange sounds are coming from inside...
+</p>
+
+<p>
+🔦 Find hidden stationery before Granny catches you!
+</p>
+
+<button class="scary-btn"
+onclick="alert('😱 Granny is coming... RUN!')">
+OPEN DARK ROOM
+</button>
+
+</div>
+
+<button class="scary-btn"
+onclick="closeGame()">
+EXIT GAME
+</button>
+
+</div>
+
+</div>
 
 <!-- CHECKOUT -->
 
@@ -467,12 +576,8 @@ placeholder="Search Products...">
 
 <div id="cartItemsList"></div>
 
-<div style="
-font-weight:bold;
-margin:15px 0;
-text-align:right;
-color:var(--primary);
-" id="cartTotalBill">
+<div id="cartTotalBill"
+style="font-weight:bold;margin:15px 0;text-align:right;color:var(--primary);">
 Total: ₹0
 </div>
 
@@ -538,15 +643,6 @@ ON
 </div>
 
 <div class="setting-row">
-<span>☀️ Summer Sale</span>
-<button class="setting-btn"
-onclick="toggleSale()"
-id="saleBtn">
-ON
-</button>
-</div>
-
-<div class="setting-row">
 <span>🛒 Clear Cart</span>
 <button class="setting-btn"
 onclick="clearCart()">
@@ -583,7 +679,7 @@ const inventory={
 {name:"Pilot Hitectpoint",price:55},
 {name:"Pilot v2",price:20},
 {name:"Fountain",price:60},
-{name:"calligraphy pen",price:55}
+{name:"Calligraphy Pen",price:55}
 ],
 
 "Budget Pens":[
@@ -610,8 +706,7 @@ const inventory={
 {name:"Supra His Ball",price:10},
 {name:"Linc Ocean Gel",price:10},
 {name:"Hauser XO Glow",price:11},
-{name:"Flair Woody Ballpoint",price:10},
-{name:"flair glow gel",price:10}
+{name:"Flair Woody Ballpoint",price:10}
 ],
 
 "Kits & Sets":[
@@ -644,8 +739,8 @@ const inventory={
 {name:"Sketch Pens",price:40},
 {name:"Water Colour",price:20},
 {name:"Crayons",price:10},
-{name:"camel oil pastels",price:50},
-{name:"drawing copy",price:45}
+{name:"Camel Oil Pastels",price:50},
+{name:"Drawing Copy",price:45}
 ],
 
 "Essentials":[
@@ -661,14 +756,13 @@ const inventory={
 {name:"Sanitizer",price:38},
 {name:"Stapler",price:100},
 {name:"Stapler Pins",price:12},
-{name:"keychains",price:110}
+{name:"Keychains",price:110}
 ]
 
 };
 
 let cart=[];
 let notificationsOn=true;
-let saleEnabled=true;
 
 /* NOTIFICATION */
 
@@ -690,17 +784,25 @@ banner.classList.remove("show");
 
 /* SALE */
 
-function isSale(){
-
-if(!saleEnabled) return false;
+function getDiscount(){
 
 const now=new Date();
 
-const start=new Date(now.getFullYear(),4,17);
+const summerEnd=new Date(now.getFullYear(),4,25,23,59);
 
-const end=new Date(now.getFullYear(),4,25);
+const birthdayStart=new Date(now.getFullYear(),4,27,23,59);
 
-return now>=start && now<=end;
+const birthdayEnd=new Date(now.getFullYear(),4,28,23,59);
+
+if(now<=summerEnd){
+return 5;
+}
+
+if(now>=birthdayStart && now<=birthdayEnd){
+return 25;
+}
+
+return 0;
 
 }
 
@@ -711,6 +813,8 @@ function render(filter=""){
 const main=document.getElementById("main-content");
 
 main.innerHTML="";
+
+const discount=getDiscount();
 
 for(const cat in inventory){
 
@@ -733,13 +837,16 @@ let finalPrice=p.price;
 let pHTML=
 `<span class="price-new">₹${finalPrice}</span>`;
 
-if(isSale()){
+if(discount>0){
 
-finalPrice=Math.round(p.price*0.95);
+finalPrice=
+Math.round(p.price-(p.price*discount/100));
 
 pHTML=
-`<span class="price-old">₹${p.price}</span>
-<span class="price-new">₹${finalPrice}</span>`;
+`
+<span class="price-old">₹${p.price}</span>
+<span class="price-new">₹${finalPrice}</span>
+`;
 
 }
 
@@ -889,13 +996,11 @@ document.getElementById("checkoutModal")
 /* CLOSE */
 
 function closeModal(){
-
 document.getElementById("checkoutModal")
 .style.display="none";
-
 }
 
-/* EMAIL ORDER */
+/* ORDER */
 
 function submitOrder(){
 
@@ -916,33 +1021,7 @@ return;
 
 }
 
-let total=cart.reduce((s,i)=>s+i.price,0);
-
-let productText="";
-
-cart.forEach((item,index)=>{
-
-productText +=
-(index+1)+". "+item.name+
-" - ₹"+item.price+"\n";
-
-});
-
-const subject="New Blinkart Order";
-
-const body=
-"Customer: "+name+"\n"+
-"Mobile: "+phone+"\n"+
-"Address: "+address+"\n\n"+
-"Products:\n"+productText+
-"\nTotal Bill: ₹"+total;
-
-window.location.href=
-"mailto:newbikepoint02@gmail.com?subject="
-+encodeURIComponent(subject)+
-"&body="+encodeURIComponent(body);
-
-alert("🎉 Order Ready For Email!");
+alert("🎉 Order Placed Successfully!");
 
 cart=[];
 
@@ -957,17 +1036,13 @@ closeModal();
 /* SETTINGS */
 
 function openSettings(){
-
 document.getElementById("settingsModal")
 .style.display="flex";
-
 }
 
 function closeSettings(){
-
 document.getElementById("settingsModal")
 .style.display="none";
-
 }
 
 function toggleDarkMode(){
@@ -991,18 +1066,6 @@ notificationsOn?"ON":"OFF";
 
 }
 
-function toggleSale(){
-
-saleEnabled=!saleEnabled;
-
-document.getElementById("saleBtn")
-.innerText=
-saleEnabled?"ON":"OFF";
-
-render();
-
-}
-
 function clearCart(){
 
 cart=[];
@@ -1012,12 +1075,37 @@ updateCartUI();
 render();
 
 showInlineNotification("🛒 Cart Cleared");
+
 }
 
 /* SEARCH */
 
 document.getElementById("findInput")
 .oninput=(e)=>render(e.target.value);
+
+/* GAME */
+
+function openGame(){
+
+if(cart.length===0){
+
+showInlineNotification("🛒 Buy Product To Unlock Horror Game");
+
+return;
+
+}
+
+document.getElementById("gameScreen")
+.style.display="block";
+
+}
+
+function closeGame(){
+
+document.getElementById("gameScreen")
+.style.display="none";
+
+}
 
 /* START */
 
@@ -1033,12 +1121,14 @@ setTimeout(()=>{
 document.getElementById("loadingScreen")
 .style.display="none";
 
-},200);
+},100);
 
-},800);
+},300);
 
 render();
-}
+
+};
+
 </script>
 
 </body>
