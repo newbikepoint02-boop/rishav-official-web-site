@@ -4,15 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Blinkart Wholesale Store</title>
+<title>Blinkart MasterCode</title>
 
 <style>
 
 :root{
 --primary:#ff6600;
 --accent:#fff200;
---sale:#ff3300;
---dark:#111;
 }
 
 *{
@@ -22,30 +20,9 @@ box-sizing:border-box;
 }
 
 body{
-font-family:'Segoe UI',sans-serif;
-background:white;
-padding-bottom:50px;
-transition:0.3s;
-}
-
-/* DARK MODE */
-
-body.dark{
-background:#111;
-color:white;
-}
-
-body.dark .card,
-body.dark .modal-content,
-body.dark .nav-item,
-body.dark .search-box input{
-background:#1f1f1f;
-color:white;
-}
-
-body.dark .category-title{
-background:#333;
-color:white;
+font-family:Segoe UI,sans-serif;
+background:#fff;
+padding-bottom:120px;
 }
 
 /* LOADING */
@@ -62,23 +39,23 @@ justify-content:center;
 align-items:center;
 flex-direction:column;
 z-index:99999;
-transition:0.3s;
+transition:.3s;
 }
 
 .loader-logo{
-font-size:50px;
+font-size:55px;
 font-weight:900;
 color:var(--primary);
 }
 
 .spinner{
+width:65px;
+height:65px;
 margin-top:20px;
-width:60px;
-height:60px;
 border:6px solid white;
 border-top:6px solid var(--primary);
 border-radius:50%;
-animation:spin 0.8s linear infinite;
+animation:spin .8s linear infinite;
 }
 
 @keyframes spin{
@@ -94,8 +71,8 @@ background:var(--accent);
 padding:15px;
 position:sticky;
 top:0;
-z-index:1000;
-border-bottom:3px solid var(--primary);
+z-index:999;
+border-bottom:4px solid var(--primary);
 }
 
 .header-top{
@@ -103,29 +80,28 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 flex-wrap:wrap;
-margin-bottom:10px;
+gap:10px;
 }
 
 .logo{
-font-size:30px;
+font-size:34px;
 font-weight:900;
 color:var(--primary);
 }
 
-.top-nav-actions{
+.actions{
 display:flex;
 gap:10px;
 flex-wrap:wrap;
 }
 
-.nav-item{
+.action-btn{
 background:white;
-padding:10px 15px;
-border-radius:20px;
-font-size:14px;
+padding:10px 16px;
+border-radius:30px;
 font-weight:bold;
-cursor:pointer;
 border:2px solid var(--primary);
+cursor:pointer;
 position:relative;
 }
 
@@ -143,57 +119,29 @@ display:none;
 
 /* SEARCH */
 
+.search-box{
+margin-top:12px;
+}
+
 .search-box input{
 width:100%;
-padding:12px;
+padding:13px;
 border-radius:10px;
 border:2px solid var(--primary);
 font-size:15px;
 outline:none;
 }
 
-/* SALE */
-
-#saleBanner{
-background:var(--sale);
-color:white;
-padding:12px;
-text-align:center;
-font-weight:bold;
-font-size:16px;
-}
-
-/* NOTIFICATION */
-
-#appNotification{
-position:fixed;
-top:20px;
-left:50%;
-transform:translateX(-50%) translateY(-100px);
-background:#222;
-color:white;
-padding:12px 24px;
-border-radius:30px;
-font-weight:bold;
-transition:0.4s;
-z-index:9999;
-border:2px solid var(--primary);
-}
-
-#appNotification.show{
-transform:translateX(-50%) translateY(0);
-}
-
 /* CATEGORY */
 
 .category-title{
-background:#fff3ad;
-padding:12px 18px;
-margin:20px 15px 10px;
-border-left:6px solid var(--primary);
+background:#fff0b0;
+margin:18px 15px 10px;
+padding:12px;
 font-size:20px;
 font-weight:bold;
-border-radius:8px;
+border-left:6px solid var(--primary);
+border-radius:10px;
 }
 
 /* PRODUCTS */
@@ -207,31 +155,24 @@ padding:0 15px;
 
 .card{
 background:white;
-padding:15px;
-border-radius:14px;
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
 border:2px solid var(--primary);
+border-radius:15px;
+padding:15px;
 text-align:center;
+box-shadow:0 4px 10px rgba(0,0,0,.08);
 }
 
 .card h4{
+height:45px;
 font-size:15px;
-height:42px;
 margin-bottom:10px;
 }
 
-.price-old{
-text-decoration:line-through;
-color:#777;
-font-size:12px;
-}
-
-.price-new{
-display:block;
-font-size:20px;
+.price{
+font-size:22px;
 font-weight:bold;
 color:var(--primary);
-margin:8px 0;
+margin-bottom:10px;
 }
 
 /* BUTTONS */
@@ -246,7 +187,7 @@ flex:2;
 background:var(--primary);
 color:white;
 border:none;
-padding:9px;
+padding:10px;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
@@ -266,90 +207,93 @@ background:red;
 color:white;
 }
 
-/* MODALS */
+/* NOTIFICATION */
 
-.modal-overlay{
+#notification{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%) translateY(-100px);
+background:#111;
+color:white;
+padding:12px 24px;
+border-radius:30px;
+font-weight:bold;
+transition:.4s;
+z-index:9999;
+border:2px solid var(--primary);
+}
+
+#notification.show{
+transform:translateX(-50%) translateY(0);
+}
+
+/* MODAL */
+
+.modal{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,.6);
 display:none;
 justify-content:center;
 align-items:center;
-z-index:5000;
+z-index:9999;
 }
 
 .modal-content{
 background:white;
-padding:20px;
-border-radius:15px;
 width:92%;
 max-width:420px;
-max-height:85vh;
-overflow-y:auto;
+padding:20px;
+border-radius:15px;
 border:3px solid var(--primary);
+max-height:85vh;
+overflow:auto;
 }
 
-.modal-content h3{
+.modal-content h2{
 margin-bottom:15px;
 color:var(--primary);
 }
 
-.form-group{
-margin-bottom:12px;
-}
-
-.form-group label{
-display:block;
-margin-bottom:5px;
-font-weight:bold;
-}
-
-.form-group input,
-.form-group textarea{
-width:100%;
-padding:10px;
-border-radius:8px;
-border:2px solid var(--primary);
-}
-
-.cart-summary-item{
+.cart-item{
 display:flex;
 justify-content:space-between;
 padding:10px 0;
-border-bottom:1px dashed #ddd;
+border-bottom:1px dashed #ccc;
 }
 
-.modal-actions{
+.total{
+margin-top:15px;
+font-size:22px;
+font-weight:bold;
+text-align:right;
+color:var(--primary);
+}
+
+.modal-buttons{
 display:flex;
 gap:10px;
-margin-top:15px;
+margin-top:20px;
 }
 
-.submit-btn,
-.close-btn,
-.setting-btn{
-padding:10px 14px;
+.modal-buttons button{
+flex:1;
+padding:12px;
 border:none;
-border-radius:8px;
+border-radius:10px;
 font-weight:bold;
 cursor:pointer;
 }
 
-.submit-btn{
-background:var(--primary);
-color:white;
-flex:1;
-}
-
 .close-btn{
 background:#ddd;
-flex:1;
 }
 
-.setting-btn{
+.order-btn{
 background:var(--primary);
 color:white;
 }
@@ -361,79 +305,51 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 margin-bottom:12px;
-padding:10px;
+padding:12px;
 border:2px solid var(--primary);
 border-radius:10px;
 }
 
-/* GAME BUTTON */
+/* AI BUTTON */
 
-#gameButton{
+#chatgptButton{
 position:fixed;
 bottom:20px;
 right:20px;
-width:70px;
-height:70px;
+width:75px;
+height:75px;
 border-radius:50%;
 background:#111;
 color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:28px;
+font-size:30px;
+font-weight:bold;
 cursor:pointer;
-z-index:999;
-border:4px solid red;
-box-shadow:0 0 15px red;
+z-index:99999;
+border:4px solid #00ff99;
+box-shadow:0 0 20px #00ff99;
 }
 
-/* GAME */
+/* DARK MODE */
 
-#gameScreen{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-z-index:999999;
+body.dark{
+background:#111;
 color:white;
-overflow:auto;
-padding:20px;
 }
 
-.game-house{
-margin-top:30px;
-background:#1a1a1a;
-padding:20px;
-border:3px solid red;
-border-radius:20px;
-text-align:center;
-}
-
-.game-house h1{
-color:red;
-font-size:40px;
-margin-bottom:20px;
-}
-
-.scary-box{
-background:#2a0000;
-padding:20px;
-border-radius:15px;
-margin-top:20px;
-}
-
-.scary-btn{
-margin-top:20px;
-padding:15px 20px;
-background:red;
+body.dark .card,
+body.dark .modal-content,
+body.dark .action-btn,
+body.dark .search-box input{
+background:#1f1f1f;
 color:white;
-border:none;
-border-radius:10px;
-font-size:18px;
-cursor:pointer;
+}
+
+body.dark .category-title{
+background:#333;
+color:white;
 }
 
 </style>
@@ -455,8 +371,15 @@ cursor:pointer;
 
 <!-- NOTIFICATION -->
 
-<div id="appNotification">
-Notification
+<div id="notification">
+Welcome
+</div>
+
+<!-- AI BUTTON -->
+
+<div id="chatgptButton"
+onclick="openAIHelper()">
+AI
 </div>
 
 <!-- HEADER -->
@@ -469,29 +392,22 @@ Notification
 🛒 Blinkart
 </div>
 
-<div class="top-nav-actions">
+<div class="actions">
 
-<div class="nav-item"
-onclick="showInlineNotification('🔥 Summer Sale Active Till 25 May')">
-
-🔔 Notification
-
-<span class="badge" id="nBadge">0</span>
-
+<div class="action-btn"
+onclick="showNotification('🛒 Welcome To Blinkart')">
+🔔 Notice
+<span class="badge" id="badge">0</span>
 </div>
 
-<div class="nav-item"
-onclick="checkout()">
-
-🛍️ Cart (<span id="cCount">0</span>)
-
+<div class="action-btn"
+onclick="openCart()">
+🛍️ Cart (<span id="cartCount">0</span>)
 </div>
 
-<div class="nav-item"
+<div class="action-btn"
 onclick="openSettings()">
-
 ⚙️ Settings
-
 </div>
 
 </div>
@@ -499,115 +415,41 @@ onclick="openSettings()">
 </div>
 
 <div class="search-box">
-
 <input type="text"
-id="findInput"
-placeholder="Search Products...">
-
+id="searchInput"
+placeholder="Search Products">
 </div>
 
 </header>
 
-<!-- SALE -->
-
-<div id="saleBanner">
-☀️ SUMMER SALE LIVE TILL 25 MAY • OWNER'S BIRTHDAY SALE STARTS 27 MAY 11:59 PM • UPTO 25% OFF 🎉
-</div>
-
 <!-- PRODUCTS -->
 
-<div id="main-content"></div>
+<div id="main"></div>
 
-<!-- GAME BUTTON -->
+<!-- CART -->
 
-<div id="gameButton" onclick="openGame()">
-👻
-</div>
-
-<!-- GAME -->
-
-<div id="gameScreen">
-
-<h1 style="text-align:center;color:red;">
-🏚️ Haunted Blinkart House
-</h1>
-
-<div class="game-house">
-
-<h1>GRANNY STYLE HORROR</h1>
-
-<p>
-You entered the haunted Blinkart warehouse...
-</p>
-
-<div class="scary-box">
-
-<p>
-💀 Strange sounds are coming from inside...
-</p>
-
-<p>
-🔦 Find hidden stationery before Granny catches you!
-</p>
-
-<button class="scary-btn"
-onclick="alert('😱 Granny is coming... RUN!')">
-OPEN DARK ROOM
-</button>
-
-</div>
-
-<button class="scary-btn"
-onclick="closeGame()">
-EXIT GAME
-</button>
-
-</div>
-
-</div>
-
-<!-- CHECKOUT -->
-
-<div class="modal-overlay" id="checkoutModal">
+<div class="modal" id="cartModal">
 
 <div class="modal-content">
 
-<h3>🛒 Your Cart</h3>
+<h2>🛒 Your Cart</h2>
 
-<div id="cartItemsList"></div>
+<div id="cartItems"></div>
 
-<div id="cartTotalBill"
-style="font-weight:bold;margin:15px 0;text-align:right;color:var(--primary);">
-Total: ₹0
+<div class="total" id="totalBill">
+₹0
 </div>
 
-<h3>👤 Customer Details</h3>
-
-<div class="form-group">
-<label>Full Name</label>
-<input type="text" id="custName">
-</div>
-
-<div class="form-group">
-<label>Mobile Number</label>
-<input type="tel" id="custPhone">
-</div>
-
-<div class="form-group">
-<label>Delivery Address</label>
-<textarea rows="2" id="custAddress"></textarea>
-</div>
-
-<div class="modal-actions">
+<div class="modal-buttons">
 
 <button class="close-btn"
-onclick="closeModal()">
-Back
+onclick="closeCart()">
+Close
 </button>
 
-<button class="submit-btn"
-onclick="submitOrder()">
-Place Order
+<button class="order-btn"
+onclick="placeOrder()">
+Order
 </button>
 
 </div>
@@ -618,16 +460,15 @@ Place Order
 
 <!-- SETTINGS -->
 
-<div class="modal-overlay" id="settingsModal">
+<div class="modal" id="settingsModal">
 
 <div class="modal-content">
 
-<h3>⚙️ Blinkart Settings</h3>
+<h2>⚙️ Settings</h2>
 
 <div class="setting-row">
 <span>🌙 Dark Mode</span>
-<button class="setting-btn"
-onclick="toggleDarkMode()"
+<button onclick="toggleDarkMode()"
 id="darkBtn">
 OFF
 </button>
@@ -635,22 +476,20 @@ OFF
 
 <div class="setting-row">
 <span>🔔 Notifications</span>
-<button class="setting-btn"
-onclick="toggleNotifications()"
-id="notifBtn">
+<button onclick="toggleNotifications()"
+id="notifyBtn">
 ON
 </button>
 </div>
 
 <div class="setting-row">
 <span>🛒 Clear Cart</span>
-<button class="setting-btn"
-onclick="clearCart()">
+<button onclick="clearCart()">
 CLEAR
 </button>
 </div>
 
-<div class="modal-actions">
+<div class="modal-buttons">
 
 <button class="close-btn"
 onclick="closeSettings()">
@@ -677,8 +516,6 @@ const inventory={
 {name:"Pilot v7",price:60},
 {name:"Pilot v5",price:67},
 {name:"Pilot Hitectpoint",price:55},
-{name:"Pilot v2",price:20},
-{name:"Fountain",price:60},
 {name:"Calligraphy Pen",price:55}
 ],
 
@@ -687,26 +524,10 @@ const inventory={
 {name:"Octane Fountain",price:40},
 {name:"Jeter Ballpoint Pens",price:32},
 {name:"Writo Meter Gel",price:25},
-{name:"Writo Meter Silky Ball",price:32},
 {name:"Classmate Octane Ball",price:10},
-{name:"Unomax Ultron Ball",price:10},
-{name:"Unomax Geltron",price:10},
-{name:"Unomax Pearl Ball",price:10},
-{name:"Unomax Pearl Gel",price:10},
-{name:"Doms Inxo",price:10},
-{name:"Flair Breeze Ball",price:10},
 {name:"Flair Move Gel",price:10},
-{name:"Flair Glow Gel Pen",price:10},
-{name:"Classmate Octane Gel",price:10},
 {name:"Hauser XO Ball",price:10},
-{name:"Doms Inxon",price:10},
-{name:"Hauser XO Gel",price:10},
-{name:"Doms Inxify Ball",price:5},
-{name:"Doms Inxify Gel",price:5},
-{name:"Supra His Ball",price:10},
-{name:"Linc Ocean Gel",price:10},
-{name:"Hauser XO Glow",price:11},
-{name:"Flair Woody Ballpoint",price:10}
+{name:"Linc Ocean Gel",price:10}
 ],
 
 "Kits & Sets":[
@@ -718,29 +539,18 @@ const inventory={
 "Pencils & Mechanical":[
 {name:"Apsara Princess Pencils",price:90},
 {name:"Doms Groove",price:65},
-{name:"Apsara Spacekids",price:60},
-{name:"Doms Xi Pencils",price:50},
 {name:"Apsara Platinum",price:50},
 {name:"Natraj Bold",price:50},
-{name:"Flair Penpencil 0.7",price:20},
-{name:"Hauser 2.0 Penpencils",price:20},
-{name:"Flair Penpencil 2.0",price:10},
-{name:"Rynolds 0.5 Penpencil",price:6}
+{name:"Flair Penpencil 0.7",price:20}
 ],
 
 "Colors & Art":[
 {name:"Fabric Colour",price:400},
 {name:"Brush Pen",price:200},
 {name:"Luxor Pastel",price:125},
-{name:"Luxor Flouroscent",price:100},
-{name:"Doms Colour Pencils",price:60},
-{name:"Drawing Pencils",price:50},
-{name:"Paint Brush",price:50},
 {name:"Sketch Pens",price:40},
 {name:"Water Colour",price:20},
-{name:"Crayons",price:10},
-{name:"Camel Oil Pastels",price:50},
-{name:"Drawing Copy",price:45}
+{name:"Crayons",price:10}
 ],
 
 "Essentials":[
@@ -749,11 +559,9 @@ const inventory={
 {name:"Origami Paper",price:20},
 {name:"Stencil",price:15},
 {name:"Pocket Diary",price:10},
-{name:"Gliters",price:10},
 {name:"Scale",price:5},
 {name:"Eraser",price:5},
 {name:"Sharpner",price:5},
-{name:"Sanitizer",price:38},
 {name:"Stapler",price:100},
 {name:"Stapler Pins",price:12},
 {name:"Keychains",price:110}
@@ -762,47 +570,37 @@ const inventory={
 };
 
 let cart=[];
-let notificationsOn=true;
+let notifications=true;
+
+/* AI BUTTON */
+
+function openAIHelper(){
+
+showNotification("🤖 Opening ChatGPT");
+
+setTimeout(()=>{
+
+window.open("https://chatgpt.com","_blank");
+
+},500);
+
+}
 
 /* NOTIFICATION */
 
-function showInlineNotification(text){
+function showNotification(text){
 
-if(!notificationsOn) return;
+if(!notifications) return;
 
-const banner=document.getElementById("appNotification");
+const box=document.getElementById("notification");
 
-banner.innerText=text;
+box.innerText=text;
 
-banner.classList.add("show");
+box.classList.add("show");
 
 setTimeout(()=>{
-banner.classList.remove("show");
+box.classList.remove("show");
 },2000);
-
-}
-
-/* SALE */
-
-function getDiscount(){
-
-const now=new Date();
-
-const summerEnd=new Date(now.getFullYear(),4,25,23,59);
-
-const birthdayStart=new Date(now.getFullYear(),4,27,23,59);
-
-const birthdayEnd=new Date(now.getFullYear(),4,28,23,59);
-
-if(now<=summerEnd){
-return 5;
-}
-
-if(now>=birthdayStart && now<=birthdayEnd){
-return 25;
-}
-
-return 0;
 
 }
 
@@ -810,74 +608,49 @@ return 0;
 
 function render(filter=""){
 
-const main=document.getElementById("main-content");
+const main=document.getElementById("main");
 
 main.innerHTML="";
 
-const discount=getDiscount();
-
 for(const cat in inventory){
 
-const filteredItems=
-inventory[cat].filter(p=>
+const items=inventory[cat].filter(p=>
 p.name.toLowerCase().includes(filter.toLowerCase())
 );
 
-if(filteredItems.length>0){
+if(items.length>0){
 
-main.innerHTML+=
-`<div class="category-title">${cat}</div>`;
-
-let gridHTML='<div class="container">';
-
-filteredItems.forEach(p=>{
-
-let finalPrice=p.price;
-
-let pHTML=
-`<span class="price-new">₹${finalPrice}</span>`;
-
-if(discount>0){
-
-finalPrice=
-Math.round(p.price-(p.price*discount/100));
-
-pHTML=
-`
-<span class="price-old">₹${p.price}</span>
-<span class="price-new">₹${finalPrice}</span>
+main.innerHTML+=`
+<div class="category-title">${cat}</div>
 `;
 
-}
+let html='<div class="container">';
+
+items.forEach(p=>{
 
 const count=
-cart.filter(item=>item.name===p.name).length;
+cart.filter(i=>i.name===p.name).length;
 
-const removable=
-count>0?"active":"";
-
-gridHTML+=`
+html+=`
 
 <div class="card">
 
 <h4>${p.name}</h4>
 
-${pHTML}
+<div class="price">
+₹${p.price}
+</div>
 
 <div class="btn-group">
 
 <button class="add-btn"
-onclick="add('${p.name}',${finalPrice})">
-
+onclick="addItem('${p.name}',${p.price})">
 Add (${count})
-
 </button>
 
-<button class="remove-btn ${removable}"
-onclick="removeOne('${p.name}')">
-
+<button class="remove-btn ${count>0?'active':''}"
+onclick="removeItem('${p.name}')">
 -
-
 </button>
 
 </div>
@@ -888,9 +661,9 @@ onclick="removeOne('${p.name}')">
 
 });
 
-gridHTML+='</div>';
+html+='</div>';
 
-main.innerHTML+=gridHTML;
+main.innerHTML+=html;
 
 }
 
@@ -900,70 +673,70 @@ main.innerHTML+=gridHTML;
 
 /* ADD */
 
-function add(name,price){
+function addItem(name,price){
 
 cart.push({name,price});
 
-updateCartUI();
+updateCart();
 
-showInlineNotification(`🛒 ${name} added`);
+showNotification("🛒 "+name+" Added");
 
-render(document.getElementById("findInput").value);
+render(document.getElementById("searchInput").value);
 
 }
 
 /* REMOVE */
 
-function removeOne(name){
+function removeItem(name){
 
 const index=
-cart.findIndex(item=>item.name===name);
+cart.findIndex(i=>i.name===name);
 
 if(index!==-1){
 
 cart.splice(index,1);
 
-updateCartUI();
+updateCart();
 
-showInlineNotification(`❌ ${name} removed`);
+showNotification("❌ "+name+" Removed");
 
-render(document.getElementById("findInput").value);
-
-}
+render(document.getElementById("searchInput").value);
 
 }
 
-/* CART */
+}
 
-function updateCartUI(){
+/* UPDATE CART */
 
-document.getElementById("cCount").innerText=
+function updateCart(){
+
+document.getElementById("cartCount").innerText=
 cart.length;
 
-document.getElementById("nBadge").innerText=
+document.getElementById("badge").innerText=
 cart.length;
 
-document.getElementById("nBadge").style.display=
+document.getElementById("badge").style.display=
 cart.length>0?"block":"none";
 
 }
 
-/* CHECKOUT */
+/* OPEN CART */
 
-function checkout(){
+function openCart(){
 
 if(cart.length===0){
 
-showInlineNotification("⚠️ Cart Empty");
+showNotification("⚠️ Cart Empty");
 
 return;
 
 }
 
-const listDiv=
-document.getElementById("cartItemsList");
+const list=
+document.getElementById("cartItems");
 
-listDiv.innerHTML="";
+list.innerHTML="";
 
 let total=0;
 
@@ -971,78 +744,64 @@ cart.forEach(item=>{
 
 total+=item.price;
 
-listDiv.innerHTML+=`
+list.innerHTML+=`
 
-<div class="cart-summary-item">
-
+<div class="cart-item">
 <span>${item.name}</span>
-
 <span>₹${item.price}</span>
-
 </div>
 
 `;
 
 });
 
-document.getElementById("cartTotalBill")
-.innerText=`Total Bill: ₹${total}`;
+document.getElementById("totalBill")
+.innerText="Total : ₹"+total;
 
-document.getElementById("checkoutModal")
+document.getElementById("cartModal")
 .style.display="flex";
 
 }
 
-/* CLOSE */
+/* CLOSE CART */
 
-function closeModal(){
-document.getElementById("checkoutModal")
+function closeCart(){
+
+document.getElementById("cartModal")
 .style.display="none";
+
 }
 
 /* ORDER */
 
-function submitOrder(){
+function placeOrder(){
 
-const name=
-document.getElementById("custName").value.trim();
-
-const phone=
-document.getElementById("custPhone").value.trim();
-
-const address=
-document.getElementById("custAddress").value.trim();
-
-if(!name || !phone || !address){
-
-alert("Please fill all details");
-
-return;
-
-}
-
-alert("🎉 Order Placed Successfully!");
+alert("🎉 Order Placed Successfully");
 
 cart=[];
 
-updateCartUI();
+updateCart();
 
 render();
 
-closeModal();
+closeCart();
 
 }
 
 /* SETTINGS */
 
 function openSettings(){
+
 document.getElementById("settingsModal")
 .style.display="flex";
+
 }
 
 function closeSettings(){
+
 document.getElementById("settingsModal")
 .style.display="none";
+
 }
 
 function toggleDarkMode(){
@@ -1058,11 +817,11 @@ document.body.classList.contains("dark")
 
 function toggleNotifications(){
 
-notificationsOn=!notificationsOn;
+notifications=!notifications;
 
-document.getElementById("notifBtn")
+document.getElementById("notifyBtn")
 .innerText=
-notificationsOn?"ON":"OFF";
+notifications?"ON":"OFF";
 
 }
 
@@ -1070,42 +829,18 @@ function clearCart(){
 
 cart=[];
 
-updateCartUI();
+updateCart();
 
 render();
 
-showInlineNotification("🛒 Cart Cleared");
+showNotification("🛒 Cart Cleared");
 
 }
 
 /* SEARCH */
 
-document.getElementById("findInput")
+document.getElementById("searchInput")
 .oninput=(e)=>render(e.target.value);
-
-/* GAME */
-
-function openGame(){
-
-if(cart.length===0){
-
-showInlineNotification("🛒 Buy Product To Unlock Horror Game");
-
-return;
-
-}
-
-document.getElementById("gameScreen")
-.style.display="block";
-
-}
-
-function closeGame(){
-
-document.getElementById("gameScreen")
-.style.display="none";
-
-}
 
 /* START */
 
@@ -1121,9 +856,9 @@ setTimeout(()=>{
 document.getElementById("loadingScreen")
 .style.display="none";
 
-},100);
+},200);
 
-},300);
+},400);
 
 render();
 
