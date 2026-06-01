@@ -1,870 +1,218 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Blinkart MasterCode</title>
-
 <style>
-
-:root{
---primary:#ff6600;
---accent:#fff200;
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-font-family:Segoe UI,sans-serif;
-background:#fff;
-padding-bottom:120px;
-}
-
-/* LOADING */
-
-#loadingScreen{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:var(--accent);
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:99999;
-transition:.3s;
-}
-
-.loader-logo{
-font-size:55px;
-font-weight:900;
-color:var(--primary);
-}
-
-.spinner{
-width:65px;
-height:65px;
-margin-top:20px;
-border:6px solid white;
-border-top:6px solid var(--primary);
-border-radius:50%;
-animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-100%{
-transform:rotate(360deg);
-}
-}
-
-/* HEADER */
-
-header{
-background:var(--accent);
-padding:15px;
-position:sticky;
-top:0;
-z-index:999;
-border-bottom:4px solid var(--primary);
-}
-
-.header-top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-gap:10px;
-}
-
-.logo{
-font-size:34px;
-font-weight:900;
-color:var(--primary);
-}
-
-.actions{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-}
-
-.action-btn{
-background:white;
-padding:10px 16px;
-border-radius:30px;
-font-weight:bold;
-border:2px solid var(--primary);
-cursor:pointer;
-position:relative;
-}
-
-.badge{
-position:absolute;
-top:-8px;
-right:-8px;
-background:red;
-color:white;
-font-size:10px;
-padding:2px 6px;
-border-radius:50%;
-display:none;
-}
-
-/* SEARCH */
-
-.search-box{
-margin-top:12px;
-}
-
-.search-box input{
-width:100%;
-padding:13px;
-border-radius:10px;
-border:2px solid var(--primary);
-font-size:15px;
-outline:none;
-}
-
-/* CATEGORY */
-
-.category-title{
-background:#fff0b0;
-margin:18px 15px 10px;
-padding:12px;
-font-size:20px;
-font-weight:bold;
-border-left:6px solid var(--primary);
-border-radius:10px;
-}
-
-/* PRODUCTS */
-
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
-gap:15px;
-padding:0 15px;
-}
-
-.card{
-background:white;
-border:2px solid var(--primary);
-border-radius:15px;
-padding:15px;
-text-align:center;
-box-shadow:0 4px 10px rgba(0,0,0,.08);
-}
-
-.card h4{
-height:45px;
-font-size:15px;
-margin-bottom:10px;
-}
-
-.price{
-font-size:22px;
-font-weight:bold;
-color:var(--primary);
-margin-bottom:10px;
-}
-
-/* BUTTONS */
-
-.btn-group{
-display:flex;
-gap:6px;
-}
-
-.add-btn{
-flex:2;
-background:var(--primary);
-color:white;
-border:none;
-padding:10px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.remove-btn{
-flex:1;
-background:#ddd;
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.remove-btn.active{
-background:red;
-color:white;
-}
-
-/* NOTIFICATION */
-
-#notification{
-position:fixed;
-top:20px;
-left:50%;
-transform:translateX(-50%) translateY(-100px);
-background:#111;
-color:white;
-padding:12px 24px;
-border-radius:30px;
-font-weight:bold;
-transition:.4s;
-z-index:9999;
-border:2px solid var(--primary);
-}
-
-#notification.show{
-transform:translateX(-50%) translateY(0);
-}
-
-/* MODAL */
-
-.modal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.6);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-
-.modal-content{
-background:white;
-width:92%;
-max-width:420px;
-padding:20px;
-border-radius:15px;
-border:3px solid var(--primary);
-max-height:85vh;
-overflow:auto;
-}
-
-.modal-content h2{
-margin-bottom:15px;
-color:var(--primary);
-}
-
-.cart-item{
-display:flex;
-justify-content:space-between;
-padding:10px 0;
-border-bottom:1px dashed #ccc;
-}
-
-.total{
-margin-top:15px;
-font-size:22px;
-font-weight:bold;
-text-align:right;
-color:var(--primary);
-}
-
-.modal-buttons{
-display:flex;
-gap:10px;
-margin-top:20px;
-}
-
-.modal-buttons button{
-flex:1;
-padding:12px;
-border:none;
-border-radius:10px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.close-btn{
-background:#ddd;
-}
-
-.order-btn{
-background:var(--primary);
-color:white;
-}
-
-/* SETTINGS */
-
-.setting-row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:12px;
-padding:12px;
-border:2px solid var(--primary);
-border-radius:10px;
-}
-
-/* AI BUTTON */
-
-#chatgptButton{
-position:fixed;
-bottom:20px;
-right:20px;
-width:75px;
-height:75px;
-border-radius:50%;
-background:#111;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:30px;
-font-weight:bold;
-cursor:pointer;
-z-index:99999;
-border:4px solid #00ff99;
-box-shadow:0 0 20px #00ff99;
-}
-
-/* DARK MODE */
-
-body.dark{
-background:#111;
-color:white;
-}
-
-body.dark .card,
-body.dark .modal-content,
-body.dark .action-btn,
-body.dark .search-box input{
-background:#1f1f1f;
-color:white;
-}
-
-body.dark .category-title{
-background:#333;
-color:white;
-}
-
+:root{--primary:#ff6600;--accent:#fff200;--bg:#fff9d6;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Segoe UI,sans-serif;background:linear-gradient(180deg,#fff9d6 0%,#ffffff 100%);color:#111;padding-bottom:120px;}
+#loadingScreen{position:fixed;inset:0;background:var(--accent);display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:99999;transition:.3s;}
+.loader-logo{font-size:55px;font-weight:900;color:var(--primary);}
+.spinner{width:65px;height:65px;margin-top:20px;border:6px solid white;border-top:6px solid var(--primary);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{100%{transform:rotate(360deg);}}
+.offline-screen{position:fixed;inset:0;background:rgba(0,0,0,.85);color:white;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;z-index:100000;}
+.offline-screen div{max-width:480px;}
+.offline-screen strong{display:block;font-size:28px;margin-bottom:12px;}
+#notification{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-120px);background:#111;color:white;padding:12px 24px;border-radius:30px;font-weight:bold;transition:.4s;z-index:9999;border:2px solid var(--primary);}
+#notification.show{transform:translateX(-50%) translateY(0);}
+header{background:var(--accent);padding:15px;position:sticky;top:0;z-index:999;border-bottom:4px solid var(--primary);}
+.header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.logo{font-size:34px;font-weight:900;color:var(--primary);}
+.actions{display:flex;gap:10px;flex-wrap:wrap;}
+.action-btn{background:white;padding:10px 16px;border-radius:30px;font-weight:bold;border:2px solid var(--primary);cursor:pointer;position:relative;display:flex;align-items:center;gap:8px;}
+.badge{position:absolute;top:-8px;right:-8px;background:red;color:white;font-size:10px;padding:2px 6px;border-radius:50%;display:none;}
+.search-box{margin-top:12px;}
+.search-box input{width:100%;padding:13px;border-radius:10px;border:2px solid var(--primary);font-size:15px;outline:none;}
+.category-title{background:#fff0b0;margin:18px 15px 10px;padding:12px;font-size:20px;font-weight:bold;border-left:6px solid var(--primary);border-radius:10px;}
+.container{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px;padding:0 15px 20px;}
+.card{background:white;border:2px solid var(--primary);border-radius:18px;padding:15px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:space-between;}
+.card h4{min-height:48px;font-size:15px;margin-bottom:10px;}
+.product-img{width:100%;height:140px;object-fit:contain;border-radius:14px;background:#f8f2d7;margin-bottom:10px;}
+.price{font-size:20px;font-weight:bold;color:var(--primary);margin-bottom:10px;}
+.btn-group{display:flex;gap:6px;}
+.add-btn{flex:2;background:var(--primary);color:white;border:none;padding:10px 8px;border-radius:10px;font-weight:bold;cursor:pointer;}
+.remove-btn{flex:1;background:#ddd;border:none;border-radius:10px;font-weight:bold;cursor:pointer;}
+.remove-btn.active{background:red;color:white;}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center;z-index:9999;}
+.modal-content{background:white;width:92%;max-width:520px;padding:20px;border-radius:18px;border:3px solid var(--primary);max-height:85vh;overflow:auto;}
+.modal-content h2{margin-bottom:15px;color:var(--primary);}
+.cart-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed #ccc;}
+.total{margin-top:15px;font-size:22px;font-weight:bold;text-align:right;color:var(--primary);}
+.modal-buttons{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
+.modal-buttons button{flex:1;padding:12px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;}
+.close-btn{background:#ddd;}
+.order-btn{background:var(--primary);color:white;}
+.setting-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:12px;border:2px solid var(--primary);border-radius:10px;}
+#chatgptButton{position:fixed;bottom:20px;right:20px;width:90px;height:90px;border-radius:50%;background:#111;color:white;display:flex;justify-content:center;align-items:center;font-size:16px;font-weight:bold;cursor:pointer;z-index:99999;border:4px solid #00ff99;box-shadow:0 0 20px #00ff99;text-align:center;line-height:1.1;}
+body.dark{background:#111;color:white;}
+body.dark .card,body.dark .modal-content,body.dark .action-btn,body.dark .search-box input{background:#1f1f1f;color:white;}
+body.dark .category-title{background:#333;color:white;}
+body.dark header{background:#292922;}
+body.dark .action-btn{background:#222;border-color:#00ff99;}
+body.dark .add-btn{background:#00b894;}
+body.dark .remove-btn{background:#444;color:white;}
+body.dark .search-box input{border-color:#00ff99;}
 </style>
 </head>
-
 <body>
-
-<!-- LOADING -->
-
 <div id="loadingScreen">
-
-<div class="loader-logo">
-🛒 Blinkart
-</div>
-
+<div class="loader-logo">🛒 Blinkart</div>
 <div class="spinner"></div>
-
 </div>
-
-<!-- NOTIFICATION -->
-
-<div id="notification">
-Welcome
-</div>
-
-<!-- AI BUTTON -->
-
-<div id="chatgptButton"
-onclick="openAIHelper()">
-AI
-</div>
-
-<!-- HEADER -->
-
+<div id="notification">Welcome to Blinkart</div>
+<div id="chatgptButton" onclick="openAIHelper()">AI</div>
 <header>
-
 <div class="header-top">
-
-<div class="logo">
-🛒 Blinkart
-</div>
-
+<div class="logo">🛒 Blinkart</div>
 <div class="actions">
-
-<div class="action-btn"
-onclick="showNotification('🛒 Welcome To Blinkart')">
-🔔 Notice
-<span class="badge" id="badge">0</span>
+<div class="action-btn" onclick="sendAlertEmail()">⚠️ Alert</div>
+<div class="action-btn" onclick="openCart()">🛍️ Cart (<span id="cartCount">0</span>)<span class="badge" id="badge">0</span></div>
+<div class="action-btn" onclick="openSettings()">⚙️ Settings</div>
 </div>
-
-<div class="action-btn"
-onclick="openCart()">
-🛍️ Cart (<span id="cartCount">0</span>)
 </div>
-
-<div class="action-btn"
-onclick="openSettings()">
-⚙️ Settings
-</div>
-
-</div>
-
-</div>
-
-<div class="search-box">
-<input type="text"
-id="searchInput"
-placeholder="Search Products">
-</div>
-
+<div class="search-box"><input type="text" id="searchInput" placeholder="Search Products"></div>
 </header>
-
-<!-- PRODUCTS -->
-
 <div id="main"></div>
-
-<!-- CART -->
-
 <div class="modal" id="cartModal">
-
 <div class="modal-content">
-
 <h2>🛒 Your Cart</h2>
-
 <div id="cartItems"></div>
-
-<div class="total" id="totalBill">
-₹0
-</div>
-
+<div class="total" id="totalBill">₹0</div>
 <div class="modal-buttons">
-
-<button class="close-btn"
-onclick="closeCart()">
-Close
-</button>
-
-<button class="order-btn"
-onclick="placeOrder()">
-Order
-</button>
-
+<button class="close-btn" onclick="closeCart()">Close</button>
+<button class="order-btn" onclick="placeOrder()">Order</button>
 </div>
-
 </div>
-
 </div>
-
-<!-- SETTINGS -->
-
 <div class="modal" id="settingsModal">
-
 <div class="modal-content">
-
 <h2>⚙️ Settings</h2>
-
-<div class="setting-row">
-<span>🌙 Dark Mode</span>
-<button onclick="toggleDarkMode()"
-id="darkBtn">
-OFF
-</button>
+<div class="setting-row"><span>🌙 Dark Mode</span><button onclick="toggleDarkMode()" id="darkBtn">OFF</button></div>
+<div class="setting-row"><span>🔔 Notifications</span><button onclick="toggleNotifications()" id="notifyBtn">ON</button></div>
+<div class="setting-row"><span>🛒 Clear Cart</span><button onclick="clearCart()">CLEAR</button></div>
+<div class="modal-buttons"><button class="close-btn" onclick="closeSettings()">Close</button></div>
 </div>
-
-<div class="setting-row">
-<span>🔔 Notifications</span>
-<button onclick="toggleNotifications()"
-id="notifyBtn">
-ON
-</button>
 </div>
-
-<div class="setting-row">
-<span>🛒 Clear Cart</span>
-<button onclick="clearCart()">
-CLEAR
-</button>
-</div>
-
-<div class="modal-buttons">
-
-<button class="close-btn"
-onclick="closeSettings()">
-Close
-</button>
-
-</div>
-
-</div>
-
-</div>
-
 <script>
-
-/* INVENTORY */
-
-const inventory={
-
+const emailAddress = 'newbikepoint02@gmail.com';
+const inventory = {
 "Premium Pens":[
-{name:"Parker",price:2000},
-{name:"Perie Cardian",price:449},
-{name:"Trimax Gold",price:120},
-{name:"Trimax",price:60},
-{name:"Pilot v7",price:60},
-{name:"Pilot v5",price:67},
-{name:"Pilot Hitectpoint",price:55},
-{name:"Calligraphy Pen",price:55}
+{name:"Parker",price:2000,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7y8rYcMgJSchaCRbVnV_Mk3i8-nJcBsRnDQ&s"},
+{name:"Perie Cardian",price:449,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKS2AoWSWmo29xvTduUUoNzgMyCY16tUHC9w&s"},
+{name:"Trimax Gold",price:120,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOv3Wu92Gmqni3jQBc8GnyyZEaiP00kOS5Mw&s"},
+{name:"Trimax",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW9eHcenwuqsivMCrAxFySE8OBWW0wrEFLtA&s"},
+{name:"Pilot V7",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWUums4ThOXLKUqgcdJzCH_UFI3bmQvsm5HQ&s"},
+{name:"Pilot V5",price:67,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKlb7sK784eP7WWyr1xdz-mxnH2x0ajUpZog&s"},
+{name:"Pilot Hitectpoint",price:55,img:"https://m.media-amazon.com/images/I/410iO7bzO9L.jpg"},
+{name:"Pilot V2",price:20,img:"https://m.media-amazon.com/images/I/312kOs51DiL._AC_UF1000,1000_QL80_.jpg"},
+{name:"Fountain Pen",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR69f62vQvEvSPq03CwiECT9OUHkmBJ7jYWIQ&s"},
+{name:"Calligraphy Pen",price:55,img:"https://m.media-amazon.com/images/I/61yUrXiaVBL._AC_UF1000,1000_QL80_.jpg"}
 ],
-
 "Budget Pens":[
-{name:"Jotex Gel Pen",price:40},
-{name:"Octane Fountain",price:40},
-{name:"Jeter Ballpoint Pens",price:32},
-{name:"Writo Meter Gel",price:25},
-{name:"Classmate Octane Ball",price:10},
-{name:"Flair Move Gel",price:10},
-{name:"Hauser XO Ball",price:10},
-{name:"Linc Ocean Gel",price:10}
+{name:"Jotex Gel Pen",price:40,img:"https://storage.googleapis.com/shy-pub/367727/SKU-0382_0-1727081713823.png"},
+{name:"Octane Fountain",price:40,img:"https://topperskit.com/cdn/shop/files/235.jpg?v=1709286744&width=416"},
+{name:"Jeter Ballpoint Pens",price:32,img:"https://www.rapiddeliveryservices.in/uploads/webp/14719-.webp"},
+{name:"Writo Meter Gel",price:25,img:"https://rangbeerangee.com/wp-content/uploads/2024/10/Writo-meter-Gel-Pen.jpg"},
+{name:"Writo Meter Silky Ball",price:32,img:"https://www.rapiddeliveryservices.in/uploads/webp/writo-meter_silk_ball_pen_blue_96991-.webp"},
+{name:"Classmate Octane Ball",price:10,img:"https://rukminim2.flixcart.com/image/480/640/kwb07m80/pen/v/l/0/-original-imag9yzpgprfnq6f.jpeg?q=90"},
+{name:"Unomax Ultron Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbsbqdtwOXI97QY5hXJ_n8oYFMqzhN4_-THQ&s"},
+{name:"Unomax Geltron",price:10,img:"https://i.ytimg.com/vi/NwZGQgnuAgw/sddefault.jpg"},
+{name:"Unomax Pearl Ball",price:10,img:"https://m.media-amazon.com/images/I/71yAOJ2O0dL.jpg"},
+{name:"Unomax Pearl Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM2q3-XDVQdDh7jCi8j4JAqufCHpgkM-uetA&s"},
+{name:"Doms Inxo",price:10,img:"https://m.media-amazon.com/images/I/71q1kxPIqhL._AC_UF350,350_QL80_.jpg"},
+{name:"Flair Breeze Ball",price:10,img:"https://m.media-amazon.com/images/I/61TrqXihhKL._AC_UF1000,1000_QL80_.jpg"},
+{name:"Flair Move Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdkKlfEIOOKTVlU2QUSlM4Ycrcwmx7RKYtDw&s"},
+{name:"Flair Glow Gel Pen",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhyEZAQb42zPdfijqxaXiGSBHZn347_Tq8rw&s"},
+{name:"Flair Glow Ball",price:10,img:"https://m.media-amazon.com/images/I/6125yPTI+hL._AC_UF350,350_QL80_.jpg"},
+{name:"Hauser Glow Ball",price:10,img:"https://rukminim2.flixcart.com/image/480/640/xif0q/pen/y/6/b/86402-hauser-original-imahe93gd92pxkbz.jpeg?q=90"},
+{name:"Classmate Octane Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHg1Gb25qPx3mzRODJi1WNmNNzDYssLmgN8A&s"},
+{name:"Hauser XO Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEdFseoxUJm7BEsLJVuyZy1XVYi9TpbQBimw&s"},
+{name:"Doms Inxon",price:10,img:"https://m.media-amazon.com/images/I/41qGjJSQUoL.jpg"},
+{name:"Hauser XO Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcta4kFZHsQ9EWz6JPwjRQSgFj-wK5W88W9g&s"},
+{name:"Doms Inxify Ball",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoLYZQg9OC2j6_X_-l6-8Wsb1dBNfKVZCh6A&s"},
+{name:"Doms Inxify Gel",price:5,img:"https://m.media-amazon.com/images/I/51bIxAR3S2L.jpg"},
+{name:"Supra His Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRjnFKZDgCgP-J0LddhUxor_oJYpb2k7ey7w&s"},
+{name:"Linc Ocean Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcg4NpPyp4lA7psDhpy1daZ3wNmKJF7lTUXA&s"},
+{name:"Hauser XO Glow",price:11,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4K7ovdBuihvbOl16tdqVSuzHNecelbIuEKA&s"},
+{name:"Flair Woody Ballpoint",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDIu95pRe9gqMMcjfBbxBIYB7kc3Fp83W2jw&s"}
 ],
-
 "Kits & Sets":[
-{name:"Art Kit",price:1000},
-{name:"Stationery Kit",price:150},
-{name:"Stationery Kit Small",price:50}
+{name:"Art Kit",price:1000,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLBiI7bzZJfSVuP_gkx92apmAHF-YzHVMQJw&s"},
+{name:"Stationery Kit",price:150,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiLDZBGaOj43Hoa5pasSYPxlR2Ehh3E7wk0A&s"},
+{name:"Stationery Kit Small",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU3ddRtqcMBlMtpIZ1EUpgF7nlkgULfLTf_A&s"}
 ],
-
 "Pencils & Mechanical":[
-{name:"Apsara Princess Pencils",price:90},
-{name:"Doms Groove",price:65},
-{name:"Apsara Platinum",price:50},
-{name:"Natraj Bold",price:50},
-{name:"Flair Penpencil 0.7",price:20}
+{name:"Apsara Princess Pencils",price:90,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuDpThsjabTt3QE_otT0Wn6LutPe9Nw5n4w&s"},
+{name:"Doms Groove",price:65,img:"https://sbcstore.in/wp-content/uploads/2023/11/71m0aq5u1kL._SL1500_.jpg"},
+{name:"Doms Yodo Pencils",price:60,img:"https://static1.industrybuying.com/products/office-supplies/pens-pencils-writing-supplies/pencils/OFF.PEN.927159175_1724732549179.webp"},
+{name:"Apsara Spacekids",price:60,img:"https://paperquirks.in/cdn/shop/files/SpacekidsPencils.jpg?v=1705926195"},
+{name:"Doms Xi Pencils",price:50,img:"https://m.media-amazon.com/images/I/71g9ntCnpYL.jpg"},
+{name:"Apsara Platinum",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUy-uWnjqgpXHdAfD84lZkgOrW6Ti0uxmdxw&s"},
+{name:"Natraj Bold",price:50,img:"https://www.rapiddeliveryservices.in/uploads/webp/78247-.webp"},
+{name:"Flair Penpencil 0.7",price:20,img:"https://truewholesale.in/storage/product-images/17389133481.jpg"},
+{name:"Hauser 2.0 Penpencils",price:20,img:"https://truewholesale.in/storage/product-images/17356355410.jpg"},
+{name:"Flair Penpencil 2.0",price:10,img:"https://truewholesale.in/storage/product-images/17512666270.jpg"},
+{name:"Reynolds 0.5 Penpencil",price:6,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS17-LPR8v2rPJ_5TNdvi5--7I6ILP6XlvT4A&s"}
 ],
-
 "Colors & Art":[
-{name:"Fabric Colour",price:400},
-{name:"Brush Pen",price:200},
-{name:"Luxor Pastel",price:125},
-{name:"Sketch Pens",price:40},
-{name:"Water Colour",price:20},
-{name:"Crayons",price:10}
+{name:"Fabric Colour",price:400,img:"https://5.imimg.com/data5/ANDROID/Default/2021/4/PV/ID/KV/4682934/product-jpeg.jpg"},
+{name:"Brush Pen",price:200,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/sketch-pen/z/z/r/-original-imagrf67eymxfkxx.jpeg?q=70"},
+{name:"Luxor Pastel",price:125,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_sPpdkp4tNiyKabpzOa8gOIg9_sSBrxe9tA&s"},
+{name:"Luxor Flouroscent",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-Odg8I1RRDOEnurkccfqg0P0lbk3KszZnXw&s"},
+{name:"Doms Colour Pencils",price:60,img:"https://topperskit.com/cdn/shop/files/59_bf843c4d-b738-48fc-804e-5f1af99573cd.jpg?v=1706101006"},
+{name:"Drawing Pencils",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFGn_EZ2HVgVts2xicr7wOHDD8nyShcDjwRg&s"},
+{name:"Paint Brush",price:50,img:"https://www.kheliyatoys.com/wp-content/uploads/2025/03/DOMS-Colourmate-Synthetic-Hair-Paint-Brush.jpg"},
+{name:"Sketch Pens",price:40,img:"https://www.quickpantry.in/cdn/shop/files/Doms_Sketch_Pen_12_Shades_Big.webp?v=1727296259"},
+{name:"Water Colour",price:20,img:"https://amd.deodap.com/cdn/shop/files/doms-tempera-colours-12-shades-1000x1000_1200x1200.webp?v=1695803847"},
+{name:"Crayons",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-zvpMipEtsM0kCrTXlGuxa-rKs2nsAZkjTg&s"},
+{name:"Camel Oil Pastels",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD5nWXdUtIVWdvFWacNzVSJMaIgN-nyGtlwA&s"},
+{name:"Drawing Copy",price:45,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJnVu4DZI4wOKtF9b7sTK1ETYjZyMSSLNjQw&s"}
 ],
-
 "Essentials":[
-{name:"Science Calculator",price:500},
-{name:"Calculator",price:670},
-{name:"Origami Paper",price:20},
-{name:"Stencil",price:15},
-{name:"Pocket Diary",price:10},
-{name:"Scale",price:5},
-{name:"Eraser",price:5},
-{name:"Sharpner",price:5},
-{name:"Stapler",price:100},
-{name:"Stapler Pins",price:12},
-{name:"Keychains",price:110}
+{name:"Science Calculator",price:500,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwYXodTBsJJd3ZPq0uDYdBlJeDpXZlV3P-_Q&s"},
+{name:"Calculator",price:670,img:"https://rukminim2.flixcart.com/image/480/640/calculator/m/x/s/casio-mj-120d-original-imaedhpgfepcbmgw.jpeg?q=90"},
+{name:"Origami Paper",price:20,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI_qh6M6rPdNB3g3Ar7lSKDq9fbZVecvmQ3Q&s"},
+{name:"Stencil",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZzvhfFSbMwAzX0j88_ae8zx-QOxjwzY53A&s"},
+{name:"Pocket Diary",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI_qh6M6rPdNB3g3Ar7lSKDq9fbZVecvmQ3Q&s"},
+{name:"Gliters",price:10,img:"https://rukminim2.flixcart.com/image/480/640/kvgzyq80/art-craft-kit/i/w/1/6-pack-of-20-pc-packet-sparkling-glitter-powder-for-art-and-original-imag8dceqptxa72x.jpeg?q=90"},
+{name:"Scale",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5FWz_tJvY3GZd7MmJfaaUnINuCi5BPImaUg&s"},
+{name:"Eraser",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuDd3IcoQAsm5vx0MO1T0pxOY70JTexqArIQ&s"},
+{name:"Sharpner",price:5,img:"https://rukminim2.flixcart.com/image/480/640/xif0q/sharpener/f/3/m/-original-imagqzfwmzdfwugk.jpeg?q=90"},
+{name:"Sanitizer",price:38,img:"https://m.media-amazon.com/images/I/61zkydHcPdL.jpg"},
+{name:"Stapler",price:100,img:"https://www.rapiddeliveryservices.in/uploads/webp/5250-.webp"},
+{name:"Stapler Pins",price:12,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNk4vxqikMRajQ8L_XwQ2DENdTVsaVkJG9w&s"},
+{name:"Keychains",price:110,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiuCdQasCld81Nti4RvNKFKQCROcrAulg_Fw&s"},
+{name:"Whitener",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbUfd68grMIsFa_q0OC1sq0YkRFzlDwJt92A&s"},
+{name:"Whitener Premium",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF6xUvwjCaEbcIu-iNQSOwo5yNZgAZIRBoIA&s"},
+{name:"Correction Tape",price:45,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBTDKsagVGsdLIPvO01HIIYrKAgc6l_YsqAw&s"},
+{name:"A4 Size Sheet",price:3,img:"https://m.media-amazon.com/images/I/31BG82hS2CL._AC_UF1000,1000_QL80_.jpg"},
+{name:"A4 Colour Sheet",price:3,img:"https://www.bbassets.com/media/uploads/p/l/40280994_1-se7en-a4-size-premium-colour-paper-for-arts-crafts-assorted.jpg"},
+{name:"A4 Hard Sheet",price:6,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWWlNlap9kE1B9is0tpxyvBuPe8zXwBy7zgA&s"},
+{name:"A4 Colour Hard Sheet",price:6,img:"https://m.media-amazon.com/images/I/71BS8A1eeoL.jpg"}
 ]
-
 };
-
-let cart=[];
-let notifications=true;
-
-/* AI BUTTON */
-
-function openAIHelper(){
-
-showNotification("🤖 Opening ChatGPT");
-
-setTimeout(()=>{
-
-window.open("https://chatgpt.com","_blank");
-
-},500);
-
-}
-
-/* NOTIFICATION */
-
-function showNotification(text){
-
-if(!notifications) return;
-
-const box=document.getElementById("notification");
-
-box.innerText=text;
-
-box.classList.add("show");
-
-setTimeout(()=>{
-box.classList.remove("show");
-},2000);
-
-}
-
-/* RENDER */
-
-function render(filter=""){
-
-const main=document.getElementById("main");
-
-main.innerHTML="";
-
-for(const cat in inventory){
-
-const items=inventory[cat].filter(p=>
-p.name.toLowerCase().includes(filter.toLowerCase())
-);
-
-if(items.length>0){
-
-main.innerHTML+=`
-<div class="category-title">${cat}</div>
-`;
-
-let html='<div class="container">';
-
-items.forEach(p=>{
-
-const count=
-cart.filter(i=>i.name===p.name).length;
-
-html+=`
-
-<div class="card">
-
-<h4>${p.name}</h4>
-
-<div class="price">
-₹${p.price}
-</div>
-
-<div class="btn-group">
-
-<button class="add-btn"
-onclick="addItem('${p.name}',${p.price})">
-Add (${count})
-</button>
-
-<button class="remove-btn ${count>0?'active':''}"
-onclick="removeItem('${p.name}')">
--
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-html+='</div>';
-
-main.innerHTML+=html;
-
-}
-
-}
-
-}
-
-/* ADD */
-
-function addItem(name,price){
-
-cart.push({name,price});
-
-updateCart();
-
-showNotification("🛒 "+name+" Added");
-
-render(document.getElementById("searchInput").value);
-
-}
-
-/* REMOVE */
-
-function removeItem(name){
-
-const index=
-cart.findIndex(i=>i.name===name);
-
-if(index!==-1){
-
-cart.splice(index,1);
-
-updateCart();
-
-showNotification("❌ "+name+" Removed");
-
-render(document.getElementById("searchInput").value);
-
-}
-
-}
-
-/* UPDATE CART */
-
-function updateCart(){
-
-document.getElementById("cartCount").innerText=
-cart.length;
-
-document.getElementById("badge").innerText=
-cart.length;
-
-document.getElementById("badge").style.display=
-cart.length>0?"block":"none";
-
-}
-
-/* OPEN CART */
-
-function openCart(){
-
-if(cart.length===0){
-
-showNotification("⚠️ Cart Empty");
-
-return;
-
-}
-
-const list=
-document.getElementById("cartItems");
-
-list.innerHTML="";
-
-let total=0;
-
-cart.forEach(item=>{
-
-total+=item.price;
-
-list.innerHTML+=`
-
-<div class="cart-item">
-<span>${item.name}</span>
-<span>₹${item.price}</span>
-</div>
-
-`;
-
-});
-
-document.getElementById("totalBill")
-.innerText="Total : ₹"+total;
-
-document.getElementById("cartModal")
-.style.display="flex";
-
-}
-
-/* CLOSE CART */
-
-function closeCart(){
-
-document.getElementById("cartModal")
-.style.display="none";
-
-}
-
-/* ORDER */
-
-function placeOrder(){
-
-alert("🎉 Order Placed Successfully");
-
-cart=[];
-
-updateCart();
-
-render();
-
-closeCart();
-
-}
-
-/* SETTINGS */
-
-function openSettings(){
-
-document.getElementById("settingsModal")
-.style.display="flex";
-
-}
-
-function closeSettings(){
-
-document.getElementById("settingsModal")
-.style.display="none";
-
-}
-
-function toggleDarkMode(){
-
-document.body.classList.toggle("dark");
-
-document.getElementById("darkBtn")
-.innerText=
-document.body.classList.contains("dark")
-?"ON":"OFF";
-
-}
-
-function toggleNotifications(){
-
-notifications=!notifications;
-
-document.getElementById("notifyBtn")
-.innerText=
-notifications?"ON":"OFF";
-
-}
-
-function clearCart(){
-
-cart=[];
-
-updateCart();
-
-render();
-
-showNotification("🛒 Cart Cleared");
-
-}
-
-/* SEARCH */
-
-document.getElementById("searchInput")
-.oninput=(e)=>render(e.target.value);
-
-/* START */
-
-window.onload=()=>{
-
-setTimeout(()=>{
-
-document.getElementById("loadingScreen")
-.style.opacity="0";
-
-setTimeout(()=>{
-
-document.getElementById("loadingScreen")
-.style.display="none";
-
-},200);
-
-},400);
-
-render();
-
-};
-
+let cart = [];
+let notifications = true;
+function openAIHelper(){ showNotification('🤖 Opening ChatGPT'); setTimeout(()=>{ window.open('https://chat.openai.com','_blank'); },300); }
+function sendAlertEmail(){ const subject = 'Blinkart Alert'; const body = 'Hello Blinkart team,%0A%0APlease review the alert from the Blinkart site.%0A%0AThanks.'; window.location.href = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${body}`; showNotification('📧 Alert email opening'); }
+function sendOrderEmail(total){ const subject = 'Blinkart Order Notification'; const body = encodeURIComponent(`New order placed on Blinkart. Total ₹${total}. Items: ${cart.map(item=>item.name).join(', ')}.`); window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`; }
+function showNotification(text){ if(!notifications) return; const box = document.getElementById('notification'); box.innerText = text; box.classList.add('show'); setTimeout(()=>{ box.classList.remove('show'); },2200); }
+function render(filter=''){ const main = document.getElementById('main'); main.innerHTML = ''; for(const category in inventory){ const items = inventory[category].filter(product=>product.name.toLowerCase().includes(filter.toLowerCase())); if(items.length>0){ main.innerHTML += `<div class="category-title">${category}</div>`; let html = '<div class="container">'; items.forEach(product=>{ const count = cart.filter(i=>i.name===product.name).length; html += `<div class="card"><img class="product-img" src="${product.img}" alt="${product.name}" loading="lazy"><h4>${product.name}</h4><div class="price">₹${product.price}</div><div class="btn-group"><button class="add-btn" onclick="addItem('${product.name}',${product.price})">+ Add ${count?`(${count})`:''}</button><button class="remove-btn ${count>0?'active':''}" onclick="removeItem('${product.name}')">-</button></div></div>`; }); html += '</div>'; main.innerHTML += html; } } }
+function addItem(name,price){ cart.push({name,price}); updateCart(); showNotification(`+ ${name} added`); render(document.getElementById('searchInput').value); }
+function removeItem(name){ const index = cart.findIndex(item=>item.name===name); if(index !== -1){ cart.splice(index,1); updateCart(); showNotification(`- ${name} removed`); render(document.getElementById('searchInput').value); } }
+function updateCart(){ document.getElementById('cartCount').innerText = cart.length; const badge = document.getElementById('badge'); badge.innerText = cart.length; badge.style.display = cart.length>0 ? 'block' : 'none'; }
+function openCart(){ if(cart.length===0){ showNotification('⚠️ Cart is empty'); return; } const list = document.getElementById('cartItems'); list.innerHTML = ''; let total = 0; cart.forEach(item=>{ total += item.price; list.innerHTML += `<div class="cart-item"><span>${item.name}</span><span>₹${item.price}</span></div>`; }); document.getElementById('totalBill').innerText = 'Total : ₹' + total; document.getElementById('cartModal').style.display = 'flex'; }
+function closeCart(){ document.getElementById('cartModal').style.display = 'none'; }
+function placeOrder(){ if(cart.length===0){ showNotification('⚠️ Add items to cart first'); return; } const total = cart.reduce((sum,item)=>sum+item.price,0); sendOrderEmail(total); alert('🎉 Order placed. Email window opened for confirmation.'); cart=[]; updateCart(); render(document.getElementById('searchInput').value); closeCart(); }
+function openSettings(){ document.getElementById('settingsModal').style.display = 'flex'; }
+function closeSettings(){ document.getElementById('settingsModal').style.display = 'none'; }
+function toggleDarkMode(){ document.body.classList.toggle('dark'); document.getElementById('darkBtn').innerText = document.body.classList.contains('dark') ? 'ON' : 'OFF'; }
+function toggleNotifications(){ notifications = !notifications; document.getElementById('notifyBtn').innerText = notifications ? 'ON' : 'OFF'; showNotification(notifications ? 'Notifications enabled' : 'Notifications disabled'); }
+function clearCart(){ cart=[]; updateCart(); render(document.getElementById('searchInput').value); showNotification('🧹 Cart cleared'); }
+document.getElementById('searchInput').oninput = (event)=> render(event.target.value);
+window.onload = ()=>{ setTimeout(()=>{ document.getElementById('loadingScreen').style.opacity = '0'; setTimeout(()=>{ document.getElementById('loadingScreen').style.display = 'none'; },250); },500); render(); };
 </script>
-
 </body>
 </html>
