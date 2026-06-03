@@ -54,6 +54,19 @@ body.dark .action-btn{background:#222;border-color:#00ff99;}
 body.dark .add-btn{background:#00b894;}
 body.dark .remove-btn{background:#444;color:white;}
 body.dark .search-box input{border-color:#00ff99;}
+#lockScreen{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;justify-content:center;align-items:center;z-index:100001;padding:20px;}
+#lockScreen.show{display:flex;}
+#lockScreen .lock-content{width:100%;max-width:420px;background:#111;color:white;border:3px solid #00ff99;border-radius:20px;padding:24px;box-shadow:0 0 40px rgba(0,0,0,.6);text-align:center;}
+#lockScreen .lock-content h2{margin-bottom:18px;font-size:24px;color:#00ff99;}
+#lockScreen .lock-content input{width:100%;margin:10px 0;padding:14px 16px;border-radius:14px;border:2px solid #00ff99;background:#222;color:white;font-size:16px;outline:none;}
+#lockScreen .lock-buttons{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px;}
+#lockScreen .lock-buttons button{flex:1;padding:12px 14px;border:none;border-radius:12px;font-weight:bold;cursor:pointer;}
+#lockScreen .lock-buttons .primary{background:#00ff99;color:#111;}
+#lockScreen .lock-buttons .secondary{background:#333;color:white;border:2px solid #00ff99;}
+#lockScreen .lock-buttons .secondary:hover{background:#444;}
+#lockScreen .lock-hint{margin-top:14px;font-size:14px;color:#ccc;}
+#passwordBtn, #backupBtn {display:none;}
+#passwordBtn.active, #backupBtn.active {display:inline-block;}
 </style>
 </head>
 <body>
@@ -62,6 +75,19 @@ body.dark .search-box input{border-color:#00ff99;}
 <div class="spinner"></div>
 </div>
 <div id="notification">Welcome to Blinkart</div>
+<div id="lockScreen">
+<div class="lock-content">
+<h2 id="lockTitle">Set App Password</h2>
+<input type="password" id="passwordInput" placeholder="Enter password">
+<input type="password" id="passwordConfirmInput" placeholder="Confirm password" style="display:none;">
+<div class="lock-buttons">
+<button class="primary" id="lockActionBtn" onclick="handleLockAction()">Save password</button>
+<button class="secondary" id="lockCancelBtn" onclick="cancelPasswordSetup()" style="display:none;">Cancel</button>
+<button class="secondary" id="forgotPasswordBtn" onclick="forgotPassword()" style="display:none;">🔄 Forgot?</button>
+</div>
+<div class="lock-hint" id="lockHint">Create a password to protect your app.</div>
+</div>
+</div>
 <div id="chatgptButton" onclick="openAIHelper()">AI</div>
 <header>
 <div class="header-top">
@@ -92,11 +118,41 @@ body.dark .search-box input{border-color:#00ff99;}
 <div class="setting-row"><span>🌙 Dark Mode</span><button onclick="toggleDarkMode()" id="darkBtn">OFF</button></div>
 <div class="setting-row"><span>🔔 Notifications</span><button onclick="toggleNotifications()" id="notifyBtn">ON</button></div>
 <div class="setting-row"><span>🛒 Clear Cart</span><button onclick="clearCart()">CLEAR</button></div>
+<div class="setting-row"><span>🔒 App Password</span><button onclick="preparePasswordChange()" id="passwordBtn">CHANGE</button></div>
+<div class="setting-row"><span>📱 Backup Password</span><button onclick="setupBackupPassword()" id="backupBtn">ADD</button></div>
 <div class="modal-buttons"><button class="close-btn" onclick="closeSettings()">Close</button></div>
 </div>
 </div>
 <script>
 const emailAddress = 'newbikepoint02@gmail.com';
+const appPasswordKey = 'blinkartAppPassword';
+const backupPasswordKey = 'blinkartBackupPassword';
+const sessionLockedKey = 'blinkartSessionUnlocked';
+let currentLockMode = 'unlock';
+let isSessionUnlocked = false;
+function getStoredPassword(){ return localStorage.getItem(appPasswordKey); }
+function getBackupPassword(){ return localStorage.getItem(backupPasswordKey); }
+function setPasswordButtonLabel(){ const pwdBtn = document.getElementById('passwordBtn'); const backupBtn = document.getElementById('backupBtn'); if(pwdBtn){ if(getStoredPassword()){ pwdBtn.classList.add('active'); pwdBtn.innerText='CHANGE'; } else { pwdBtn.classList.remove('active'); } } if(backupBtn){ if(getStoredPassword()){ backupBtn.classList.add('active'); backupBtn.innerText = getBackupPassword() ? 'CHANGE' : 'ADD'; } else { backupBtn.classList.remove('active'); } } }
+function showLockScreen(mode){ currentLockMode = mode; const lockScreen = document.getElementById('lockScreen'); const title = document.getElementById('lockTitle'); const passwordInputEl = document.getElementById('passwordInput'); const confirmInput = document.getElementById('passwordConfirmInput'); const actionBtn = document.getElementById('lockActionBtn'); const cancelBtn = document.getElementById('lockCancelBtn'); const forgotBtn = document.getElementById('forgotPasswordBtn'); const hint = document.getElementById('lockHint'); if(!lockScreen || !title || !actionBtn || !hint || !passwordInputEl || !confirmInput) return; lockScreen.classList.add('show'); lockScreen.style.display='flex'; document.body.style.overflow='hidden'; passwordInputEl.value = ''; if(mode==='set'){ title.innerText='🔐 Set App Password'; confirmInput.style.display='block'; actionBtn.innerText='Save password'; actionBtn.className='primary'; cancelBtn.style.display='none'; forgotBtn.style.display='none'; hint.innerText='Choose at least 4 characters to protect your Blinkart app.'; }
+else if(mode==='unlock'){ title.innerText='🔓 Unlock Blinkart'; confirmInput.style.display='none'; actionBtn.innerText='Unlock'; actionBtn.className='primary'; cancelBtn.style.display='none'; forgotBtn.style.display=getStoredPassword()?'inline-flex':'none'; hint.innerText='Enter your password to continue shopping.'; }
+else if(mode==='change'){ title.innerText='🔄 Verify Current Password'; confirmInput.style.display='none'; actionBtn.innerText='Verify'; actionBtn.className='primary'; cancelBtn.style.display='inline-flex'; forgotBtn.style.display='none'; hint.innerText='Enter current password to change it.'; }
+else if(mode==='setupBackup'){ title.innerText='📱 Setup Backup Password'; confirmInput.style.display='block'; actionBtn.innerText='Save Backup'; actionBtn.className='secondary'; cancelBtn.style.display='inline-flex'; forgotBtn.style.display='none'; hint.innerText='For other devices (min 4 characters).'; }
+passwordInputEl.focus(); }
+function hideLockScreen(){ const lockScreen = document.getElementById('lockScreen'); if(lockScreen){ lockScreen.classList.remove('show'); lockScreen.style.display='none'; document.body.style.overflow='auto'; } isSessionUnlocked = true; }
+async function hashPassword(password){ const data = new TextEncoder().encode(password); const hashBuffer = await crypto.subtle.digest('SHA-256', data); const hashArray = Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b=>b.toString(16).padStart(2,'0')).join(''); }
+async function verifyPassword(input){ const stored = getStoredPassword(); const backup = getBackupPassword(); if(!stored) return false; const hashed = await hashPassword(input); return hashed === stored || (backup && hashed === backup); }
+function hideLockScreen(){ const lockScreen = document.getElementById('lockScreen'); if(lockScreen){ lockScreen.classList.remove('show'); lockScreen.style.display='none'; document.body.style.overflow='auto'; } }
+async function hashPassword(password){ const data = new TextEncoder().encode(password); const hashBuffer = await crypto.subtle.digest('SHA-256', data); const hashArray = Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b=>b.toString(16).padStart(2,'0')).join(''); }
+async function verifyPassword(input){ const stored = getStoredPassword(); if(!stored) return false; const hashed = await hashPassword(input); return hashed === stored; }
+async function handleLockAction(){ const passwordInputEl = document.getElementById('passwordInput'); const passwordConfirmEl = document.getElementById('passwordConfirmInput'); if(!passwordInputEl || !passwordConfirmEl) return; if(currentLockMode==='unlock'){ const valid = await verifyPassword(passwordInputEl.value); if(valid){ hideLockScreen(); showNotification('🔓 App unlocked'); } else { showNotification('❌ Incorrect password'); passwordInputEl.value=''; passwordInputEl.focus(); } }
+else if(currentLockMode==='change'){ const valid = await verifyPassword(passwordInputEl.value); if(valid){ showLockScreen('set'); } else { showNotification('❌ Incorrect current password'); passwordInputEl.value=''; passwordInputEl.focus(); } }
+else if(currentLockMode==='setupBackup'){ const pass = passwordInputEl.value.trim(); const passConfirm = passwordConfirmEl.value.trim(); if(pass.length < 4){ showNotification('⚠️ Use at least 4 characters'); return; } if(pass !== passConfirm){ showNotification('⚠️ Passwords do not match'); return; } const hashed = await hashPassword(pass); localStorage.setItem(backupPasswordKey, hashed); showNotification('✅ Backup password saved'); showLockScreen('unlock'); }
+else { const pass = passwordInputEl.value.trim(); const passConfirm = passwordConfirmEl.value.trim(); if(pass.length < 4){ showNotification('⚠️ Use at least 4 characters'); return; } if(pass !== passConfirm){ showNotification('⚠️ Passwords do not match'); return; } const hashed = await hashPassword(pass); localStorage.setItem(appPasswordKey, hashed); setPasswordButtonLabel(); hideLockScreen(); showNotification('✅ Password saved'); setTimeout(()=>{ showNotification('💡 Tip: Set backup password in Settings'); },2000); } }
+function cancelPasswordSetup(){ if(getStoredPassword()){ showLockScreen('unlock'); } else { hideLockScreen(); showNotification('Password setup cancelled'); } }
+function forgotPassword(){ if(!confirm('⚠️ Reset will clear your password. Continue?')) return; const newPass = prompt('🆕 Enter new password (min 4 chars):'); if(!newPass || newPass.trim().length < 4){ showNotification('Password must be at least 4 characters'); return; } hashPassword(newPass.trim()).then(hashed=>{ localStorage.setItem(appPasswordKey, hashed); localStorage.removeItem(backupPasswordKey); showNotification('✅ Password reset successfully'); showLockScreen('unlock'); }); }
+function setupBackupPassword(){ closeSettings(); showLockScreen('setupBackup'); }
+function preparePasswordChange(){ closeSettings(); if(getStoredPassword()){ showLockScreen('change'); } else { showLockScreen('set'); } }
+function initLockScreen(){ setPasswordButtonLabel(); if(getStoredPassword()){ showLockScreen('unlock'); } else { showLockScreen('set'); } }
 const inventory = {
 "Premium Pens":[
 {name:"Parker",price:2000,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7y8rYcMgJSchaCRbVnV_Mk3i8-nJcBsRnDQ&s"},
@@ -268,7 +324,7 @@ function toggleDarkMode(){ document.body.classList.toggle('dark'); document.getE
 function toggleNotifications(){ notifications = !notifications; document.getElementById('notifyBtn').innerText = notifications ? 'ON' : 'OFF'; showNotification(notifications ? 'Notifications enabled' : 'Notifications disabled'); }
 function clearCart(){ cart=[]; updateCart(); render(document.getElementById('searchInput').value); showNotification('🧹 Cart cleared'); }
 document.getElementById('searchInput').oninput = (event)=> render(event.target.value);
-window.onload = ()=>{ setTimeout(()=>{ document.getElementById('loadingScreen').style.opacity = '0'; setTimeout(()=>{ document.getElementById('loadingScreen').style.display = 'none'; },250); },500); render(); };
+window.onload = ()=>{ setTimeout(()=>{ document.getElementById('loadingScreen').style.opacity = '0'; setTimeout(()=>{ document.getElementById('loadingScreen').style.display = 'none'; },250); },500); render(); initLockScreen(); };
 </script>
 </body>
 </html>
