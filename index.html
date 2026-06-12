@@ -8,7 +8,7 @@
 :root{--primary:#ff6600;--accent:#fff200;--bg:#fff9d6;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:Segoe UI,sans-serif;background:linear-gradient(180deg,#fff9d6 0%,#ffffff 100%);color:#111;padding-bottom:120px;}
-#loadingScreen{position:fixed;inset:0;background:var(--accent);display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:99999;transition:.3s;}
+#loadingScreen{position:fixed;inset:0;background:var(--accent);display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:99999;transition:.4s ease-out;}
 .loader-logo{font-size:55px;font-weight:900;color:var(--primary);}
 .spinner{width:65px;height:65px;margin-top:20px;border:6px solid white;border-top:6px solid var(--primary);border-radius:50%;animation:spin .8s linear infinite;}
 @keyframes spin{100%{transform:rotate(360deg);}}
@@ -201,7 +201,7 @@ const inventory = {
 {name:"Cello Butterflow Gel Set",price:37,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYCZXHtaJreGDlfEekOJKrZXqldy9Nqi0wvg&s"},
 {name:"Unomax Funtron",price:12,img:"https://storage.googleapis.com/shy-pub/367727/SKU-0202_0-1746172924100.png"},
 {name:"Supra His Gold",price:10,img:"https://m.media-amazon.com/images/I/51cnuMeY-ZL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Unomax Zap 2X",price:10,img:"https://annachy-prod-assets.annachy-prod-assets.annachy.com/pims/products-v1/028779MULPACOF10_1.png"},
+{name:"Unomax Zap 2X",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRIY55Ot6BtpzZndgTDK_uI_G0NRosCRzeiw&s"},
 {name:"Hauser UV Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXOxaWSqyUX6YjOOd3JmRkmMSO280gVK3m6A&s"},
 {name:"Unomax Disney Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY8oOAwSITF_oBYSIWgtqXnMrvTpTOt5syag&s"},
 {name:"Hauser Autoclick Ball",price:10,img:"https://www.ebcstoreonline.com/themes/images/product/Hauser%20Auto-Click%20Ball%20Pen%20-%20Black.jpg"},
@@ -353,10 +353,11 @@ let cart = {};
 let notificationsEnabled = true;
 
 window.addEventListener('DOMContentLoaded', () => {
+    // Loading page time restricted between 1 to 2 seconds (set to 1.5 seconds)
     setTimeout(() => {
         document.getElementById('loadingScreen').style.opacity = '0';
-        setTimeout(() => document.getElementById('loadingScreen').style.display = 'none', 300);
-    }, 800);
+        setTimeout(() => document.getElementById('loadingScreen').style.display = 'none', 400);
+    }, 1500);
     renderShop();
     setupFormValidation();
 });
