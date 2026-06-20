@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,24 +8,80 @@
 <style>
 :root{--primary:#ff6600;--accent:#fff200;--bg:#fff9d6;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Segoe UI,sans-serif;background:linear-gradient(180deg,#fff9d6 0%,#ffffff 100%);color:#111;padding-bottom:120px;}
+
+body{
+  font-family:Segoe UI,sans-serif;
+  color:#111;
+  padding-bottom:120px;
+  background:
+    linear-gradient(180deg, rgba(255,249,214,.90) 0%, rgba(255,255,255,.82) 45%, rgba(255,255,255,.95) 100%),
+    url('https://i.ibb.co/fY2zZ5F7/image.png');
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  background-repeat:no-repeat;
+  background-color:#fff9d6;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at top left, rgba(255,102,0,.12), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(255,242,0,.14), transparent 38%);
+  z-index:-1;
+}
+
 #loadingScreen{position:fixed;inset:0;background:var(--accent);display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:99999;transition:.4s ease-out;}
 .loader-logo{font-size:55px;font-weight:900;color:var(--primary);}
 .spinner{width:65px;height:65px;margin-top:20px;border:6px solid white;border-top:6px solid var(--primary);border-radius:50%;animation:spin .8s linear infinite;}
 @keyframes spin{100%{transform:rotate(360deg);}}
-#notification{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-120px);background:#111;color:white;padding:12px 24px;border-radius:30px;font-weight:bold;transition:.4s;z-index:9999;border:2px solid var(--primary);}
+#notification{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-120px);background:#111;color:white;padding:12px 24px;border-radius:30px;font-weight:bold;transition:.4s;z-index:9999;border:2px solid var(--primary);cursor:pointer;max-width:92%;text-align:center;}
 #notification.show{transform:translateX(-50%) translateY(0);}
-header{background:var(--accent);padding:15px;position:sticky;top:0;z-index:999;border-bottom:4px solid var(--primary);}
+
+header{
+  background:rgba(255,242,0,.88);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  padding:15px;
+  position:sticky;
+  top:0;
+  z-index:999;
+  border-bottom:4px solid var(--primary);
+  border-radius:0 0 18px 18px;
+}
+
 .header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .logo{font-size:34px;font-weight:900;color:var(--primary);}
 .actions{display:flex;gap:10px;flex-wrap:wrap;}
-.action-btn{background:white;padding:10px 16px;border-radius:30px;font-weight:bold;border:2px solid var(--primary);cursor:pointer;position:relative;display:flex;align-items:center;gap:8px;}
+.action-btn{
+  background:white;padding:10px 16px;border-radius:30px;font-weight:bold;
+  border:2px solid var(--primary);cursor:pointer;position:relative;display:flex;align-items:center;gap:8px;
+  transition:.15s transform ease;
+}
+.action-btn:active{transform:scale(.98);}
 .badge{position:absolute;top:-8px;right:-8px;background:red;color:white;font-size:10px;padding:2px 6px;border-radius:50%;display:none;}
 .search-box{margin-top:12px;}
-.search-box input{width:100%;padding:13px;border-radius:10px;border:2px solid var(--primary);font-size:15px;outline:none;}
+.search-box input{width:100%;padding:13px;border-radius:10px;border:2px solid var(--primary);font-size:15px;outline:none;background:rgba(255,249,240,.95);}
+.search-box input:focus{box-shadow:0 0 0 3px rgba(255,102,0,.15);}
+
+.banner{padding:15px 15px 0;}
+.banner img{width:100%;max-height:260px;object-fit:cover;border-radius:18px;border:3px solid var(--primary);box-shadow:0 4px 12px rgba(0,0,0,.12);}
+
 .category-title{background:#fff0b0;margin:18px 15px 10px;padding:12px;font-size:20px;font-weight:bold;border-left:6px solid var(--primary);border-radius:10px;}
 .container{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px;padding:0 15px 20px;}
-.card{background:white;border:2px solid var(--primary);border-radius:18px;padding:15px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:space-between;}
+.card{
+  background:rgba(255,255,255,.92);
+  border:2px solid var(--primary);
+  border-radius:18px;
+  padding:15px;text-align:center;
+  box-shadow:0 10px 22px rgba(0,0,0,.08);
+  display:flex;flex-direction:column;justify-content:space-between;
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
 .card h4{min-height:48px;font-size:15px;margin-bottom:10px;}
 .product-img{width:100%;height:140px;object-fit:contain;border-radius:14px;background:#f8f2d7;margin-bottom:10px;}
 .price{font-size:20px;font-weight:bold;color:var(--primary);margin-bottom:5px;}
@@ -33,6 +90,7 @@ header{background:var(--accent);padding:15px;position:sticky;top:0;z-index:999;b
 .add-btn{flex:2;background:var(--primary);color:white;border:none;padding:10px 8px;border-radius:10px;font-weight:bold;cursor:pointer;}
 .remove-btn{flex:1;background:#ddd;border:none;border-radius:10px;font-weight:bold;cursor:pointer;}
 .remove-btn.active{background:red;color:white;}
+
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center;z-index:9999;}
 .modal-content{background:white;width:92%;max-width:520px;padding:20px;border-radius:18px;border:3px solid var(--primary);max-height:85vh;overflow:auto;}
 .modal-content h2{margin-bottom:15px;color:var(--primary);}
@@ -47,7 +105,7 @@ header{background:var(--accent);padding:15px;position:sticky;top:0;z-index:999;b
 .customer-form h3{margin-bottom:12px;color:#333;font-size:16px;}
 .form-group{margin-bottom:12px;}
 .form-group label{display:block;font-size:13px;font-weight:bold;margin-bottom:4px;color:#555;}
-.form-group input,.form-group textarea{width:100%;padding:12px;border:2px solid #ddd;border-radius:10px;font-size:14px;outline:none;transition:.2s;}
+.form-group input,.form-group textarea{width:100%;padding:12px;border:2px solid #ddd;border-radius:10px;font-size:14px;outline:none;transition:.2s;background:#fff;}
 .form-group input:focus,.form-group textarea:focus{border-color:var(--primary);}
 .form-group textarea{resize:vertical;min-height:60px;}
 .modal-buttons{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
@@ -56,8 +114,9 @@ header{background:var(--accent);padding:15px;position:sticky;top:0;z-index:999;b
 .order-btn{background:var(--primary);color:white;}
 .order-btn:disabled{background:#ccc;cursor:not-allowed;}
 .setting-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:12px;border:2px solid var(--primary);border-radius:10px;}
-#chatgptButton{position:fixed;bottom:20px;right:20px;width:90px;height:90px;border-radius:50%;background:#111;color:white;display:flex;justify-content:center;align-items:center;font-size:16px;font-weight:bold;cursor:pointer;z-index:99999;border:4px solid #00ff99;box-shadow:0 0 20px #00ff99;text-align:center;line-height:1.1;}
+
 body.dark{background:#111;color:white;}
+body.dark::before{opacity:.18;}
 body.dark .card,body.dark .modal-content,body.dark .action-btn,body.dark .search-box input{background:#1f1f1f;color:white;}
 body.dark .category-title{background:#333;color:white;}
 body.dark header{background:#292922;}
@@ -69,6 +128,51 @@ body.dark .summary-section{background:#2a2a2a;}
 body.dark .form-group input,body.dark .form-group textarea{background:#333;border-color:#444;color:white;}
 body.dark .customer-form h3{color:#fff;}
 body.dark .form-group label{color:#ccc;}
+body.dark .search-highlight{outline:3px solid #00ff99;box-shadow:0 0 10px rgba(0,255,153,.4);}
+
+.flash-timer-wrap{
+  margin:15px;
+  padding:15px;
+  border:3px solid var(--primary);
+  border-radius:18px;
+  background:rgba(255,255,255,.92);
+  text-align:center;
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+.flash-timer-title{
+  font-size:20px;
+  font-weight:900;
+  color:var(--primary);
+  margin-bottom:10px;
+}
+.flash-timer{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:1px;
+  color:#111;
+}
+.flash-note{
+  margin-top:8px;
+  font-size:13px;
+  color:#444;
+}
+body.dark .flash-timer-wrap{background:#1f1f1f;color:white;}
+body.dark .flash-timer{color:white;}
+body.dark .flash-note{color:#ddd;}
+
+.sale-badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  color:white;
+  background:#666;
+}
+.sale-badge.high{background:#d35400;}
+.sale-badge.low{background:#0a7a2f;}
+.sale-badge.live{background:#c0392b;}
 </style>
 </head>
 <body>
@@ -76,8 +180,9 @@ body.dark .form-group label{color:#ccc;}
 <div class="loader-logo">🛒 Blinkart</div>
 <div class="spinner"></div>
 </div>
-<div id="notification">Welcome to Blinkart</div>
-<div id="chatgptButton" onclick="openAIHelper()">AI</div>
+
+<div id="notification" onclick="showAdvertisement()">Blinkart Universe sale live on Monday, 22 June 2026 — 3:00 PM to 3:30 PM. Tap here for advertisement!</div>
+
 <header>
 <div class="header-top">
 <div class="logo">🛒 Blinkart</div>
@@ -89,6 +194,18 @@ body.dark .form-group label{color:#ccc;}
 </div>
 <div class="search-box"><input type="text" id="searchInput" placeholder="Search Products"></div>
 </header>
+
+<div class="banner" id="bannerWrap">
+<img src="https://i.ibb.co/twFxjzxf/2026-06-17-181644.png" alt="Banner">
+</div>
+
+<div class="flash-timer-wrap" id="flashTimerWrap">
+  <div class="flash-timer-title">Flash Timer Starts Tomorrow</div>
+  <div class="flash-timer" id="flashTimer">Loading...</div>
+  <div class="flash-note">Universe Sale on Monday, 22 June 2026 from 3:00 PM to 3:30 PM</div>
+  <div id="saleStatus" class="sale-badge">Sale not started</div>
+</div>
+
 <div id="main"></div>
 
 <div class="modal" id="cartModal">
@@ -139,6 +256,309 @@ body.dark .form-group label{color:#ccc;}
 <script>
 const emailAddress = 'newbikepoint02@gmail.com';
 const HANDLING_CHARGE = 2;
+let cart = {};
+let notificationsEnabled = true;
+
+const SALE_START = new Date('2026-06-22T15:00:00');
+const SALE_END = new Date('2026-06-22T15:30:00');
+const SALE_MID = new Date('2026-06-22T15:15:00');
+
+function isSaleActive() {
+    const now = new Date();
+    return now >= SALE_START && now < SALE_END;
+}
+
+function showAdvertisement() {
+    alert("Blinkart Universe Sale Live!\nMonday, 22 June 2026\nTime: 3:00 PM to 3:30 PM\nLucky Sale: Every 2 minutes\nDon't miss the offer!");
+}
+
+function showNotification(msg) {
+    if (!notificationsEnabled) return;
+    const banner = document.getElementById('notification');
+    banner.innerText = msg;
+    banner.classList.add('show');
+    setTimeout(() => banner.classList.remove('show'), 2500);
+}
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function getSalePhase(now) {
+    if (now < SALE_START) return 'before';
+    if (now < SALE_MID) return 'high';
+    if (now < SALE_END) return 'low';
+    return 'after';
+}
+
+function getHandlingChargeForItem(basePrice) {
+    if (isSaleActive() && basePrice <= 200) return 0;
+    return HANDLING_CHARGE;
+}
+
+function getPriceForSale(basePrice) {
+    const phase = getSalePhase(new Date());
+    if (phase === 'high') return Math.ceil(basePrice * 1.25);
+    if (phase === 'low') return Math.max(1, Math.floor(basePrice * 0.8));
+    return basePrice;
+}
+
+function updateSaleStatus() {
+    const now = new Date();
+    const status = document.getElementById('saleStatus');
+    const flashWrap = document.getElementById('flashTimerWrap');
+    const bannerWrap = document.getElementById('bannerWrap');
+
+    if (now < SALE_START) {
+        flashWrap.style.display = 'block';
+        bannerWrap.style.display = 'block';
+        status.className = 'sale-badge';
+        status.innerText = 'Sale starts on Monday 3:00 PM';
+    } else if (now < SALE_END) {
+        flashWrap.style.display = 'block';
+        bannerWrap.style.display = 'block';
+        status.className = 'sale-badge ' + (now < SALE_MID ? 'high' : 'low');
+        status.innerText = now < SALE_MID ? 'First 15 min: Higher than original price' : 'Last 15 min: Lower than original price';
+    } else {
+        flashWrap.style.display = 'none';
+        bannerWrap.style.display = 'none';
+    }
+}
+
+function updateFlashTimer() {
+    const now = new Date();
+    if (now < SALE_START) {
+        const diff = SALE_START - now;
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        document.getElementById('flashTimer').innerText = `${days}D ${pad(hours)}H ${pad(minutes)}M ${pad(seconds)}S`;
+    } else if (now < SALE_END) {
+        const diff = SALE_END - now;
+        const totalSeconds = Math.floor(diff / 1000);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        document.getElementById('flashTimer').innerText = `Sale Ends In ${pad(minutes)}M ${pad(seconds)}S`;
+    }
+    updateSaleStatus();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const now = new Date();
+    if (now >= SALE_END) {
+        document.getElementById('flashTimerWrap').style.display = 'none';
+        document.getElementById('bannerWrap').style.display = 'none';
+    }
+    setTimeout(() => {
+        document.getElementById('loadingScreen').style.opacity = '0';
+        setTimeout(() => document.getElementById('loadingScreen').style.display = 'none', 400);
+    }, 1500);
+    renderShop();
+    setupFormValidation();
+    updateFlashTimer();
+    setInterval(updateFlashTimer, 1000);
+});
+
+function renderShop(filterTerm = "") {
+    const mainDiv = document.getElementById('main');
+    mainDiv.innerHTML = "";
+    for (const category in inventory) {
+        const filteredItems = inventory[category].filter(item => item.name.toLowerCase().includes(filterTerm.toLowerCase()));
+        if (filteredItems.length === 0) continue;
+
+        const catTitle = document.createElement('div');
+        catTitle.className = 'category-title';
+        catTitle.innerText = category;
+        mainDiv.appendChild(catTitle);
+
+        const container = document.createElement('div');
+        container.className = 'container';
+
+        filteredItems.forEach(item => {
+            const qty = cart[item.name] ? cart[item.name].qty : 0;
+            const displayPrice = getPriceForSale(item.price);
+            const salePhase = getSalePhase(new Date());
+            const saleLabel = salePhase === 'high' ? 'Sale Price High' : salePhase === 'low' ? 'Sale Price Low' : 'Original Price';
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            if (filterTerm && item.name.toLowerCase().includes(filterTerm.toLowerCase())) card.classList.add('search-highlight');
+            card.innerHTML = `
+                <div>
+                    <img class="product-img" src="${item.img}" alt="${item.name}" onerror="this.src='https://placehold.co/150?text=No+Image'">
+                    <h4>${item.name}</h4>
+                </div>
+                <div>
+                    <div class="price">₹${displayPrice}</div>
+                    <div class="handling-note">Base: ₹${item.price} + ₹${getHandlingChargeForItem(item.price)} handling charge</div>
+                    <div class="sale-badge ${salePhase === 'high' ? 'high' : salePhase === 'low' ? 'low' : ''}">${saleLabel}</div>
+                    <div class="btn-group">
+                        <button class="add-btn" onclick="addToCart('${item.name}', ${displayPrice})">${qty > 0 ? `Add (${qty})` : 'Add To Cart'}</button>
+                        <button class="remove-btn ${qty > 0 ? 'active' : ''}" onclick="removeFromCart('${item.name}')">×</button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+        mainDiv.appendChild(container);
+    }
+}
+
+document.getElementById('searchInput').addEventListener('input', (e) => renderShop(e.target.value));
+
+function addToCart(name, price) {
+    if (cart[name]) cart[name].qty++;
+    else cart[name] = { price, qty: 1 };
+    updateCartDOM();
+    renderShop(document.getElementById('searchInput').value);
+    showNotification(`Added ${name} to cart!`);
+}
+
+function removeFromCart(name) {
+    if (!cart[name]) return;
+    cart[name].qty--;
+    if (cart[name].qty <= 0) delete cart[name];
+    updateCartDOM();
+    renderShop(document.getElementById('searchInput').value);
+    showNotification(`Removed item from cart.`);
+}
+
+function clearCart() {
+    cart = {};
+    updateCartDOM();
+    renderShop();
+    showNotification("Cart completely cleared!");
+    closeSettings();
+}
+
+function updateCartDOM() {
+    let count = 0, subtotal = 0, handlingTotal = 0;
+    const cartItemsDiv = document.getElementById('cartItems');
+    cartItemsDiv.innerHTML = "";
+
+    for (const name in cart) {
+        count += cart[name].qty;
+        const totalItemCost = cart[name].price * cart[name].qty;
+        subtotal += totalItemCost;
+
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = `
+            <div class="item-details">
+                <div class="item-name">${name}</div>
+                <div class="item-breakdown">₹${cart[name].price} × ${cart[name].qty}</div>
+            </div>
+            <div style="font-weight:bold; align-self: center;">₹${totalItemCost}</div>
+        `;
+        cartItemsDiv.appendChild(row);
+
+        const originalItem = findItemByName(name);
+        handlingTotal += getHandlingChargeForItem(originalItem ? originalItem.price : cart[name].price) * cart[name].qty;
+    }
+
+    const totalBill = subtotal + handlingTotal;
+    document.getElementById('cartCount').innerText = count;
+    const badge = document.getElementById('badge');
+    if(count > 0) {
+        badge.innerText = count;
+        badge.style.display = 'block';
+    } else {
+        badge.style.display = 'none';
+        cartItemsDiv.innerHTML = "<p style='text-align:center;color:#666;padding:20px 0;'>Your cart is empty.</p>";
+    }
+
+    document.getElementById('subtotalAmount').innerText = `₹${subtotal}`;
+    document.getElementById('handlingAmount').innerText = `₹${handlingTotal}`;
+    document.getElementById('totalBill').innerText = `₹${totalBill}`;
+    validateForm();
+}
+
+function findItemByName(name) {
+    for (const category in inventory) {
+        const item = inventory[category].find(x => x.name === name);
+        if (item) return item;
+    }
+    return null;
+}
+
+function openCart() { document.getElementById('cartModal').style.display = 'flex'; }
+function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
+function openSettings() { document.getElementById('settingsModal').style.display = 'flex'; }
+function closeSettings() { document.getElementById('settingsModal').style.display = 'none'; }
+
+function setupFormValidation() {
+    ['customerName', 'customerEmail', 'customerPhone', 'customerAddress'].forEach(id => {
+        document.getElementById(id).addEventListener('input', validateForm);
+    });
+}
+
+function validateForm() {
+    const name = document.getElementById('customerName').value.trim();
+    const email = document.getElementById('customerEmail').value.trim();
+    const phone = document.getElementById('customerPhone').value.trim();
+    const address = document.getElementById('customerAddress').value.trim();
+    const hasItems = Object.keys(cart).length > 0;
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const phoneValid = /^\d{10}$/.test(phone);
+    document.getElementById('orderBtn').disabled = !(name && emailValid && phoneValid && address && hasItems);
+}
+
+function placeOrder() {
+    const name = document.getElementById('customerName').value.trim();
+    const email = document.getElementById('customerEmail').value.trim();
+    const phone = document.getElementById('customerPhone').value.trim();
+    const address = document.getElementById('customerAddress').value.trim();
+    const totalBill = document.getElementById('totalBill').innerText;
+
+    let itemsList = "";
+    for (const itemName in cart) {
+        itemsList += `- ${itemName} (Qty: ${cart[itemName].qty}, Price: ₹${cart[itemName].price})\n`;
+    }
+
+    const subject = encodeURIComponent(`Blinkart New Order from ${name}`);
+    const body = encodeURIComponent(
+        `Hello Admin,\n\nYou have received a new order on Blinkart.\n\n` +
+        `📦 CUSTOMER DETAILS:\n` +
+        `-------------------------\n` +
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Phone: ${phone}\n` +
+        `Delivery Address: ${address}\n\n` +
+        `🛒 ORDERED ITEMS:\n` +
+        `-------------------------\n` +
+        `${itemsList}\n` +
+        `💰 TOTAL AMOUNT PAYABLE: ${totalBill}\n\n` +
+        `Please process the order as soon as possible.`
+    );
+
+    window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+
+    setTimeout(() => {
+        alert("Redirecting to email client... Please press send button in your mail app to finish order notification!");
+        cart = {};
+        updateCartDOM();
+        renderShop();
+        closeCart();
+    }, 500);
+}
+
+function sendAlertEmail() {
+    window.location.href = `mailto:${emailAddress}?subject=Blinkart%20Alert&body=Emergency%20or%20Alert%20Triggered%20from%20Store%20Front.`;
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    document.getElementById('darkBtn').innerText = isDark ? "ON" : "OFF";
+    document.getElementById('darkBtn').style.background = isDark ? "#00ff99" : "#ddd";
+}
+
+function toggleNotifications() {
+    notificationsEnabled = !notificationsEnabled;
+    document.getElementById('notifyBtn').innerText = notificationsEnabled ? "ON" : "OFF";
+    document.getElementById('notifyBtn').style.background = notificationsEnabled ? "#ff6600" : "#ddd";
+    document.getElementById('notifyBtn').style.color = notificationsEnabled ? "white" : "black";
+}
 
 const inventory = {
 "Premium Pens":[
@@ -155,11 +575,13 @@ const inventory = {
 {name:"Calligraphy Pen",price:55,img:"https://m.media-amazon.com/images/I/61yUrXiaVBL._AC_UF1000,1000_QL80_.jpg"},
 {name:"Robomax",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX5XsfNwUZKdNG4pR481b0HVXcYyr1NRDUVQ&s"},
 {name:"Perie Cardian Rollerink",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlGKGY5QxUDm3QLp_0NDdGMNaiVXSTqmlipw&s"},
-{name:"Zoox U7 Pen",price:110,img:"https://rangbeerangee.com/wp-content/uploads/2024/11/Zoox-U7-Roller-gel-pen.jpg"},
+{name:"Zoox U7 Pen",price:110,img:"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSw726-wAGmFoOxKGuCQ-xzjQD7l8ZMpIZVFe65q99CVpxiKIvT4xSHrbXDB8R1r32yshrgzVyfuUTk8h53Bi_lpjds8NaQ4sAIARf0gqYpIKPNKeTnLbcQRw"},
 {name:"Maxtron",price:65,img:"https://rukminim2.flixcart.com/image/480/640/kdnf98w0pkrrdj/pen/y/b/c/rorito-original-imafumsfp96q5ffn.jpeg?q=90"},
 {name:"Maxtron Gold",price:130,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8f2sUbEIQBBIOb3lJ3HK2FF7vcDluY9Zk8A&s"},
 {name:"Uniball Air Micro",price:200,img:"https://bbag.in/cdn/shop/files/OFF.GEL.127796383_1732184228745.webp?v=1742993549&width=1080"},
-{name:"Frixion Eraseable Pen",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXZPHflkdmFtVh-migyg9WJvR0iSETVYbenA&s"}
+{name:"Frixion Eraseable Pen",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXZPHflkdmFtVh-migyg9WJvR0iSETVYbenA&s"},
+{name:"Hauser Doku Rite",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyJ2wtltnzwuCsrDTs4ws1VqBcsQZ18c-j3w&s"},
+{name:"Gel Metal Ball Pen",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZRAZMBC8Gf5NoNMUdgpmMJA7MgC4NWVjM5A&s"}
 ],
 "Budget Pens":[
 {name:"Jotex Gel Pen",price:40,img:"https://storage.googleapis.com/shy-pub/367727/SKU-0382_0-1727081713823.png"},
@@ -210,7 +632,10 @@ const inventory = {
 {name:"Unomax Vogue RT Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpk3YmvXF_6e6CW6Dsn5SYNzye-6k5x3q9w&s"},
 {name:"Goldex Klassy Ball",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTt5LavtGBj2606T37BxsHvck4P3G46JM98A&s"},
 {name:"Doms Liko Piko Ball",price:5,img:"https://m.media-amazon.com/images/I/61hkQ55P9OS._AC_UF1000,1000_QL80_.jpg"},
-{name:"Classmate Hook Ballpoint",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAzSNVFgu5aCXQ9V_lvkI6xYH5tXtignHg2w&s"}
+{name:"Classmate Hook Ballpoint",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAzSNVFgu5aCXQ9V_lvkI6xYH5tXtignHg2w&s"},
+{name:"Multicolour Ball Pen Pentonic",price:128,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVDAUKOK8WfgxDSAYoGcuhfL20UqQHrudJ6Q&s"},
+{name:"Multicolour Gel Pen Pentonic",price:203,img:"https://m.media-amazon.com/images/I/61wHWLOlmDL.jpg"},
+{name:"Hauser Multicolour Gel Pen Set",price:123,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGGT_xh43iIM-OJBFnNvFMWv0YGu4TYz65Og&s"}
 ],
 "Multicolor Pens":[
 {name:"Multicolor Ballpoint Pen",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw6dlvFluhgpZ-V5a8qXtIRaaRi5fug1MDmzo4pvS0vQ&s=10"},
@@ -220,11 +645,14 @@ const inventory = {
 {name:"Fountain Pen Refill",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA37dANrYbKyugZtuLGI6nyVPN-iFAieD3SnRBS7erna5yu1_OWf6C5cE&s=10"},
 {name:"Octane Fountain Refill",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdydEEV1Ad9tKGKylaflng3OWVUiMSG9H_iEni_5JMzKLeSjqA25DSV18&s=10"},
 {name:"Pilot V7 and V5 Refill",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR25zCukw2vn52aY_YRLacDuvK3aveVTTiheIc-hQpR0g&s=10"},
-{name:"Trimax Refill",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGEwf2e1fSwAOlrbLNsmY3prk62wUHOuronEXqY9keLq_sHbF1CdSZ7Hhg&s=10"}
+{name:"Trimax Refill",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGEwf2e1fSwAOlrbLNsmY3prk62wUHOuronEXqY9keLq_sHbF1CdSZ7Hhg&s=10"},
+{name:"Hauser 2.0 mm Penpencil Refill",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRZ1ck_NpWiUTmSaqvwSz-SNMRnq2Fje9qkQ&s"},
+{name:"Camlin 0.7 mm Refill",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZd2TtRrjcvIPfs4muRYdG8Jx30mOddzCuow&s"},
+{name:"0.5 mm Penpencil Refill",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVJb0jhUhN5X-4rdKZPLEKtY8KSBW89gqXJw&s"}
 ],
 "Kits & Sets":[
 {name:"Art Kit",price:1000,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLBiI7bzZJfSVuP_gkx92apmAHF-YzHVMQJw&s"},
-{name:"Stationery Kit",price:150,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiLDZBGaOj43Hoa5pasSYPxlR2Ehh3E7wk0A&s"},
+{name:"Stationery Kit",price:150,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN3d8VNIhigtOlQJtNUYA3OqqbpeMfExZhMg&s"},
 {name:"Stationery Kit Small",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU3ddRtqcMBlMtpIZ1EUpgF7nlkgULfLTf_A&s"},
 {name:"Art Strokes Doms",price:225,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqAxltZrwtA25pTir877uL-hOru0Sc9I0VGg&s"}
 ],
@@ -251,7 +679,13 @@ const inventory = {
 {name:"Endless Charcoal Graphite",price:22,img:"https://m.media-amazon.com/images/I/61LUp7y6a3L.jpg"},
 {name:"Flair Carbonix 0.7",price:10,img:"https://i0.wp.com/grovertechno.com/wp-content/uploads/2024/08/39.png?fit=1000%2C1000&ssl=1"},
 {name:"Flair Move 0.7 Penpencils",price:20,img:"https://truewholesale.in/storage/product-images/17195547430.jpg"},
-{name:"Hauser Superdark 0.7",price:15,img:"https://sharmag.co.in/wp-content/uploads/2025/01/IMG_20250131_101532.jpg"}
+{name:"Hauser Superdark 0.7",price:15,img:"https://sharmag.co.in/wp-content/uploads/2025/01/IMG_20250131_101532.jpg"},
+{name:"Flair 2.0 Glow Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5-J20NJPYfVz5n4MUcBTql7H47t0tuGNQDg&s"},
+{name:"Flair Diva 2.0 Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI-tk-RsRdFocMbBEUM-Rmm5_yeTGzpn9o7w&s"},
+{name:"Flair Thrill 2.0 Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7FkM02QFgpmHiOmUWwFKfUOLq_xloMBHxDA&s"},
+{name:"Red Margin Single Piece",price:7,img:"https://www.stationerywalebhaiya.com/cdn/shop/files/rn-image_picker_lib_temp_9915a275-dadf-4eca-837b-9b27a145b77d.jpg?v=1762713432&width=416"},
+{name:"Blue Margin Single Piece",price:7,img:"https://rukmini1.flixcart.com/image/300/300/pencil/x/t/8/nataraj-checking-pencils-blue-original-imadkxapgfszgnyr.jpeg"},
+{name:"Unomax Click 0.7 mm Penpencil",price:10,img:"https://www.giftsandpens.com/cdn/shop/files/unomax-click-it-pearl-mechanical-pencil-0-7mm-294.webp?v=1779687479"}
 ],
 "Colors & Art":[
 {name:"Acrylic Colours",price:350,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVQ7qSipKnN3PS5ozWNJfYnyLehV5JHQWOEqtuxWn5wwUFbWF7MQ_guilk&s=10"},
@@ -294,7 +728,11 @@ const inventory = {
 {name:"Classmate2 Ruled 140",price:55,img:"https://5.imimg.com/data5/SELLER/Default/2023/9/343463827/JR/FN/SR/30903313/classmate-longbook-a4-notebook-unruled-140-pages-multicolor-pack-of-12-250x250.jpg"},
 {name:"Classmate Thin 24 Pages",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO6Bo7hEtwEcAqYK1_Ah6yv_QFwxJj9ESOSA&s"},
 {name:"Classmate Pulse Spiral",price:180,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREpiSo0KQcapeSu4JvSPALO13xHxuarYmLkQ&s"},
-{name:"Classmate Spiral Small",price:65,img:"https://m.media-amazon.com/images/I/71+ghNW6BDL._AC_UF1000,1000_QL80_.jpg"}
+{name:"Classmate Spiral Small",price:65,img:"https://m.media-amazon.com/images/I/71+ghNW6BDL._AC_UF1000,1000_QL80_.jpg"},
+{name:"Doms 172 Pages Notebook",price:48,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ3gCRdXHSK2fArFD8rx_YJ3pR3J5N1Swg2Q&s"},
+{name:"Classmate Bar Graph Copy",price:32,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQIkcOOObIBNnWM31JLvMZr14J0FHulKDlmw&s"},
+{name:"Clasmate Geometry Copy 140 Pages",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1rCu-U_vWDICg91Z2bU6h-LsPFQNOWkTcPQ&s"},
+{name:"Maths Practical Spiral Notebook",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTINAotvBk6eJMywL2m6JJkAPNH4eMEDz8H7A&s"}
 ],
 "Essentials":[
 {name:"Doms Colour Plate",price:100,img:"https://m.media-amazon.com/images/I/819683ID-vL.jpg"},
@@ -304,6 +742,10 @@ const inventory = {
 {name:"Apsara Colour Chalks",price:35,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYosHE5iYgD0CIEK5Fuvqz9V8LwRZ11I9tn3CfsEtd-g&s=10"},
 {name:"Doms White Chalk",price:33,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6A78bLl1HBZz3XlLvFV9BDdWVpUncvBH5qpMcycXugw&s"},
 {name:"Doms Chalk Holder",price:20,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzjr3REdWPuhz13r5JNpzf9HxPcVf6Q6KfUXkhpdaKZ5TXdAZfCafPNK3T&s=10"},
+{name:"Board Pins",price:33,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwW3TYbWpIaGOmTBZnSqOo0_iKOCYzaAvMMg&s"},
+{name:"Duster",price:134,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVKk9uwKo794R88AFk1YpGy928-bndW6ChvA&s"},
+{name:"Board Clip",price:55,img:"https://5.imimg.com/data5/SELLER/Default/2022/7/YK/UH/CQ/25484915/drawing-board-clip.jpg"},
+{name:"Kneedable Eraser",price:100,img:"https://amarizindia.com/cdn/shop/files/5_92d5193e-5cc7-4daa-aa89-bfebcee9bf08.png?v=1758713264"},
 {name:"Science Calculator",price:500,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwYXodTBsJJd3ZPq0uDYdBlJeDpXZlV3P-_Q&s"},
 {name:"Calculator",price:670,img:"https://rukminim2.flixcart.com/image/480/640/calculator/m/x/s/casio-mj-120d-original-imaedhpgfepcbmgw.jpeg?q=90"},
 {name:"Origami Paper",price:20,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI_qh6M6rPdNB3g3Ar7lSKDq9fbZVecvmQ3Q&s"},
@@ -320,6 +762,7 @@ const inventory = {
 {name:"Whitener",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbUfd68grMIsFa_q0OC1sq0YkRFzlDwJt92A&s"},
 {name:"Whitener Premium",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF6xUvwjCaEbcIu-iNQSOwo5yNZgAZIRBoIA&s"},
 {name:"Correction Tape",price:45,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBTDKsagVGsdLIPvO01HIIYrKAgc6l_YsqAw&s"},
+{name:"Transparent Tape",price:65,img:"https://www.stationeryplug.com/cdn/shop/products/CelloTape2inch.jpg?v=1660027502"},
 {name:"A4 Size Sheet",price:3,img:"https://m.media-amazon.com/images/I/31BG82hS2CL._AC_UF1000,1000_QL80_.jpg"},
 {name:"A4 Colour Sheet",price:3,img:"https://www.bbassets.com/media/uploads/p/l/40280994_1-se7en-a4-size-premium-colour-paper-for-arts-crafts-assorted.jpg"},
 {name:"A4 Hard Sheet",price:6,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWWlNlap9kE1B9is0tpxyvBuPe8zXwBy7zgA&s"},
@@ -331,269 +774,17 @@ const inventory = {
 {name:"Transparent Cover Roll",price:80,img:"https://truewholesale.in/storage/product-images/17423722421.jpg"},
 {name:"Geometry Box",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9ieHRPcJDXEkgkPaTRrXlHq8BDonm34IN7Q&s"},
 {name:"Doms Mechanical Eraser",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNDySL4jEVCbrW-1KT36WuOvIeMcz_uWi2IA&s"},
-{name:"A4 White Ruled Sheet",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKwu_VyXTTFe91OQzFUQrrbph3l7cKLU-i-g&s"},
-{name:"Fevicol 1",price:5,img:"https://www.bbassets.com/media/uploads/p/l/1213184_1-pidilite-fevicol-mr-angular-tip.jpg"},
-{name:"Fevicol 2",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSHoP6SwXrWtJL3oqgQFc8pDwES1ekCqLaCg&s"},
-{name:"Fevicol 3",price:25,img:"https://knowhowartcraft.com/cdn/shop/files/1f3c9da0-f3e4-4452-a35b-81b2cbe650b8.jpg?v=1768290834"},
-{name:"Fevicol 4",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_jEZOv0X-6kLTGU1AlIUdguyyG0jF6if6cg&s"},
-{name:"Sticky Notes 1",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9lz5WWiFvY6Yaz3jaoG-4n7WOtSVzgQ2rWw&s"},
-{name:"Sticky Notes 2",price:42,img:"https://m.media-amazon.com/images/I/41-Gja9rYfL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Fevi Stick",price:15,img:"https://www.stationeryplug.com/cdn/shop/products/pidilite-fevistick-super-glue-stick-non-toxic-transparent-adhesive-846987.jpg?v=1741263636"},
-{name:"Fevistick",price:25,img:"https://m.media-amazon.com/images/I/31YQaJtsJJL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Doms Clay Bucket",price:50,img:"https://domsindia.com/wp-content/uploads/2025/04/451-1-scaled.webp"},
-{name:"Clay Module Plate",price:100,img:"https://5.imimg.com/data5/SELLER/Default/2023/8/339676300/HQ/NK/JG/4577428/plastic-mould.jpg"},
-{name:"Cutting Blade",price:20,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOA_nQy9ziCNzAI18sMRXQ5xWsQ29tczyLIw&s"},
-{name:"Clay Sculpting Tool",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpgqmWrfYrrzwa74YQYSVojox6hwfdJcS5tQ&s"},
-{name:"Yoava Protector",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2L6uzh1mSjbkiXeeh-3rOAsCbj88RtNQmJg&s"},
-{name:"Youva Pocket Diary",price:45,img:"https://kundantraders.co.in/cdn/shop/files/YOUVAPOCKETNOTEBOOKSIZEA7_2048x.jpg?v=1708936879"},
-{name:"Hauser Glow Eraser",price:10,img:"https://m.media-amazon.com/images/I/4123miZ59FL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Hauser Glow Eraser Set",price:200,img:"https://5.imimg.com/data5/SELLER/Default/2025/10/549697046/JG/SQ/CP/243589889/glow-01.jpg"},
-{name:"File Folder",price:12,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnfxg1bJOZjCMb51XdY16FKQ7aPm3qh7fr0A&s"},
-{name:"Doms Scale 30cm",price:36,img:"https://m.media-amazon.com/images/I/51HozeOSWJL.jpg"},
-{name:"Chart Papers",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjhtdw3pAJNlapcI7Gayb8VKy0YiZFGaTIwg&s"},
-{name:"Doms Eraser Set",price:55,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8_9YRQWw096FYcSSkee2TLqIBWImXsZCoMA&s"},
 {name:"Apsara Eraser Set",price:56,img:"https://topperskit.com/cdn/shop/files/190_ecfc0ea9-1c31-4b2d-ac88-46ab810197c0.jpg?v=1709274524"},
-{name:"Natraj Eraser Set",price:52,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5OsaLFjvaDN7RUt2iGHDOhNfo3mE1eERYkA&s"},
-{name:"Doms Sharpner Set",price:54,img:"https://www.stationeryplug.com/cdn/shop/files/doms-extra-long-pencil-sharpener-box-pack-pack-of-20-pieces-288916.jpg?v=1741263537"},
-{name:"Apsara Sharpner Box",price:60,img:"https://m.media-amazon.com/images/I/51a+vM3+JrL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Natraj Sharpner Set",price:55,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTGoVIe3L8wl2K2wAuVmSuKFemr-ZXTjrYCw&s"},
-{name:"Doms 2in1 Eraser+Sharpner",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStqqDmm8KeuBYkySPuBjz-jn5eWWZTOpG54Q&s"},
-{name:"Apsara Avengers Eraser",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYIJ6XN_h8KoTxX_iE1hk0qceyLD--qogBAA&s"},
-{name:"Doms Dustbin Sharpner",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP9JNimbsg4Nd3DEBHX-W7tjwn0uhDebHlQQ&s"},
-{name:"Doms Dustbin Sharpner Set",price:200,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXTBZQTBAOGyoM0qq9pRK3e4wSnsxyZ7JQQA&s"},
-{name:"Portable Fan + Eraser",price:120,img:"https://www.giftoo.in/cdn/shop/files/O1CN01lNVSIi1JsyhYxNh0w__2218214281085-0-cib.jpg?v=1751955325"},
-{name:"Diary",price:85,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU9fEWxAJB9cdQJIRgJke4Xd_1m-3m0ZbY8w&s"},
-{name:"2.0 Penpencil Lead",price:5,img:"https://m.media-amazon.com/images/I/51bwAv1ejGL._AC_UF1000,1000_QL80_.jpg"},
-{name:"0.7 Penpencil Lead",price:5,img:"https://djl2kq23xfhqi.cloudfront.net/productimages/WebP/6784147_4.webp"},
-{name:"0.5 Penpencil Lead",price:5,img:"https://yourstationeryhouse.com/pub/media/catalog/product/cache/da0cda2dfdffe074d4519b521af73fcd/g/s/gsspdi63.jpg"}
+{name:"Apsara Eraser",price:5,img:"https://dukaan.b-cdn.net/700x700/webp/media/5dd47447-93da-45e4-8a79-8c038d005a8f.jpg"},
+{name:"Apsara Sharpner",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTonrCo57A8Srewua1UHilqf1ip2yTZYu8DbA&s"},
+{name:"Digital Pad",price:499,img:"https://rukminim2.flixcart.com/image/1536/1536/ks4yz680/learning-toy/u/m/b/drawing-tablet-with-battery-free-stylus-ruffpad-for-kids-and-original-imag5ruwrwpbbvan.jpeg?q=90"},
+{name:"Glue Gun",price:199,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiy9sFhByWlUg7J3NnH89m7quwy4m6kyLGgI3RpKU9d5K3piRASN3BWtUq&s=10"},
+{name:"Glue Stick",price:10,img:"https://djl2kq23xfhqi.cloudfront.net/productimages/WebP/GSTK10PC_2.webp"},
+{name:"Electrical Tape",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwZZaLgnaxACW6Cbt4ieCvnKmHVsMewYif9TRdgmxMPw&s=10"},
+{name:"Brown Covering and Packaging Tape",price:68,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDLxMGma2275XtHDPMCshEA7FJSmpBVvBpmAIf5yPvLNE1gtcGZkfliYjb&s=10"},
+{name:"Whiteboard Marker",price:33,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa3TARThKNgdRgVnLrGBsMfVllCWKneA6to4F0LJkXYA&s=10"}
 ]
 };
-
-let cart = {};
-let notificationsEnabled = true;
-
-window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        document.getElementById('loadingScreen').style.opacity = '0';
-        setTimeout(() => document.getElementById('loadingScreen').style.display = 'none', 400);
-    }, 1500);
-    renderShop();
-    setupFormValidation();
-});
-
-function showNotification(msg) {
-    if (!notificationsEnabled) return;
-    const banner = document.getElementById('notification');
-    banner.innerText = msg;
-    banner.classList.add('show');
-    setTimeout(() => banner.classList.remove('show'), 2500);
-}
-
-function renderShop(filterTerm = "") {
-    const mainDiv = document.getElementById('main');
-    mainDiv.innerHTML = "";
-    
-    for (const category in inventory) {
-        const filteredItems = inventory[category].filter(item => 
-            item.name.toLowerCase().includes(filterTerm.toLowerCase())
-        );
-        
-        if (filteredItems.length === 0) continue;
-
-        const catTitle = document.createElement('div');
-        catTitle.className = 'category-title';
-        catTitle.innerText = category;
-        mainDiv.appendChild(catTitle);
-
-        const container = document.createElement('div');
-        container.className = 'container';
-
-        filteredItems.forEach(item => {
-            const qty = cart[item.name] ? cart[item.name].qty : 0;
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <div>
-                    <img class="product-img" src="${item.img}" alt="${item.name}" onerror="this.src='https://placehold.co/150?text=No+Image'">
-                    <h4>${item.name}</h4>
-                </div>
-                <div>
-                    <div class="price">₹${item.price}</div>
-                    <div class="handling-note">+₹${HANDLING_CHARGE} handling charge</div>
-                    <div class="btn-group">
-                        <button class="add-btn" onclick="addToCart('${item.name}', ${item.price})">
-                            ${qty > 0 ? `Add (${qty})` : 'Add To Cart'}
-                        </button>
-                        <button class="remove-btn ${qty > 0 ? 'active' : ''}" onclick="removeFromCart('${item.name}')">×</button>
-                    </div>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-        mainDiv.appendChild(container);
-    }
-}
-
-document.getElementById('searchInput').addEventListener('input', (e) => {
-    renderShop(e.target.value);
-});
-
-function addToCart(name, price) {
-    if (cart[name]) {
-        cart[name].qty++;
-    } else {
-        cart[name] = { price: price, qty: 1 };
-    }
-    updateCartDOM();
-    renderShop(document.getElementById('searchInput').value);
-    showNotification(`Added ${name} to cart!`);
-}
-
-function removeFromCart(name) {
-    if (!cart[name]) return;
-    cart[name].qty--;
-    if (cart[name].qty <= 0) {
-        delete cart[name];
-    }
-    updateCartDOM();
-    renderShop(document.getElementById('searchInput').value);
-    showNotification(`Removed item from cart.`);
-}
-
-function clearCart() {
-    cart = {};
-    updateCartDOM();
-    renderShop();
-    showNotification("Cart completely cleared!");
-    closeSettings();
-}
-
-function updateCartDOM() {
-    let count = 0;
-    let subtotal = 0;
-    const cartItemsDiv = document.getElementById('cartItems');
-    cartItemsDiv.innerHTML = "";
-
-    for (const name in cart) {
-        count += cart[name].qty;
-        const totalItemCost = cart[name].price * cart[name].qty;
-        subtotal += totalItemCost;
-
-        const row = document.createElement('div');
-        row.className = 'cart-item';
-        row.innerHTML = `
-            <div class="item-details">
-                <div class="item-name">${name}</div>
-                <div class="item-breakdown">₹${cart[name].price} × ${cart[name].qty}</div>
-            </div>
-            <div style="font-weight:bold; align-self: center;">₹${totalItemCost}</div>
-        `;
-        cartItemsDiv.appendChild(row);
-    }
-
-    const handlingTotal = count * HANDLING_CHARGE;
-    const totalBill = subtotal + handlingTotal;
-
-    document.getElementById('cartCount').innerText = count;
-    const badge = document.getElementById('badge');
-    if(count > 0) {
-        badge.innerText = count;
-        badge.style.display = 'block';
-    } else {
-        badge.style.display = 'none';
-        cartItemsDiv.innerHTML = "<p style='text-align:center;color:#666;padding:20px 0;'>Your cart is empty.</p>";
-    }
-
-    document.getElementById('subtotalAmount').innerText = `₹${subtotal}`;
-    document.getElementById('handlingAmount').innerText = `₹${handlingTotal}`;
-    document.getElementById('totalBill').innerText = `₹${totalBill}`;
-    
-    validateForm();
-}
-
-function openCart() { document.getElementById('cartModal').style.display = 'flex'; }
-function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
-function openSettings() { document.getElementById('settingsModal').style.display = 'flex'; }
-function closeSettings() { document.getElementById('settingsModal').style.display = 'none'; }
-
-function setupFormValidation() {
-    const inputs = ['customerName', 'customerEmail', 'customerPhone', 'customerAddress'];
-    inputs.forEach(id => document.getElementById(id).addEventListener('input', validateForm));
-}
-
-function validateForm() {
-    const name = document.getElementById('customerName').value.trim();
-    const email = document.getElementById('customerEmail').value.trim();
-    const phone = document.getElementById('customerPhone').value.trim();
-    const address = document.getElementById('customerAddress').value.trim();
-    const hasItems = Object.keys(cart).length > 0;
-
-    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const phoneValid = /^\d{10}$/.test(phone);
-
-    document.getElementById('orderBtn').disabled = !(name && emailValid && phoneValid && address && hasItems);
-}
-
-function placeOrder() {
-    const name = document.getElementById('customerName').value.trim();
-    const email = document.getElementById('customerEmail').value.trim();
-    const phone = document.getElementById('customerPhone').value.trim();
-    const address = document.getElementById('customerAddress').value.trim();
-    const totalBill = document.getElementById('totalBill').innerText;
-
-    let itemsList = "";
-    for (const name in cart) {
-        itemsList += `- ${name} (Qty: ${cart[name].qty}, Price: ₹${cart[name].price})\n`;
-    }
-
-    const subject = encodeURIComponent(`Blinkart New Order from ${name}`);
-    const body = encodeURIComponent(
-        `Hello Admin,\n\nYou have received a new order on Blinkart.\n\n` +
-        `📦 CUSTOMER DETAILS:\n` +
-        `-------------------------\n` +
-        `Name: ${name}\n` +
-        `Email: ${email}\n` +
-        `Phone: ${phone}\n` +
-        `Delivery Address: ${address}\n\n` +
-        `🛒 ORDERED ITEMS:\n` +
-        `-------------------------\n` +
-        `${itemsList}\n` +
-        `💰 TOTAL AMOUNT PAYABLE: ${totalBill}\n\n` +
-        `Please process the order as soon as possible.`
-    );
-
-    window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
-
-    setTimeout(() => {
-        alert("Redirecting to email client... Please press send button in your mail app to finish order notification!");
-        cart = {};
-        updateCartDOM();
-        renderShop();
-        closeCart();
-    }, 500);
-}
-
-function sendAlertEmail() {
-    window.location.href = `mailto:${emailAddress}?subject=Blinkart%20Alert&body=Emergency%20or%20Alert%20Triggered%20from%20Store%20Front.`;
-}
-
-function openAIHelper() {
-    alert("AI Assistant Module initialized! How can I help you navigate your stationary products today?");
-}
-
-function toggleDarkMode() {
-    document.body.classList.toggle('dark');
-    const isDark = document.body.classList.contains('dark');
-    document.getElementById('darkBtn').innerText = isDark ? "ON" : "OFF";
-    document.getElementById('darkBtn').style.background = isDark ? "#00ff99" : "#ddd";
-}
-
-function toggleNotifications() {
-    notificationsEnabled = !notificationsEnabled;
-    document.getElementById('notifyBtn').innerText = notificationsEnabled ? "ON" : "OFF";
-    document.getElementById('notifyBtn').style.background = notificationsEnabled ? "#ff6600" : "#ddd";
-    document.getElementById('notifyBtn').style.color = notificationsEnabled ? "white" : "black";
-}
 </script>
 </body>
 </html>
