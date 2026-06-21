@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +8,6 @@
 <style>
 :root{--primary:#ff6600;--accent:#fff200;--bg:#fff9d6;}
 *{margin:0;padding:0;box-sizing:border-box;}
-
 body{
   font-family:Segoe UI,sans-serif;
   color:#111;
@@ -23,7 +21,6 @@ body{
   background-repeat:no-repeat;
   background-color:#fff9d6;
 }
-
 body::before{
   content:"";
   position:fixed;
@@ -34,14 +31,12 @@ body::before{
     radial-gradient(circle at bottom right, rgba(255,242,0,.14), transparent 38%);
   z-index:-1;
 }
-
 #loadingScreen{position:fixed;inset:0;background:var(--accent);display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:99999;transition:.4s ease-out;}
 .loader-logo{font-size:55px;font-weight:900;color:var(--primary);}
 .spinner{width:65px;height:65px;margin-top:20px;border:6px solid white;border-top:6px solid var(--primary);border-radius:50%;animation:spin .8s linear infinite;}
 @keyframes spin{100%{transform:rotate(360deg);}}
 #notification{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-120px);background:#111;color:white;padding:12px 24px;border-radius:30px;font-weight:bold;transition:.4s;z-index:9999;border:2px solid var(--primary);cursor:pointer;max-width:92%;text-align:center;}
 #notification.show{transform:translateX(-50%) translateY(0);}
-
 header{
   background:rgba(255,242,0,.88);
   backdrop-filter:blur(10px);
@@ -53,7 +48,6 @@ header{
   border-bottom:4px solid var(--primary);
   border-radius:0 0 18px 18px;
 }
-
 .header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .logo{font-size:34px;font-weight:900;color:var(--primary);}
 .actions{display:flex;gap:10px;flex-wrap:wrap;}
@@ -67,10 +61,8 @@ header{
 .search-box{margin-top:12px;}
 .search-box input{width:100%;padding:13px;border-radius:10px;border:2px solid var(--primary);font-size:15px;outline:none;background:rgba(255,249,240,.95);}
 .search-box input:focus{box-shadow:0 0 0 3px rgba(255,102,0,.15);}
-
 .banner{padding:15px 15px 0;}
 .banner img{width:100%;max-height:260px;object-fit:cover;border-radius:18px;border:3px solid var(--primary);box-shadow:0 4px 12px rgba(0,0,0,.12);}
-
 .category-title{background:#fff0b0;margin:18px 15px 10px;padding:12px;font-size:20px;font-weight:bold;border-left:6px solid var(--primary);border-radius:10px;}
 .container{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px;padding:0 15px 20px;}
 .card{
@@ -91,7 +83,6 @@ header{
 .add-btn{flex:2;background:var(--primary);color:white;border:none;padding:10px 8px;border-radius:10px;font-weight:bold;cursor:pointer;}
 .remove-btn{flex:1;background:#ddd;border:none;border-radius:10px;font-weight:bold;cursor:pointer;}
 .remove-btn.active{background:red;color:white;}
-
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center;z-index:9999;}
 .modal-content{background:white;width:92%;max-width:520px;padding:20px;border-radius:18px;border:3px solid var(--primary);max-height:85vh;overflow:auto;}
 .modal-content h2{margin-bottom:15px;color:var(--primary);}
@@ -115,7 +106,6 @@ header{
 .order-btn{background:var(--primary);color:white;}
 .order-btn:disabled{background:#ccc;cursor:not-allowed;}
 .setting-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:12px;border:2px solid var(--primary);border-radius:10px;}
-
 body.dark{background:#111;color:white;}
 body.dark::before{opacity:.18;}
 body.dark .card,body.dark .modal-content,body.dark .action-btn,body.dark .search-box input{background:#1f1f1f;color:white;}
@@ -130,7 +120,6 @@ body.dark .form-group input,body.dark .form-group textarea{background:#333;borde
 body.dark .customer-form h3{color:#fff;}
 body.dark .form-group label{color:#ccc;}
 body.dark .search-highlight{outline:3px solid #00ff99;box-shadow:0 0 10px rgba(0,255,153,.4);}
-
 .flash-timer-wrap{
   margin:15px;
   padding:15px;
@@ -160,7 +149,6 @@ body.dark .search-highlight{outline:3px solid #00ff99;box-shadow:0 0 10px rgba(0
 body.dark .flash-timer-wrap{background:#1f1f1f;color:white;}
 body.dark .flash-timer{color:white;}
 body.dark .flash-note{color:#ddd;}
-
 .sale-badge{
   display:inline-block;
   margin-top:10px;
@@ -179,26 +167,26 @@ body.dark .flash-note{color:#ddd;}
 </head>
 <body>
 <div id="loadingScreen">
-<div class="loader-logo">🛒 Blinkart</div>
-<div class="spinner"></div>
+  <div class="loader-logo">🛒 Blinkart</div>
+  <div class="spinner"></div>
 </div>
 
 <div id="notification" onclick="showAdvertisement()">Blinkart Universe sale live on Monday, 22 June 2026 — 3:00 PM to 3:30 PM. Tap here for advertisement!</div>
 
 <header>
-<div class="header-top">
-<div class="logo">🛒 Blinkart</div>
-<div class="actions">
-<div class="action-btn" onclick="sendAlertEmail()">⚠️ Alert</div>
-<div class="action-btn" onclick="openCart()">🛍️ Cart (<span id="cartCount">0</span>)<span class="badge" id="badge">0</span></div>
-<div class="action-btn" onclick="openSettings()">⚙️ Settings</div>
-</div>
-</div>
-<div class="search-box"><input type="text" id="searchInput" placeholder="Search Products"></div>
+  <div class="header-top">
+    <div class="logo">🛒 Blinkart</div>
+    <div class="actions">
+      <div class="action-btn" onclick="sendAlertEmail()">⚠️ Alert</div>
+      <div class="action-btn" onclick="openCart()">🛍️ Cart (<span id="cartCount">0</span>)<span class="badge" id="badge">0</span></div>
+      <div class="action-btn" onclick="openSettings()">⚙️ Settings</div>
+    </div>
+  </div>
+  <div class="search-box"><input type="text" id="searchInput" placeholder="Search Products"></div>
 </header>
 
 <div class="banner" id="bannerWrap">
-<img src="https://i.ibb.co/twFxjzxf/2026-06-17-181644.png" alt="Banner">
+  <img src="https://i.ibb.co/twFxjzxf/2026-06-17-181644.png" alt="Banner">
 </div>
 
 <div class="flash-timer-wrap" id="flashTimerWrap">
@@ -211,48 +199,48 @@ body.dark .flash-note{color:#ddd;}
 <div id="main"></div>
 
 <div class="modal" id="cartModal">
-<div class="modal-content">
-<h2>🛒 Your Cart</h2>
-<div id="cartItems"></div>
-<div class="summary-section">
-<div class="summary-row"><span>Subtotal</span><span id="subtotalAmount">₹0</span></div>
-<div class="summary-row"><span>Handling Charges (₹2 × items)</span><span id="handlingAmount">₹0</span></div>
-<div class="summary-row total"><span>Total</span><span id="totalBill">₹0</span></div>
-</div>
-<div class="customer-form">
-<h3>📦 Delivery Details</h3>
-<div class="form-group">
-<label>Full Name *</label>
-<input type="text" id="customerName" placeholder="Enter your full name">
-</div>
-<div class="form-group">
-<label>Email *</label>
-<input type="email" id="customerEmail" placeholder="Enter your email">
-</div>
-<div class="form-group">
-<label>Phone Number *</label>
-<input type="tel" id="customerPhone" placeholder="Enter 10-digit phone number">
-</div>
-<div class="form-group">
-<label>Delivery Address *</label>
-<textarea id="customerAddress" placeholder="Enter complete delivery address"></textarea>
-</div>
-</div>
-<div class="modal-buttons">
-<button class="close-btn" onclick="closeCart()">Close</button>
-<button class="order-btn" id="orderBtn" onclick="placeOrder()">Place Order</button>
-</div>
-</div>
+  <div class="modal-content">
+    <h2>🛒 Your Cart</h2>
+    <div id="cartItems"></div>
+    <div class="summary-section">
+      <div class="summary-row"><span>Subtotal</span><span id="subtotalAmount">₹0</span></div>
+      <div class="summary-row"><span>Handling Charges (₹2 × items)</span><span id="handlingAmount">₹0</span></div>
+      <div class="summary-row total"><span>Total</span><span id="totalBill">₹0</span></div>
+    </div>
+    <div class="customer-form">
+      <h3>📦 Delivery Details</h3>
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="customerName" placeholder="Enter your full name">
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" id="customerEmail" placeholder="Enter your email">
+      </div>
+      <div class="form-group">
+        <label>Phone Number *</label>
+        <input type="tel" id="customerPhone" placeholder="Enter 10-digit phone number">
+      </div>
+      <div class="form-group">
+        <label>Delivery Address *</label>
+        <textarea id="customerAddress" placeholder="Enter complete delivery address"></textarea>
+      </div>
+    </div>
+    <div class="modal-buttons">
+      <button class="close-btn" onclick="closeCart()">Close</button>
+      <button class="order-btn" id="orderBtn" onclick="placeOrder()">Place Order</button>
+    </div>
+  </div>
 </div>
 
 <div class="modal" id="settingsModal">
-<div class="modal-content">
-<h2>⚙️ Settings</h2>
-<div class="setting-row"><span>🌙 Dark Mode</span><button onclick="toggleDarkMode()" id="darkBtn">OFF</button></div>
-<div class="setting-row"><span>🔔 Notifications</span><button onclick="toggleNotifications()" id="notifyBtn">ON</button></div>
-<div class="setting-row"><span>🛒 Clear Cart</span><button onclick="clearCart()">CLEAR</button></div>
-<div class="modal-buttons"><button class="close-btn" onclick="closeSettings()">Close</button></div>
-</div>
+  <div class="modal-content">
+    <h2>⚙️ Settings</h2>
+    <div class="setting-row"><span>🌙 Dark Mode</span><button onclick="toggleDarkMode()" id="darkBtn">OFF</button></div>
+    <div class="setting-row"><span>🔔 Notifications</span><button onclick="toggleNotifications()" id="notifyBtn">ON</button></div>
+    <div class="setting-row"><span>🛒 Clear Cart</span><button onclick="clearCart()">CLEAR</button></div>
+    <div class="modal-buttons"><button class="close-btn" onclick="closeSettings()">Close</button></div>
+  </div>
 </div>
 
 <script>
@@ -266,221 +254,211 @@ const SALE_END = new Date('2026-06-22T15:30:00');
 const SALE_MID = new Date('2026-06-22T15:15:00');
 
 function isSaleActive() {
-    const now = new Date();
-    return now >= SALE_START && now < SALE_END;
+  const now = new Date();
+  return now >= SALE_START && now < SALE_END;
 }
-
 function showAdvertisement() {
-    alert("Blinkart Universe Sale Live!\nMonday, 22 June 2026\nTime: 3:00 PM to 3:30 PM\nLucky Sale: Every 2 minutes\nDon't miss the offer!");
+  alert("Blinkart Universe Sale Live!\nMonday, 22 June 2026\nTime: 3:00 PM to 3:30 PM\nLucky Sale: Every 2 minutes\nDon't miss the offer!");
 }
-
 function showNotification(msg) {
-    if (!notificationsEnabled) return;
-    const banner = document.getElementById('notification');
-    banner.innerText = msg;
-    banner.classList.add('show');
-    setTimeout(() => banner.classList.remove('show'), 2500);
+  if (!notificationsEnabled) return;
+  const banner = document.getElementById('notification');
+  banner.innerText = msg;
+  banner.classList.add('show');
+  setTimeout(() => banner.classList.remove('show'), 2500);
 }
-
 function pad(n) { return String(n).padStart(2, '0'); }
-
 function getSalePhase(now) {
-    if (now < SALE_START) return 'before';
-    if (now < SALE_MID) return 'high';
-    if (now < SALE_END) return 'low';
-    return 'after';
+  if (now < SALE_START) return 'before';
+  if (now < SALE_MID) return 'high';
+  if (now < SALE_END) return 'low';
+  return 'after';
 }
-
 function getHandlingChargeForItem(basePrice) {
-    if (isSaleActive() && basePrice <= 200) return 0;
-    return HANDLING_CHARGE;
+  if (isSaleActive() && basePrice <= 200) return 0;
+  return HANDLING_CHARGE;
 }
-
 function getPriceForSale(basePrice) {
-    const phase = getSalePhase(new Date());
-    if (phase === 'high') return Math.ceil(basePrice * 1.25);
-    if (phase === 'low') return Math.max(1, Math.floor(basePrice * 0.8));
-    return basePrice;
+  const phase = getSalePhase(new Date());
+  if (phase === 'high') return Math.ceil(basePrice * 1.25);
+  if (phase === 'low') return Math.max(1, Math.floor(basePrice * 0.8));
+  return basePrice;
 }
-
 function updateSaleStatus() {
-    const now = new Date();
-    const status = document.getElementById('saleStatus');
-    const flashWrap = document.getElementById('flashTimerWrap');
-    const bannerWrap = document.getElementById('bannerWrap');
-
-    if (now < SALE_START) {
-        flashWrap.style.display = 'block';
-        bannerWrap.style.display = 'block';
-        status.className = 'sale-badge';
-        status.innerText = 'Sale starts on Monday 3:00 PM';
-    } else if (now < SALE_END) {
-        flashWrap.style.display = 'block';
-        bannerWrap.style.display = 'block';
-        status.className = 'sale-badge ' + (now < SALE_MID ? 'high' : 'low');
-        status.innerText = now < SALE_MID ? 'First 15 min: Higher than original price' : 'Last 15 min: Lower than original price';
-    } else {
-        flashWrap.style.display = 'none';
-        bannerWrap.style.display = 'none';
-    }
+  const now = new Date();
+  const status = document.getElementById('saleStatus');
+  const flashWrap = document.getElementById('flashTimerWrap');
+  const bannerWrap = document.getElementById('bannerWrap');
+  if (now < SALE_START) {
+    flashWrap.style.display = 'block';
+    bannerWrap.style.display = 'block';
+    status.className = 'sale-badge';
+    status.innerText = 'Sale starts on Monday 3:00 PM';
+  } else if (now < SALE_END) {
+    flashWrap.style.display = 'block';
+    bannerWrap.style.display = 'block';
+    status.className = 'sale-badge ' + (now < SALE_MID ? 'high' : 'low');
+    status.innerText = now < SALE_MID ? 'First 15 min: Higher than original price' : 'Last 15 min: Lower than original price';
+  } else {
+    flashWrap.style.display = 'none';
+    bannerWrap.style.display = 'none';
+  }
 }
-
 function updateFlashTimer() {
-    const now = new Date();
-    if (now < SALE_START) {
-        const diff = SALE_START - now;
-        const totalSeconds = Math.floor(diff / 1000);
-        const days = Math.floor(totalSeconds / 86400);
-        const hours = Math.floor((totalSeconds % 86400) / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        document.getElementById('flashTimer').innerText = `${days}D ${pad(hours)}H ${pad(minutes)}M ${pad(seconds)}S`;
-    } else if (now < SALE_END) {
-        const diff = SALE_END - now;
-        const totalSeconds = Math.floor(diff / 1000);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        document.getElementById('flashTimer').innerText = `Sale Ends In ${pad(minutes)}M ${pad(seconds)}S`;
-    }
-    updateSaleStatus();
+  const now = new Date();
+  if (now < SALE_START) {
+    const diff = SALE_START - now;
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    document.getElementById('flashTimer').innerText = `${days}D ${pad(hours)}H ${pad(minutes)}M ${pad(seconds)}S`;
+  } else if (now < SALE_END) {
+    const diff = SALE_END - now;
+    const totalSeconds = Math.floor(diff / 1000);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    document.getElementById('flashTimer').innerText = `Sale Ends In ${pad(minutes)}M ${pad(seconds)}S`;
+  }
+  updateSaleStatus();
 }
-
 window.addEventListener('DOMContentLoaded', () => {
-    const now = new Date();
-    if (now >= SALE_END) {
-        document.getElementById('flashTimerWrap').style.display = 'none';
-        document.getElementById('bannerWrap').style.display = 'none';
-    }
-    setTimeout(() => {
-        document.getElementById('loadingScreen').style.opacity = '0';
-        setTimeout(() => document.getElementById('loadingScreen').style.display = 'none', 400);
-    }, 1500);
-    renderShop();
-    setupFormValidation();
-    updateFlashTimer();
-    setInterval(updateFlashTimer, 1000);
+  const now = new Date();
+  if (now >= SALE_END) {
+    document.getElementById('flashTimerWrap').style.display = 'none';
+    document.getElementById('bannerWrap').style.display = 'none';
+  }
+  setTimeout(() => {
+    document.getElementById('loadingScreen').style.opacity = '0';
+    setTimeout(() => document.getElementById('loadingScreen').style.display = 'none', 400);
+  }, 1500);
+  renderShop();
+  setupFormValidation();
+  updateFlashTimer();
+  setInterval(updateFlashTimer, 1000);
 });
 
 function renderShop(filterTerm = "") {
-    const mainDiv = document.getElementById('main');
-    mainDiv.innerHTML = "";
-    for (const category in inventory) {
-        const filteredItems = inventory[category].filter(item => item.name.toLowerCase().includes(filterTerm.toLowerCase()));
-        if (filteredItems.length === 0) continue;
+  const mainDiv = document.getElementById('main');
+  mainDiv.innerHTML = "";
+  for (const category in inventory) {
+    const filteredItems = inventory[category].filter(item => item.name.toLowerCase().includes(filterTerm.toLowerCase()));
+    if (filteredItems.length === 0) continue;
 
-        const catTitle = document.createElement('div');
-        catTitle.className = 'category-title';
-        catTitle.innerText = category;
-        mainDiv.appendChild(catTitle);
+    const catTitle = document.createElement('div');
+    catTitle.className = 'category-title';
+    catTitle.innerText = category;
+    mainDiv.appendChild(catTitle);
 
-        const container = document.createElement('div');
-        container.className = 'container';
+    const container = document.createElement('div');
+    container.className = 'container';
 
-        filteredItems.forEach(item => {
-            const qty = cart[item.name] ? cart[item.name].qty : 0;
-            const displayPrice = getPriceForSale(item.price);
-            const salePhase = getSalePhase(new Date());
-            const saleLabel = salePhase === 'high' ? 'Sale Price High' : salePhase === 'low' ? 'Sale Price Low' : 'Original Price';
+    filteredItems.forEach(item => {
+      const qty = cart[item.name] ? cart[item.name].qty : 0;
+      const displayPrice = getPriceForSale(item.price);
+      const salePhase = getSalePhase(new Date());
+      const saleLabel = salePhase === 'high' ? 'Sale Price High' : salePhase === 'low' ? 'Sale Price Low' : 'Original Price';
 
-            const card = document.createElement('div');
-            card.className = 'card';
-            if (filterTerm && item.name.toLowerCase().includes(filterTerm.toLowerCase())) card.classList.add('search-highlight');
-            card.innerHTML = `
-                <div>
-                    <img class="product-img" src="${item.img}" alt="${item.name}" onerror="this.src='https://placehold.co/150?text=No+Image'">
-                    <h4>${item.name}</h4>
-                </div>
-                <div>
-                    <div class="price">₹${displayPrice}</div>
-                    <div class="handling-note">Base: ₹${item.price} + ₹${getHandlingChargeForItem(item.price)} handling charge</div>
-                    <div class="sale-badge ${salePhase === 'high' ? 'high' : salePhase === 'low' ? 'low' : ''}">${saleLabel}</div>
-                    <div class="btn-group">
-                        <button class="add-btn" onclick="addToCart('${item.name}', ${displayPrice})">${qty > 0 ? `Add (${qty})` : 'Add To Cart'}</button>
-                        <button class="remove-btn ${qty > 0 ? 'active' : ''}" onclick="removeFromCart('${item.name}')">×</button>
-                    </div>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-        mainDiv.appendChild(container);
-    }
+      const card = document.createElement('div');
+      card.className = 'card';
+      if (filterTerm && item.name.toLowerCase().includes(filterTerm.toLowerCase())) card.classList.add('search-highlight');
+      card.innerHTML = `
+        <div>
+          <img class="product-img" src="${item.img}" alt="${item.name}" onerror="this.src='https://placehold.co/150?text=No+Image'">
+          <h4>${item.name}</h4>
+        </div>
+        <div>
+          <div class="price">₹${displayPrice}</div>
+          <div class="handling-note">Base: ₹${item.price} + ₹${getHandlingChargeForItem(item.price)} handling charge</div>
+          <div class="sale-badge ${salePhase === 'high' ? 'high' : salePhase === 'low' ? 'low' : ''}">${saleLabel}</div>
+          <div class="btn-group">
+            <button class="add-btn" onclick="addToCart('${item.name.replace(/'/g,"\\'")}', ${displayPrice})">${qty > 0 ? `Add (${qty})` : 'Add To Cart'}</button>
+            <button class="remove-btn ${qty > 0 ? 'active' : ''}" onclick="removeFromCart('${item.name.replace(/'/g,"\\'")}')">×</button>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+    mainDiv.appendChild(container);
+  }
 }
 
-document.getElementById('searchInput').addEventListener('input', (e) => renderShop(e.target.value));
+document.getElementById('searchInput').addEventListener('input', e => renderShop(e.target.value));
 
 function addToCart(name, price) {
-    if (cart[name]) cart[name].qty++;
-    else cart[name] = { price, qty: 1 };
-    updateCartDOM();
-    renderShop(document.getElementById('searchInput').value);
-    showNotification(`Added ${name} to cart!`);
+  if (cart[name]) cart[name].qty++;
+  else cart[name] = { price, qty: 1 };
+  updateCartDOM();
+  renderShop(document.getElementById('searchInput').value);
+  showNotification(`Added ${name} to cart!`);
 }
 
 function removeFromCart(name) {
-    if (!cart[name]) return;
-    cart[name].qty--;
-    if (cart[name].qty <= 0) delete cart[name];
-    updateCartDOM();
-    renderShop(document.getElementById('searchInput').value);
-    showNotification(`Removed item from cart.`);
+  if (!cart[name]) return;
+  cart[name].qty--;
+  if (cart[name].qty <= 0) delete cart[name];
+  updateCartDOM();
+  renderShop(document.getElementById('searchInput').value);
+  showNotification(`Removed item from cart.`);
 }
 
 function clearCart() {
-    cart = {};
-    updateCartDOM();
-    renderShop();
-    showNotification("Cart completely cleared!");
-    closeSettings();
+  cart = {};
+  updateCartDOM();
+  renderShop();
+  showNotification("Cart completely cleared!");
+  closeSettings();
 }
 
 function updateCartDOM() {
-    let count = 0, subtotal = 0, handlingTotal = 0;
-    const cartItemsDiv = document.getElementById('cartItems');
-    cartItemsDiv.innerHTML = "";
+  let count = 0, subtotal = 0, handlingTotal = 0;
+  const cartItemsDiv = document.getElementById('cartItems');
+  cartItemsDiv.innerHTML = "";
 
-    for (const name in cart) {
-        count += cart[name].qty;
-        const totalItemCost = cart[name].price * cart[name].qty;
-        subtotal += totalItemCost;
+  for (const name in cart) {
+    count += cart[name].qty;
+    const totalItemCost = cart[name].price * cart[name].qty;
+    subtotal += totalItemCost;
 
-        const row = document.createElement('div');
-        row.className = 'cart-item';
-        row.innerHTML = `
-            <div class="item-details">
-                <div class="item-name">${name}</div>
-                <div class="item-breakdown">₹${cart[name].price} × ${cart[name].qty}</div>
-            </div>
-            <div style="font-weight:bold; align-self: center;">₹${totalItemCost}</div>
-        `;
-        cartItemsDiv.appendChild(row);
+    const row = document.createElement('div');
+    row.className = 'cart-item';
+    row.innerHTML = `
+      <div class="item-details">
+        <div class="item-name">${name}</div>
+        <div class="item-breakdown">₹${cart[name].price} × ${cart[name].qty}</div>
+      </div>
+      <div style="font-weight:bold; align-self:center;">₹${totalItemCost}</div>
+    `;
+    cartItemsDiv.appendChild(row);
 
-        const originalItem = findItemByName(name);
-        handlingTotal += getHandlingChargeForItem(originalItem ? originalItem.price : cart[name].price) * cart[name].qty;
-    }
+    const originalItem = findItemByName(name);
+    handlingTotal += getHandlingChargeForItem(originalItem ? originalItem.price : cart[name].price) * cart[name].qty;
+  }
 
-    const totalBill = subtotal + handlingTotal;
-    document.getElementById('cartCount').innerText = count;
-    const badge = document.getElementById('badge');
-    if(count > 0) {
-        badge.innerText = count;
-        badge.style.display = 'block';
-    } else {
-        badge.style.display = 'none';
-        cartItemsDiv.innerHTML = "<p style='text-align:center;color:#666;padding:20px 0;'>Your cart is empty.</p>";
-    }
+  const totalBill = subtotal + handlingTotal;
+  document.getElementById('cartCount').innerText = count;
+  const badge = document.getElementById('badge');
+  if(count > 0) {
+    badge.innerText = count;
+    badge.style.display = 'block';
+  } else {
+    badge.style.display = 'none';
+    cartItemsDiv.innerHTML = "<p style='text-align:center;color:#666;padding:20px 0;'>Your cart is empty.</p>";
+  }
 
-    document.getElementById('subtotalAmount').innerText = `₹${subtotal}`;
-    document.getElementById('handlingAmount').innerText = `₹${handlingTotal}`;
-    document.getElementById('totalBill').innerText = `₹${totalBill}`;
-    validateForm();
+  document.getElementById('subtotalAmount').innerText = `₹${subtotal}`;
+  document.getElementById('handlingAmount').innerText = `₹${handlingTotal}`;
+  document.getElementById('totalBill').innerText = `₹${totalBill}`;
+  validateForm();
 }
 
 function findItemByName(name) {
-    for (const category in inventory) {
-        const item = inventory[category].find(x => x.name === name);
-        if (item) return item;
-    }
-    return null;
+  for (const category in inventory) {
+    const item = inventory[category].find(x => x.name === name);
+    if (item) return item;
+  }
+  return null;
 }
 
 function openCart() { document.getElementById('cartModal').style.display = 'flex'; }
@@ -489,332 +467,331 @@ function openSettings() { document.getElementById('settingsModal').style.display
 function closeSettings() { document.getElementById('settingsModal').style.display = 'none'; }
 
 function setupFormValidation() {
-    ['customerName', 'customerEmail', 'customerPhone', 'customerAddress'].forEach(id => {
-        document.getElementById(id).addEventListener('input', validateForm);
-    });
+  ['customerName', 'customerEmail', 'customerPhone', 'customerAddress'].forEach(id => {
+    document.getElementById(id).addEventListener('input', validateForm);
+  });
 }
 
 function validateForm() {
-    const name = document.getElementById('customerName').value.trim();
-    const email = document.getElementById('customerEmail').value.trim();
-    const phone = document.getElementById('customerPhone').value.trim();
-    const address = document.getElementById('customerAddress').value.trim();
-    const hasItems = Object.keys(cart).length > 0;
-    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const phoneValid = /^\d{10}$/.test(phone);
-    document.getElementById('orderBtn').disabled = !(name && emailValid && phoneValid && address && hasItems);
+  const name = document.getElementById('customerName').value.trim();
+  const email = document.getElementById('customerEmail').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
+  const hasItems = Object.keys(cart).length > 0;
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const phoneValid = /^\d{10}$/.test(phone);
+  document.getElementById('orderBtn').disabled = !(name && emailValid && phoneValid && address && hasItems);
 }
 
 function placeOrder() {
-    const name = document.getElementById('customerName').value.trim();
-    const email = document.getElementById('customerEmail').value.trim();
-    const phone = document.getElementById('customerPhone').value.trim();
-    const address = document.getElementById('customerAddress').value.trim();
-    const totalBill = document.getElementById('totalBill').innerText;
+  const name = document.getElementById('customerName').value.trim();
+  const email = document.getElementById('customerEmail').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
+  const totalBill = document.getElementById('totalBill').innerText;
 
-    let itemsList = "";
-    for (const itemName in cart) {
-        itemsList += `- ${itemName} (Qty: ${cart[itemName].qty}, Price: ₹${cart[itemName].price})\n`;
-    }
+  let itemsList = "";
+  for (const itemName in cart) {
+    itemsList += `- ${itemName} (Qty: ${cart[itemName].qty}, Price: ₹${cart[itemName].price})\n`;
+  }
 
-    const subject = encodeURIComponent(`Blinkart New Order from ${name}`);
-    const body = encodeURIComponent(
-        `Hello Admin,\n\nYou have received a new order on Blinkart.\n\n` +
-        `📦 CUSTOMER DETAILS:\n` +
-        `-------------------------\n` +
-        `Name: ${name}\n` +
-        `Email: ${email}\n` +
-        `Phone: ${phone}\n` +
-        `Delivery Address: ${address}\n\n` +
-        `🛒 ORDERED ITEMS:\n` +
-        `-------------------------\n` +
-        `${itemsList}\n` +
-        `💰 TOTAL AMOUNT PAYABLE: ${totalBill}\n\n` +
-        `Please process the order as soon as possible.`
-    );
+  const subject = encodeURIComponent(`Blinkart New Order from ${name}`);
+  const body = encodeURIComponent(
+    `Hello Admin,\n\nYou have received a new order on Blinkart.\n\n` +
+    `📦 CUSTOMER DETAILS:\n` +
+    `-------------------------\n` +
+    `Name: ${name}\n` +
+    `Email: ${email}\n` +
+    `Phone: ${phone}\n` +
+    `Delivery Address: ${address}\n\n` +
+    `🛒 ORDERED ITEMS:\n` +
+    `-------------------------\n` +
+    `${itemsList}\n` +
+    `💰 TOTAL AMOUNT PAYABLE: ${totalBill}\n\n` +
+    `Please process the order as soon as possible.`
+  );
 
-    window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
-
-    setTimeout(() => {
-        alert("Redirecting to email client... Please press send button in your mail app to finish order notification!");
-        cart = {};
-        updateCartDOM();
-        renderShop();
-        closeCart();
-    }, 500);
+  window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+  setTimeout(() => {
+    alert("Redirecting to email client... Please press send button in your mail app to finish order notification!");
+    cart = {};
+    updateCartDOM();
+    renderShop();
+    closeCart();
+  }, 500);
 }
 
 function sendAlertEmail() {
-    window.location.href = `mailto:${emailAddress}?subject=Blinkart%20Alert&body=Emergency%20or%20Alert%20Triggered%20from%20Store%20Front.`;
+  window.location.href = `mailto:${emailAddress}?subject=Blinkart%20Alert&body=Emergency%20or%20Alert%20Triggered%20from%20Store%20Front.`;
 }
 
 function toggleDarkMode() {
-    document.body.classList.toggle('dark');
-    const isDark = document.body.classList.contains('dark');
-    document.getElementById('darkBtn').innerText = isDark ? "ON" : "OFF";
-    document.getElementById('darkBtn').style.background = isDark ? "#00ff99" : "#ddd";
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  document.getElementById('darkBtn').innerText = isDark ? "ON" : "OFF";
+  document.getElementById('darkBtn').style.background = isDark ? "#00ff99" : "#ddd";
 }
 
 function toggleNotifications() {
-    notificationsEnabled = !notificationsEnabled;
-    document.getElementById('notifyBtn').innerText = notificationsEnabled ? "ON" : "OFF";
-    document.getElementById('notifyBtn').style.background = notificationsEnabled ? "#ff6600" : "#ddd";
-    document.getElementById('notifyBtn').style.color = notificationsEnabled ? "white" : "black";
+  notificationsEnabled = !notificationsEnabled;
+  document.getElementById('notifyBtn').innerText = notificationsEnabled ? "ON" : "OFF";
+  document.getElementById('notifyBtn').style.background = notificationsEnabled ? "#ff6600" : "#ddd";
+  document.getElementById('notifyBtn').style.color = notificationsEnabled ? "white" : "black";
 }
 
 const inventory = {
-"Premium Pens":[
-{name:"Electric Current Pen",price:120,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQycT0sxnmOgsgTgnPk6O-34qhLGA6z3sWRgCQgfxK9yA&s=10"},
-{name:"Parker",price:2000,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7y8rYcMgJSchaCRbVnV_Mk3i8-nJcBsRnDQ&s"},
-{name:"Perie Cardian",price:449,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKS2AoWSWmo29xvTduUUoNzgMyCY16tUHC9w&s"},
-{name:"Trimax Gold",price:120,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOv3Wu92Gmqni3jQBc8GnyyZEaiP00kOS5Mw&s"},
-{name:"Trimax",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW9eHcenwuqsivMCrAxFySE8OBWW0wrEFLtA&s"},
-{name:"Pilot V7",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWUums4ThOXLKUqgcdJzCH_UFI3bmQvsm5HQ&s"},
-{name:"Pilot V5",price:67,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKlb7sK784eP7WWyr1xdz-mxnH2x0ajUpZog&s"},
-{name:"Pilot Hitectpoint",price:55,img:"https://m.media-amazon.com/images/I/410iO7bzO9L.jpg"},
-{name:"Pilot V2",price:20,img:"https://m.media-amazon.com/images/I/312kOs51DiL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Fountain Pen",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR69f62vQvEvSPq03CwiECT9OUHkmBJ7jYWIQ&s"},
-{name:"Calligraphy Pen",price:55,img:"https://m.media-amazon.com/images/I/61yUrXiaVBL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Robomax",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX5XsfNwUZKdNG4pR481b0HVXcYyr1NRDUVQ&s"},
-{name:"Perie Cardian Rollerink",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlGKGY5QxUDm3QLp_0NDdGMNaiVXSTqmlipw&s"},
-{name:"Zoox U7 Pen",price:110,img:"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSw726-wAGmFoOxKGuCQ-xzjQD7l8ZMpIZVFe65q99CVpxiKIvT4xSHrbXDB8R1r32yshrgzVyfuUTk8h53Bi_lpjds8NaQ4sAIARf0gqYpIKPNKeTnLbcQRw"},
-{name:"Maxtron",price:65,img:"https://rukminim2.flixcart.com/image/480/640/kdnf98w0pkrrdj/pen/y/b/c/rorito-original-imafumsfp96q5ffn.jpeg?q=90"},
-{name:"Maxtron Gold",price:130,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8f2sUbEIQBBIOb3lJ3HK2FF7vcDluY9Zk8A&s"},
-{name:"Uniball Air Micro",price:200,img:"https://bbag.in/cdn/shop/files/OFF.GEL.127796383_1732184228745.webp?v=1742993549&width=1080"},
-{name:"Frixion Eraseable Pen",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXZPHflkdmFtVh-migyg9WJvR0iSETVYbenA&s"},
-],
-"Budget Pens":[
-{name:"Jotex Gel Pen",price:40,img:"https://storage.googleapis.com/shy-pub/367727/SKU-0382_0-1727081713823.png"},
-{name:"Octane Fountain",price:40,img:"https://topperskit.com/cdn/shop/files/235.jpg?v=1709286744&width=416"},
-{name:"Jeter Ballpoint Pens",price:32,img:"https://www.rapiddeliveryservices.in/uploads/webp/14719-.webp"},
-{name:"Writo Meter Gel",price:25,img:"https://rangbeerangee.com/wp-content/uploads/2024/10/Writo-meter-Gel-Pen.jpg"},
-{name:"Writo Meter Silky Ball",price:32,img:"https://www.rapiddeliveryservices.in/uploads/webp/writo-meter_silk_ball_pen_blue_96991-.webp"},
-{name:"Classmate Octane Ball",price:10,img:"https://rukminim2.flixcart.com/image/480/640/kwb07m80/pen/v/l/0/-original-imag9yzpgprfnq6f.jpeg?q=90"},
-{name:"Unomax Ultron Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbsbqdtwOXI97QY5hXJ_n8oYFMqzhN4_-THQ&s"},
-{name:"Unomax Geltron",price:10,img:"https://i.ytimg.com/vi/NwZGQgnuAgw/sddefault.jpg"},
-{name:"Unomax Pearl Ball",price:10,img:"https://m.media-amazon.com/images/I/71yAOJ2O0dL.jpg"},
-{name:"Unomax Pearl Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM2q3-XDVQdDh7jCi8j4JAqufCHpgkM-uetA&s"},
-{name:"Doms Inxo",price:10,img:"https://m.media-amazon.com/images/I/71q1kxPIqhL._AC_UF350,350_QL80_.jpg"},
-{name:"Flair Breeze Ball",price:10,img:"https://m.media-amazon.com/images/I/61TrqXihhKL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Flair Move Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdkKlfEIOOKTVlU2QUSlM4Ycrcwmx7RKYtDw&s"},
-{name:"Flair Glow Gel Pen",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhyEZAQb42zPdfijqxaXiGSBHZn347_Tq8rw&s"},
-{name:"Flair Glow Ball",price:10,img:"https://m.media-amazon.com/images/I/6125yPTI+hL._AC_UF350,350_QL80_.jpg"},
-{name:"Hauser Glow Ball",price:10,img:"https://rukminim2.flixcart.com/image/480/640/xif0q/pen/y/6/b/86402-hauser-original-imahe93gd92pxkbz.jpeg?q=90"},
-{name:"Classmate Octane Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHg1Gb25qPx3mzRODJi1WNmNNzDYssLmgN8A&s"},
-{name:"Hauser XO Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEdFseoxUJm7BEsLJVuyZy1XVYi9TpbQBimw&s"},
-{name:"Doms Inxon",price:10,img:"https://m.media-amazon.com/images/I/41qGjJSQUoL.jpg"},
-{name:"Hauser XO Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcta4kFZHsQ9EWz6JPwjRQSgFj-wK5W88W9g&s"},
-{name:"Doms Inxify Ball",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoLYZQg9OC2j6_X_-l6-8Wsb1dBNfKVZCh6A&s"},
-{name:"Doms Inxify Gel",price:5,img:"https://m.media-amazon.com/images/I/51bIxAR3S2L.jpg"},
-{name:"Supra His Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRjnFKZDgCgP-J0LddhUxor_oJYpb2k7ey7w&s"},
-{name:"Linc Ocean Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcg4NpPyp4lA7psDhpy1daZ3wNmKJF7lTUXA&s"},
-{name:"Hauser XO Glow",price:11,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4K7ovdBuihvbOl16tdqVSuzHNecelbIuEKA&s"},
-{name:"Flair Woody Ballpoint",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDIu95pRe9gqMMcjfBbxBIYB7kc3Fp83W2jw&s"},
-{name:"Hauser Doku Rite",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyJ2wtltnzwuCsrDTs4ws1VqBcsQZ18c-j3w&s"},
-{name:"Gel Metal Ball Pen",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZRAZMBC8Gf5NoNMUdgpmMJA7MgC4NWVjM5A&s"},
-{name:"Writo Meter Ball",price:20,img:"https://m.media-amazon.com/images/I/61JoXpvUDPL.jpg"},
-{name:"Pentonic Gel Pen",price:10,img:"https://rukminim2.flixcart.com/image/480/640/k7w8eq80/pen/g/k/q/pentonic-lnptp0-6gl10bl2-original-imafqff7sdfnsgzt.jpeg?q=90"},
-{name:"Pentonic Ball Pen",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEhxc1Sh3i-PJtriLDwZfSUSvm6Dpr0dumqw&s"},
-{name:"Hauser 2XL Ball Pen",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC8m1RrbKM-hZVdFg2MKHMgR8GPrpBhkcZjg&s"},
-{name:"Pentonic BRT Ballpoint",price:22,img:"https://rangbeerangee.com/wp-content/uploads/2021/02/Linc-B-RT-Ballpoint-Pen-Blue.jpg"},
-{name:"Doms Inxify Plus",price:6,img:"https://m.media-amazon.com/images/I/71rx3Lm9z8L._AC_UF1000,1000_QL80_.jpg"},
-{name:"Flair Glass Gel",price:10,img:"https://www.mystore.in/s/62ea2c599d1398fa16dbae0a/g/690859b2de764cec152ec5e2/img_20251103_125459.jpg"},
-{name:"Classmate Octane Neon",price:10,img:"https://m.media-amazon.com/images/I/71KOOdwPc9L.jpg"},
-{name:"Classmate Octane Pro",price:10,img:"https://images.meesho.com/images/products/429255407/33xqo_512.jpg"},
-{name:"Hauser Sonic Gel",price:15,img:"https://statmo.in/wp-content/uploads/2017/09/Hauser-Sonic-Gel-Pen-Set-1.jpg"},
-{name:"Cello Butterflow Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeYJ643Sc2nbXtrAZ6Bavgs9YLd5XCAeiI7w&s"},
-{name:"Cello Butterflow Gel Set",price:37,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYCZXHtaJreGDlfEekOJKrZXqldy9Nqi0wvg&s"},
-{name:"Unomax Funtron",price:12,img:"https://storage.googleapis.com/shy-pub/367727/SKU-0202_0-1746172924100.png"},
-{name:"Supra His Gold",price:10,img:"https://m.media-amazon.com/images/I/51cnuMeY-ZL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Unomax Zap 2X",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRIY55Ot6BtpzZndgTDK_uI_G0NRosCRzeiw&s"},
-{name:"Hauser UV Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXOxaWSqyUX6YjOOd3JmRkmMSO280gVK3m6A&s"},
-{name:"Unomax Disney Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY8oOAwSITF_oBYSIWgtqXnMrvTpTOt5syag&s"},
-{name:"Hauser Autoclick Ball",price:10,img:"https://www.ebcstoreonline.com/themes/images/product/Hauser%20Auto-Click%20Ball%20Pen%20-%20Black.jpg"},
-{name:"Flair Move Ball",price:10,img:"https://rukminim2.flixcart.com/image/480/640/xif0q/pen/e/y/v/99686-flair-original-imah9egakauqandn.jpeg?q=90"},
-{name:"Unomax Vogue RT Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpk3YmvXF_6e6CW6Dsn5SYNzye-6k5x3q9w&s"},
-{name:"Goldex Klassy Ball",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTt5LavtGBj2606T37BxsHvck4P3G46JM98A&s"},
-{name:"Doms Liko Piko Ball",price:5,img:"https://m.media-amazon.com/images/I/61hkQ55P9OS._AC_UF1000,1000_QL80_.jpg"},
-{name:"Classmate Hook Ballpoint",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAzSNVFgu5aCXQ9V_lvkI6xYH5tXtignHg2w&s"},
-{name:"Multicolour Ball Pen Pentonic",price:128,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVDAUKOK8WfgxDSAYoGcuhfL20UqQHrudJ6Q&s"},
-{name:"Multicolour Gel Pen Pentonic",price:203,img:"https://m.media-amazon.com/images/I/61wHWLOlmDL.jpg"},
-{name:"Hauser Multicolour Gel Pen Set",price:123,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGGT_xh43iIM-OJBFnNvFMWv0YGu4TYz65Og&s"},
-{name:"doms inxtra 0.7 ball",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzKsU3S6lmlhQxDvGvV2UGzepSAgl8jcSqer5fGL0ksbLTdbuSg-kdrWB3&s=10"}
-],
-"Multicolor Pens":[
-{name:"Multicolor Ballpoint Pen",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw6dlvFluhgpZ-V5a8qXtIRaaRi5fug1MDmzo4pvS0vQ&s=10"},
-{name:"Multicolor Gel Pen",price:189,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJyOT1uMiCp9Nz-CHjGkw3NkpzWLiXYA1tMbvKYfDDAQ&s=10"}
-],
-"Refills":[
-{name:"Fountain Pen Refill",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA37dANrYbKyugZtuLGI6nyVPN-iFAieD3SnRBS7erna5yu1_OWf6C5cE&s=10"},
-{name:"Octane Fountain Refill",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdydEEV1Ad9tKGKylaflng3OWVUiMSG9H_iEni_5JMzKLeSjqA25DSV18&s=10"},
-{name:"Pilot V7 and V5 Refill",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR25zCukw2vn52aY_YRLacDuvK3aveVTTiheIc-hQpR0g&s=10"},
-{name:"Trimax Refill",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGEwf2e1fSwAOlrbLNsmY3prk62wUHOuronEXqY9keLq_sHbF1CdSZ7Hhg&s=10"},
-{name:"Hauser 2.0 mm Penpencil Refill",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRZ1ck_NpWiUTmSaqvwSz-SNMRnq2Fje9qkQ&s"},
-{name:"Camlin 0.7 mm Refill",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZd2TtRrjcvIPfs4muRYdG8Jx30mOddzCuow&s"},
-{name:"0.5 mm Penpencil Refill",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVJb0jhUhN5X-4rdKZPLEKtY8KSBW89gqXJw&s"}
-],
-"Kits & Sets":[
-{name:"Art Kit",price:1000,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLBiI7bzZJfSVuP_gkx92apmAHF-YzHVMQJw&s"},
-{name:"Stationery Kit",price:150,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN3d8VNIhigtOlQJtNUYA3OqqbpeMfExZhMg&s"},
-{name:"Stationery Kit Small",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU3ddRtqcMBlMtpIZ1EUpgF7nlkgULfLTf_A&s"},
-{name:"Art Strokes Doms",price:225,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqAxltZrwtA25pTir877uL-hOru0Sc9I0VGg&s"}
-],
-"Pencils & Mechanical":[
-{name:"Apsara Princess Pencils",price:90,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuDpThsjabTt3QE_otT0Wn6LutPe9Nw5n4w&s"},
-{name:"Doms Groove",price:65,img:"https://sbcstore.in/wp-content/uploads/2023/11/71m0aq5u1kL._SL1500_.jpg"},
-{name:"Doms Yodo Pencils",price:60,img:"https://static1.industrybuying.com/products/office-supplies/pens-pencils-writing-supplies/pencils/OFF.PEN.927159175_1724732549179.webp"},
-{name:"Apsara Spacekids",price:60,img:"https://paperquirks.in/cdn/shop/files/SpacekidsPencils.jpg?v=1705926195"},
-{name:"Doms Xi Pencils",price:50,img:"https://m.media-amazon.com/images/I/71g9ntCnpYL.jpg"},
-{name:"Apsara Platinum",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTl-lHXQQFDmDnzCOWt9XuUIFdnCHeIrmfNg&s"},
-{name:"Natraj Bold",price:50,img:"https://www.rapiddeliveryservices.in/uploads/webp/78247-.webp"},
-{name:"Flair Penpencil 0.7",price:20,img:"https://truewholesale.in/storage/product-images/17389133481.jpg"},
-{name:"Hauser 2.0 Penpencils",price:20,img:"https://truewholesale.in/storage/product-images/17356355410.jpg"},
-{name:"Flair Penpencil 2.0",price:10,img:"https://truewholesale.in/storage/product-images/17512666270.jpg"},
-{name:"Reynolds 0.5 Penpencil",price:6,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS17-LPR8v2rPJ_5TNdvi5--7I6ILP6XlvT4A&s"},
-{name:"Doms Neon Pencil",price:50,img:"https://domsindia.com/wp-content/uploads/2025/04/158-scaled.webp"},
-{name:"Doms Fusion Pencil",price:75,img:"https://images.meesho.com/images/products/388728801/tctjn_512.webp?width=512"},
-{name:"Hauser XO Pencil",price:65,img:"https://chetna.store/cdn/shop/files/images_8910cfc3-07b5-4ebb-a5ef-7b36c33ec92e.jpg?v=1760100731"},
-{name:"Apsara Writing Pencils",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8Yw3FUGatkRqf8oQa8qwBF_1FIypATVsKMg&s"},
-{name:"Red Margin",price:53,img:"https://m.media-amazon.com/images/I/615USQqrqrL.jpg"},
-{name:"Blue Margin",price:53,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSFPk2UWlldAwGsQfsOWetuujRVx2DKRcgTg&s"},
-{name:"Apsara Matt Magic",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2WnYC6Nb555zi86NBefVRmDfaH3IzJ9UuFw&s"},
-{name:"Apsara Avengers Pencils",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFnthbHb19-Cl6CRC9xMwSsRQxUryz70Z5kg&s"},
-{name:"Endless Charcoal Graphite",price:22,img:"https://m.media-amazon.com/images/I/61LUp7y6a3L.jpg"},
-{name:"Flair Carbonix 0.7",price:10,img:"https://i0.wp.com/grovertechno.com/wp-content/uploads/2024/08/39.png?fit=1000%2C1000&ssl=1"},
-{name:"Flair Move 0.7 Penpencils",price:20,img:"https://truewholesale.in/storage/product-images/17195547430.jpg"},
-{name:"Hauser Superdark 0.7",price:15,img:"https://sharmag.co.in/wp-content/uploads/2025/01/IMG_20250131_101532.jpg"},
-{name:"Flair 2.0 Glow Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5-J20NJPYfVz5n4MUcBTql7H47t0tuGNQDg&s"},
-{name:"Flair Diva 2.0 Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI-tk-RsRdFocMbBEUM-Rmm5_yeTGzpn9o7w&s"},
-{name:"Flair Thrill 2.0 Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7FkM02QFgpmHiOmUWwFKfUOLq_xloMBHxDA&s"},
-{name:"Red Margin Single Piece",price:7,img:"https://www.stationerywalebhaiya.com/cdn/shop/files/rn-image_picker_lib_temp_9915a275-dadf-4eca-837b-9b27a145b77d.jpg?v=1762713432&width=416"},
-{name:"Blue Margin Single Piece",price:7,img:"https://rukmini1.flixcart.com/image/300/300/pencil/x/t/8/nataraj-checking-pencils-blue-original-imadkxapgfszgnyr.jpeg"},
-{name:"Unomax Click 0.7 mm Penpencil",price:10,img:"https://www.giftsandpens.com/cdn/shop/files/unomax-click-it-pearl-mechanical-pencil-0-7mm-294.webp?v=1779687479"}
-],
-"Colors & Art":[
-{name:"Acrylic Colours",price:350,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVQ7qSipKnN3PS5ozWNJfYnyLehV5JHQWOEqtuxWn5wwUFbWF7MQ_guilk&s=10"},
-{name:"Plastic Crayons",price:56,img:"https://m.media-amazon.com/images/I/617izevZSlS.jpg"},
-{name:"Soft Pastels Munvyo",price:344,img:"https://3.imimg.com/data3/OG/HI/MY-681822/soft-pastels-general-series-24-assorted-colors-500x500.jpg"},
-{name:"Fabric Colour",price:400,img:"https://5.imimg.com/data5/ANDROID/Default/2021/4/PV/ID/KV/4682934/product-jpeg.jpg"},
-{name:"Brush Pen",price:200,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/sketch-pen/z/z/r/-original-imagrf67eymxfkxx.jpeg?q=70"},
-{name:"Luxor Pastel",price:125,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_sPpdkp4tNiyKabpzOa8gOIg9_sSBrxe9tA&s"},
-{name:"Luxor Flouroscent",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-Odg8I1RRDOEnurkccfqg0P0lbk3KszZnXw&s"},
-{name:"Doms Colour Pencils",price:60,img:"https://topperskit.com/cdn/shop/files/59_bf843c4d-b738-48fc-804e-5f1af99573cd.jpg?v=1706101006"},
-{name:"Drawing Pencils",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFGn_EZ2HVgVts2xicr7wOHDD8nyShcDjwRg&s"},
-{name:"Paint Brush",price:50,img:"https://www.kheliyatoys.com/wp-content/uploads/2025/03/DOMS-Colourmate-Synthetic-Hair-Paint-Brush.jpg"},
-{name:"Sketch Pens",price:40,img:"https://www.quickpantry.in/cdn/shop/files/Doms_Sketch_Pen_12_Shades_Big.webp?v=1727296259"},
-{name:"Water Colour",price:20,img:"https://amd.deodap.com/cdn/shop/files/doms-tempera-colours-12-shades-1000x1000_1200x1200.webp?v=1695803847"},
-{name:"Crayons",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-zvpMipEtsM0kCrTXlGuxa-rKs2nsAZkjTg&s"},
-{name:"Camel Brush Pen",price:372,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDSNtIgLb-SldJnDEbEmnoFWV8Zf3t5SqnFIpKoNcFjQ&s=10"},
-{name:"Camel Oil Pastels",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD5nWXdUtIVWdvFWacNzVSJMaIgN-nyGtlwA&s"},
-{name:"Drawing Copy",price:45,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJnVu4DZI4wOKtF9b7sTK1ETYjZyMSSLNjQw&s"},
-{name:"Brush Pen Pastel",price:200,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/shopsy-pen/v/b/4/13-pastel-brush-tip-sketch-pens-doms-original-imahjejhyr3yzrnr.jpeg?q=70"},
-{name:"Gliter Pens",price:100,img:"https://kundantraders.co.in/cdn/shop/products/FlairGlitterGelPenSet_1024x.webp?v=1680262496"},
-{name:"Doms Neon Highlighter",price:127,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyr3VeePpyPTvlAm53mIWnGQylOzJeVYrG0A&s"}
-],
-"Gaming Cards":[
-{name:"Uno Flip",price:85,img:"https://upload.wikimedia.org/wikipedia/en/d/d0/Uno_Flip_Cover.jpg"},
-{name:"Uno Mercy",price:450,img:"https://m.media-amazon.com/images/I/61-FBLI+khL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Uno",price:90,img:"https://m.media-amazon.com/images/I/71n61AtC+VL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Pokemon",price:10,img:"https://m.media-amazon.com/images/I/8118Xdf8K8L._AC_UF350,350_QL80_.jpg"},
-{name:"Black Copper Pokemon",price:203,img:"https://5.imimg.com/data5/SELLER/Default/2023/1/SS/WU/QD/122336875/pokemon-cards-in-black-gold-colour-10-cards-in-one-packet-for-playing.jpg"},
-{name:"Silver Pokemon Card",price:199,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIf1Q4QVwZ4HkKf2CMCDnBQo204AtjFDHZpA&s"},
-{name:"Gold Pokemon Card",price:160,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROoJXH1BvNA9w8Xc0NjaisJYnXMw7q5uN5rg&s"},
-{name:"Spiderman Cards",price:342,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQy8joIYcL2NWJr_wc_gTBxO386hM1-v2PyQ&s"},
-{name:"Spiderman Card 2",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrlJoJQGjGt6OWczOQdWvGjpx4QEr1-YJmYw&s"}
-],
-"Notebooks":[
-{name:"Zingy Apple 140 Pages",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyptGB4Zv1DZMwZua4O5vwn2cBH2JrY0mjhw&s"},
-{name:"Classmate 172 Pages",price:80,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3wQHWK_ucPn0tU1f4dTK0fFc3iBc51-twEw&s"},
-{name:"Apple Zingy 172 Pages",price:40,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/diary-notebook/0/8/o/2914-target-publications-original-imahexdauybxkjty.jpeg?q=70"},
-{name:"Classmate 140 Pages",price:58,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwF1D9PKTlYsO9YiSaoxxGRgm4Zm3GPoXIiA&s"},
-{name:"Zingy Apple Ruled",price:62,img:"https://5.imimg.com/data5/ANDROID/Default/2023/9/347702074/MP/XK/RD/199079416/product-jpeg.jpg"},
-{name:"Classmate Ruled A4",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyrq79FYjRpbx4TpaTtDFGdoEu5d95LAeXWw&s"},
-{name:"Classmate2 Ruled 140",price:55,img:"https://5.imimg.com/data5/SELLER/Default/2023/9/343463827/JR/FN/SR/30903313/classmate-longbook-a4-notebook-unruled-140-pages-multicolor-pack-of-12-250x250.jpg"},
-{name:"Classmate Thin 24 Pages",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO6Bo7hEtwEcAqYK1_Ah6yv_QFwxJj9ESOSA&s"},
-{name:"Classmate Pulse Spiral",price:180,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREpiSo0KQcapeSu4JvSPALO13xHxuarYmLkQ&s"},
-{name:"Classmate Spiral Small",price:65,img:"https://m.media-amazon.com/images/I/71+ghNW6BDL._AC_UF1000,1000_QL80_.jpg"},
-{name:"Doms 172 Pages Notebook",price:48,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ3gCRdXHSK2fArFD8rx_YJ3pR3J5N1Swg2Q&s"},
-{name:"Classmate Bar Graph Copy",price:32,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQIkcOOObIBNnWM31JLvMZr14J0FHulKDlmw&s"},
-{name:"Clasmate Geometry Copy 140 Pages",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1rCu-U_vWDICg91Z2bU6h-LsPFQNOWkTcPQ&s"},
-{name:"Maths Practical Spiral Notebook",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTINAotvBk6eJMywL2m6JJkAPNH4eMEDz8H7A&s"}
-],
-"Essentials":[
-{ name: "Doms Colour Plate", price: 100, img: "https://m.media-amazon.com/images/I/819683ID-vL.jpg" },
-{ name: "Hauser Highlighter", price: 125, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQevM0SB3ClF_OoVLGoezpfYNkucduVXFqPh4bwZF3rbA&s" },
-{ name: "Doms Sketch Book", price: 169, img: "https://images.meesho.com/images/products/471201502/vywqr_512.webp?width=512" },
-{ name: "Youva Pocket Diary", price: 10, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxcdG5O98KwWn_c9Cj3CVQ_sV2Zns9CBUe4V-6g-1p8Q&s=10" },
-{ name: "Examination Board Transparent", price: 75, img: "https://m.media-amazon.com/images/I/31UtYG4GjjL._AC_UF894,1000_QL80_.jpg" },
-{ name: "Sticky Note", price: 30, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX2C91siKq7f-zkeh1myE3tsAspqI053-FxnkwyzZQ6g&s=10" },
-{ name: "Folder", price: 10, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMfGgXwG8PWpsyyiccn4hF_rdsRlPMwzKJ-BUtwVPvvQ&s=10" },
-{ name: "Natraj Sharpner Set", price: 55, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlhe9Qx92_5eOyWmi6M-bH0YbLTi5HVU02wQoyhIlpBQ&s=10" },
-{ name: "Natraj Eraser Set", price: 55, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRasz1sM-0L9GGC7m-2qqk__5ddTXP4j6h9PK9qrR71fg&s=10" },
-{ name: "Hauser Glow Eraser", price: 10, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm318xLD9K23choqJOdwd4Y7q412NRnEcgW90nDeVh7c-fclMx13t5WBfU&s=10" },
-{ name: "Sticky Notes", price: 40, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQETjSy9DsuCHDtjBz5LUEPkZk4NvMZtGVnZ6ZwtV1mIw&s=10" },
-{ name: "Doms Cubo Eraser Set", price: 50, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSURO_ObOENT49aKn2au7CWDStWVcFS9PF0pnaEtIEptw&s=10" },
-{ name: "Scissors", price: 148, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbMNfD75CgKEfXTNuQDuq4lbmX_yjAQWgJ_68BrX40Dg&s=10" },
-{ name: "2 in 1 Eraser + Sharpner", price: 15, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkvLMyQRACR8UCoow9Q939sNDrB1wQquzlIlSp7iOhXQ&s=10" },
-{ name: "Brown Cover", price: 63, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWr4VsY3W12_VBP84hQsMvs6EyMiIpVDwLXQ&s" },
-{ name: "Stick File", price: 11, img: "https://rukminim2.flixcart.com/image/1600/2140/xif0q/file-folder/f/v/n/transparent-stick-file-folder-strip-file-file-folders-classone-original-imahh23htrs8w2yn.jpeg?q=60" },
-{ name: "Transparent Cover Roll", price: 80, img: "https://truewholesale.in/storage/product-images/17423722421.jpg" },
-{ name: "Geometry Box", price: 100, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9ieHRPcJDXEkgkPaTRrXlHq8BDonm34IN7Q&s" },
-{ name: "Doms Mechanical Eraser", price: 25, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNDySL4jEVCbrW-1KT36WuOvIeMcz_uWi2IA&s" },
-{ name: "Apsara Eraser Set", price: 56, img: "https://topperskit.com/cdn/shop/files/190_ecfc0ea9-1c31-4b2d-ac88-46ab810197c0.jpg?v=1709274524" },
-{ name: "Apsara Eraser", price: 5, img: "https://dukaan.b-cdn.net/700x700/webp/media/5dd47447-93da-45e4-8a79-8c038d005a8f.jpg" },
-{ name: "Apsara Sharpner", price: 5, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTonrCo57A8Srewua1UHilqf1ip2yTZYu8DbA&s" },
-{ name: "Digital Pad", price: 499, img: "https://rukminim2.flixcart.com/image/1536/1536/ks4yz680/learning-toy/u/m/b/drawing-tablet-with-battery-free-stylus-ruffpad-for-kids-and-original-imag5ruwrwpbbvan.jpeg?q=90" },
-{ name: "Glue Gun", price: 199, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiy9sFhByWlUg7J3NnH89m7quwy4m6kyLGgI3RpKU9d5K3piRASN3BWtUq&s=10" },
-{ name: "Glue Stick", price: 10, img: "https://djl2kq23xfhqi.cloudfront.net/productimages/WebP/GSTK10PC_2.webp" },
-{ name: "Electrical Tape", price: 10, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwZZaLgnaxACW6Cbt4ieCvnKmHVsMewYif9TRdgmxMPw&s=10" },
-{ name: "Brown Covering and Packaging Tape", price: 68, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDLxMGma2275XtHDPMCshEA7FJSmpBVvBpmAIf5yPvLNE1gtcGZkfliYjb&s=10" },
-{ name: "Whiteboard Marker", price: 33, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa3TARThKNgdRgVnLrGBsMfVllCWKneA6to4F0LJkXYA&s=10" },
-{ name: "Hauser Glow Eraser Set", price: 200, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzFMR5aJPY0-hLTVB0_idZGpHSe14OVFX0UW_6wv822g&s" },
-{ name: "Portable Fan + Eraser", price: 100, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmArnvVDRth8F1EEBNTj8Wzsaql0u7E366_JTlO4x1ag&s=10" },
-{ name: "Natraj Eraser", price: 5, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc4ZzArclfQExxyM_uzSitKaVWwe8lHtW-EYqTWFBHPg&s=10" },
-{ name: "Doms Cubo Erasers", price: 5, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBQu2HqDNwOCMVeDnKAfSr-LQL8Ze5UiA9pGfBnAR73A&s=10" },
-{ name: "Apsara White Chalks", price: 35, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQicztlFM0Ho0bTgdKsvfRWHk_E00wgO32FxRGb-06wqw&s=10" },
-{ name: "Apsara Colour Chalks", price: 35, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYosHE5iYgD0CIEK5Fuvqz9V8LwRZ11I9tn3CfsEtd-g&s=10" },
-{ name: "Doms White Chalk", price: 33, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6A78bLl1HBZz3XlLvFV9BDdWVpUncvBH5qpMcycXugw&s" },
-{ name: "Doms Chalk Holder", price: 20, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzjr3REdWPuhz13r5JNpzf9HxPcVf6Q6KfUXkhpdaKZ5TXdAZfCafPNK3T&s=10" },
-{ name: "Board Pins", price: 33, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwW3TYbWpIaGOmTBZnSqOo0_iKOCYzaAvMMg&s" },
-{ name: "Duster", price: 134, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVKk9uwKo794R88AFk1YpGy928-bndW6ChvA&s" },
-{ name: "Board Clip", price: 55, img: "https://5.imimg.com/data5/SELLER/Default/2022/7/YK/UH/CQ/25484915/drawing-board-clip.jpg" },
-{ name: "Kneedable Eraser", price: 100, img: "https://amarizindia.com/cdn/shop/files/5_92d5193e-5cc7-4daa-aa89-bfebcee9bf08.png?v=1758713264" },
-{ name: "Science Calculator", price: 500, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwYXodTBsJJd3ZPq0uDYdBlJeDpXZlV3P-_Q&s" },
-{ name: "Calculator", price: 670, img: "https://rukminim2.flixcart.com/image/480/640/calculator/m/x/s/casio-mj-120d-original-imaedhpgfepcbmgw.jpeg?q=90" },
-{ name: "Origami Paper", price: 20, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI_qh6M6rPdNB3g3Ar7lSKDq9fbZVecvmQ3Q&s" },
-{ name: "Stencil", price: 15, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZzvhfFSbMwAzX0j88_ae8zx-QOxjwzY53A&s" },
-{ name: "Pocket Diary", price: 10, img: "https://storage.googleapis.com/shy-pub/367727/SKU-1477_2-1760440005127.png" },
-{ name: "Glitters", price: 10, img: "https://rukminim2.flixcart.com/image/480/640/kvgzyq80/art-craft-kit/i/w/1/6-pack-of-20-pc-packet-sparkling-glitter-powder-for-art-and-original-imag8dceqptxa72x.jpeg?q=90" },
-{ name: "Scale", price: 5, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5FWz_tJvY3GZd7MmJfaaUnINuCi5BPImaUg&s" },
-{ name: "Eraser", price: 5, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuDd3IcoQAsm5vx0MO1T0pxOY70JTexqArIQ&s" },
-{ name: "Sharpner", price: 5, img: "https://rukminim2.flixcart.com/image/480/640/xif0q/sharpener/f/3/m/-original-imagqzfwmzdfwugk.jpeg?q=90" },
-{ name: "Sanitizer", price: 38, img: "https://m.media-amazon.com/images/I/61zkydHcPdL.jpg" },
-{ name: "Stapler", price: 100, img: "https://www.rapiddeliveryservices.in/uploads/webp/5250-.webp" },
-{ name: "Stapler Pins", price: 12, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNk4vxqikMRajQ8L_XwQ2DENdTVsaVkJG9w&s" },
-{ name: "Keychains", price: 110, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiuCdQasCld81Nti4RvNKFKQCROcrAulg_Fw&s" },
-{ name: "Whitener", price: 15, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbUfd68grMIsFa_q0OC1sq0YkRFzlDwJt92A&s" },
-{ name: "Whitener Premium", price: 30, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF6xUvwjCaEbcIu-iNQSOwo5yNZgAZIRBoIA&s" },
-{ name: "Correction Tape", price: 45, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBTDKsagVGsdLIPvO01HIIYrKAgc6l_YsqAw&s" },
-{ name: "Transparent Tape", price: 65, img: "https://www.stationeryplug.com/cdn/shop/products/CelloTape2inch.jpg?v=1660027502" },
-{ name: "A4 Size Sheet", price: 3, img: "https://m.media-amazon.com/images/I/31BG82hS2CL._AC_UF1000,1000_QL80_.jpg" },
-{ name: "A4 Colour Sheet", price: 3, img: "https://www.bbassets.com/media/uploads/p/l/40280994_1-se7en-a4-size-premium-colour-paper-for-arts-crafts-assorted.jpg" },
-{ name: "A4 Hard Sheet", price: 6, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWWlNlap9kE1B9is0tpxyvBuPe8zXwBy7zgA&s" },
-{ name: "A4 Colour Hard Sheet", price: 6, img: "https://m.media-amazon.com/images/I/71BS8A1eeoL.jpg" },
-{ name: "Stickers", price: 10, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEMzDZ8iuJFNE2DU2bLRb9ijQ2GYsMuq6DDw&s" },
-{ name: "Markers", price: 10, img: "https://sbcstore.in/wp-content/uploads/2022/01/71OT5CpK8kL._SL1280_.jpg" },
-{ name: "Fevicol 1", price: 5, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLs0Mh0ygdYWADV-HViLoVnRgmFk3anaYF0h2x_zmnWA&s=10" },
-{ name: "Glue Stick 1", price: 15, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSppCFYf4u-I6uFG8DmCYKCMGiKtsRScg_O8fBwfVLLg&s" },
-{ name: "Fevicol 2", price: 10, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJzpdctu6r_ogQAB-mc2xJI4D69NcJUWs5W6iMXRGJzA&s=10" },
-{ name: "Fevicol 3", price: 25, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj-qdCf48kDw3R8z9aFX6D8BjfyRyurMU-nfO2CJqKow&s=10" },
-{ name: "Fevicol 4", price: 60, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMz-5IJsOyRxNwljOXNVAw2xQszWhBLqBSp2BraC0j4A&s" },
-{ name: "Glue Stick 2", price: 25, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ7gf7YNr3rWgMxsKA1ZqngtZ9LgGfSRO2tCWyFX6WIw&s=10" },
-{ name: "Pentonic Glue Stick", price: 30, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf52YeFDi7397WWXWDM_HcCxiZduZcTdIvQDVBCB4WzQ&s=10" },
-{ name: "Doms Sharpner Set", price: 55, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv2QBGzJ1fPXgV6UcqoTQ0akkPiC_l6j0aDv-6dUZRqw&s=10" },
-{ name: "Apsara Sharpner Set", price: 55, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTODZcRLo3pp2C2x3W9WX0p64pz5URd0MMNPjguoiq3DA&s=10" },
-{ name: "doms dust sharpner",price:10, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMCWgmBY_RMbR_gfztzdPzMAcHsEK9Iv6jkt8ysYVjHw&s=10"},
-{ name: "doms dust collector set",price:199, img: "https://m.media-amazon.com/images/I/71GsmDahh2L._AC_UF1000,1000_QL80_.jpg"},
-{ name: " drawing copy",price:-45, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0d_7vIs5x-pZMJ2P_v_7R5tw09T7nkDcXy0vUWyKbwA&s=10"}
-];
+  "Premium Pens":[
+    {name:"Electric Current Pen",price:120,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQycT0sxnmOgsgTgnPk6O-34qhLGA6z3sWRgCQgfxK9yA&s=10"},
+    {name:"Parker",price:2000,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7y8rYcMgJSchaCRbVnV_Mk3i8-nJcBsRnDQ&s"},
+    {name:"Perie Cardian",price:449,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKS2AoWSWmo29xvTduUUoNzgMyCY16tUHC9w&s"},
+    {name:"Trimax Gold",price:120,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOv3Wu92Gmqni3jQBc8GnyyZEaiP00kOS5Mw&s"},
+    {name:"Trimax",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW9eHcenwuqsivMCrAxFySE8OBWW0wrEFLtA&s"},
+    {name:"Pilot V7",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWUums4ThOXLKUqgcdJzCH_UFI3bmQvsm5HQ&s"},
+    {name:"Pilot V5",price:67,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKlb7sK784eP7WWyr1xdz-mxnH2x0ajUpZog&s"},
+    {name:"Pilot Hitectpoint",price:55,img:"https://m.media-amazon.com/images/I/410iO7bzO9L.jpg"},
+    {name:"Pilot V2",price:20,img:"https://m.media-amazon.com/images/I/312kOs51DiL._AC_UF1000,1000_QL80_.jpg"},
+    {name:"Fountain Pen",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR69f62vQvEvSPq03CwiECT9OUHkmBJ7jYWIQ&s"},
+    {name:"Calligraphy Pen",price:55,img:"https://m.media-amazon.com/images/I/61yUrXiaVBL._AC_UF1000,1000_QL80_.jpg"},
+    {name:"Robomax",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX5XsfNwUZKdNG4pR481b0HVXcYyr1NRDUVQ&s"},
+    {name:"Perie Cardian Rollerink",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlGKGY5QxUDm3QLp_0NDdGMNaiVXSTqmlipw&s"},
+    {name:"Zoox U7 Pen",price:110,img:"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSw726-wAGmFoOxKGuCQ-xzjQD7l8ZMpIZVFe65q99CVpxiKIvT4xSHrbXDB8R1r32yshrgzVyfuUTk8h53Bi_lpjds8NaQ4sAIARf0gqYpIKPNKeTnLbcQRw"},
+    {name:"Maxtron",price:65,img:"https://rukminim2.flixcart.com/image/480/640/kdnf98w0pkrrdj/pen/y/b/c/rorito-original-imafumsfp96q5ffn.jpeg?q=90"},
+    {name:"Maxtron Gold",price:130,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8f2sUbEIQBBIOb3lJ3HK2FF7vcDluY9Zk8A&s"},
+    {name:"Uniball Air Micro",price:200,img:"https://bbag.in/cdn/shop/files/OFF.GEL.127796383_1732184228745.webp?v=1742993549&width=1080"},
+    {name:"Frixion Eraseable Pen",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXZPHflkdmFtVh-migyg9WJvR0iSETVYbenA&s"}
+  ],
+  "Budget Pens":[
+    {name:"Jotex Gel Pen",price:40,img:"https://storage.googleapis.com/shy-pub/367727/SKU-0382_0-1727081713823.png"},
+    {name:"Octane Fountain",price:40,img:"https://topperskit.com/cdn/shop/files/235.jpg?v=1709286744&width=416"},
+    {name:"Jeter Ballpoint Pens",price:32,img:"https://www.rapiddeliveryservices.in/uploads/webp/14719-.webp"},
+    {name:"Writo Meter Gel",price:25,img:"https://rangbeerangee.com/wp-content/uploads/2024/10/Writo-meter-Gel-Pen.jpg"},
+    {name:"Writo Meter Silky Ball",price:32,img:"https://www.rapiddeliveryservices.in/uploads/webp/writo-meter_silk_ball_pen_blue_96991-.webp"},
+    {name:"Classmate Octane Ball",price:10,img:"https://rukminim2.flixcart.com/image/480/640/kwb07m80/pen/v/l/0/-original-imag9yzpgprfnq6f.jpeg?q=90"},
+    {name:"Unomax Ultron Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbsbqdtwOXI97QY5hXJ_n8oYFMqzhN4_-THQ&s"},
+    {name:"Unomax Geltron",price:10,img:"https://i.ytimg.com/vi/NwZGQgnuAgw/sddefault.jpg"},
+    {name:"Unomax Pearl Ball",price:10,img:"https://m.media-amazon.com/images/I/71yAOJ2O0dL.jpg"},
+    {name:"Unomax Pearl Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM2q3-XDVQdDh7jCi8j4JAqufCHpgkM-uetA&s"},
+    {name:"Doms Inxo",price:10,img:"https://m.media-amazon.com/images/I/71q1kxPIqhL._AC_UF350,350_QL80_.jpg"},
+    {name:"Flair Breeze Ball",price:10,img:"https://m.media-amazon.com/images/I/61TrqXihhKL._AC_UF1000,1000_QL80_.jpg"},
+    {name:"Flair Move Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdkKlfEIOOKTVlU2QUSlM4Ycrcwmx7RKYtDw&s"},
+    {name:"Flair Glow Gel Pen",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhyEZAQb42zPdfijqxaXiGSBHZn347_Tq8rw&s"},
+    {name:"Flair Glow Ball",price:10,img:"https://m.media-amazon.com/images/I/6125yPTI+hL._AC_UF350,350_QL80_.jpg"},
+    {name:"Hauser Glow Ball",price:10,img:"https://rukminim2.flixcart.com/image/480/640/xif0q/pen/y/6/b/86402-hauser-original-imahe93gd92pxkbz.jpeg?q=90"},
+    {name:"Classmate Octane Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHg1Gb25qPx3mzRODJi1WNmNNzDYssLmgN8A&s"},
+    {name:"Hauser XO Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEdFseoxUJm7BEsLJVuyZy1XVYi9TpbQBimw&s"},
+    {name:"Doms Inxon",price:10,img:"https://m.media-amazon.com/images/I/41qGjJSQUoL.jpg"},
+    {name:"Hauser XO Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcta4kFZHsQ9EWz6JPwjRQSgFj-wK5W88W9g&s"},
+    {name:"Doms Inxify Ball",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoLYZQg9OC2j6_X_-l6-8Wsb1dBNfKVZCh6A&s"},
+    {name:"Doms Inxify Gel",price:5,img:"https://m.media-amazon.com/images/I/51bIxAR3S2L.jpg"},
+    {name:"Supra His Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRjnFKZDgCgP-J0LddhUxor_oJYpb2k7ey7w&s"},
+    {name:"Linc Ocean Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcg4NpPyp4lA7psDhpy1daZ3wNmKJF7lTUXA&s"},
+    {name:"Hauser XO Glow",price:11,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4K7ovdBuihvbOl16tdqVSuzHNecelbIuEKA&s"},
+    {name:"Flair Woody Ballpoint",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDIu95pRe9gqMMcjfBbxBIYB7kc3Fp83W2jw&s"},
+    {name:"Hauser Doku Rite",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyJ2wtltnzwuCsrDTs4ws1VqBcsQZ18c-j3w&s"},
+    {name:"Gel Metal Ball Pen",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZRAZMBC8Gf5NoNMUdgpmMJA7MgC4NWVjM5A&s"},
+    {name:"Writo Meter Ball",price:20,img:"https://m.media-amazon.com/images/I/61JoXpvUDPL.jpg"},
+    {name:"Pentonic Gel Pen",price:10,img:"https://rukminim2.flixcart.com/image/480/640/k7w8eq80/pen/g/k/q/pentonic-lnptp0-6gl10bl2-original-imafqff7sdfnsgzt.jpeg?q=90"},
+    {name:"Pentonic Ball Pen",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEhxc1Sh3i-PJtriLDwZfSUSvm6Dpr0dumqw&s"},
+    {name:"Hauser 2XL Ball Pen",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC8m1RrbKM-hZVdFg2MKHMgR8GPrpBhkcZjg&s"},
+    {name:"Pentonic BRT Ballpoint",price:22,img:"https://rangbeerangee.com/wp-content/uploads/2021/02/Linc-B-RT-Ballpoint-Pen-Blue.jpg"},
+    {name:"Doms Inxify Plus",price:6,img:"https://m.media-amazon.com/images/I/71rx3Lm9z8L._AC_UF1000,1000_QL80_.jpg"},
+    {name:"Flair Glass Gel",price:10,img:"https://www.mystore.in/s/62ea2c599d1398fa16dbae0a/g/690859b2de764cec152ec5e2/img_20251103_125459.jpg"},
+    {name:"Classmate Octane Neon",price:10,img:"https://m.media-amazon.com/images/I/71KOOdwPc9L.jpg"},
+    {name:"Classmate Octane Pro",price:10,img:"https://images.meesho.com/images/products/429255407/33xqo_512.jpg"},
+    {name:"Hauser Sonic Gel",price:15,img:"https://statmo.in/wp-content/uploads/2017/09/Hauser-Sonic-Gel-Pen-Set-1.jpg"},
+    {name:"Cello Butterflow Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeYJ643Sc2nbXtrAZ6Bavgs9YLd5XCAeiI7w&s"},
+    {name:"Cello Butterflow Gel Set",price:37,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYCZXHtaJreGDlfEekOJKrZXqldy9Nqi0wvg&s"},
+    {name:"Unomax Funtron",price:12,img:"https://storage.googleapis.com/shy-pub/367727/SKU-0202_0-1746172924100.png"},
+    {name:"Supra His Gold",price:10,img:"https://m.media-amazon.com/images/I/51cnuMeY-ZL._AC_UF1000,1000_QL80_.jpg"},
+    {name:"Unomax Zap 2X",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRIY55Ot6BtpzZndgTDK_uI_G0NRosCRzeiw&s"},
+    {name:"Hauser UV Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXOxaWSqyUX6YjOOd3JmRkmMSO280gVK3m6A&s"},
+    {name:"Unomax Disney Gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY8oOAwSITF_oBYSIWgtqXnMrvTpTOt5syag&s"},
+    {name:"Hauser Autoclick Ball",price:10,img:"https://www.ebcstoreonline.com/themes/images/product/Hauser%20Auto-Click%20Ball%20Pen%20-%20Black.jpg"},
+    {name:"Flair Move Ball",price:10,img:"https://rukminim2.flixcart.com/image/480/640/xif0q/pen/e/y/v/99686-flair-original-imah9egakauqandn.jpeg?q=90"},
+    {name:"Unomax Vogue RT Ball",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpk3YmvXF_6e6CW6Dsn5SYNzye-6k5x3q9w&s"},
+    {name:"Goldex Klassy Ball",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTt5LavtGBj2606T37BxsHvck4P3G46JM98A&s"},
+    {name:"Doms Liko Piko Ball",price:5,img:"https://m.media-amazon.com/images/I/61hkQ55P9OS._AC_UF1000,1000_QL80_.jpg"},
+    {name:"Classmate Hook Ballpoint",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAzSNVFgu5aCXQ9V_lvkI6xYH5tXtignHg2w&s"},
+    {name:"Multicolour Ball Pen Pentonic",price:128,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVDAUKOK8WfgxDSAYoGcuhfL20UqQHrudJ6Q&s"},
+    {name:"Multicolour Gel Pen Pentonic",price:203,img:"https://m.media-amazon.com/images/I/61wHWLOlmDL.jpg"},
+    {name:"Hauser Multicolour Gel Pen Set",price:123,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGGT_xh43iIM-OJBFnNvFMWv0YGu4TYz65Og&s"},
+    {name:"doms inxtra 0.7 ball",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzKsU3S6lmlhQxDvGvV2UGzepSAgl8jcSqer5fGL0ksbLTdbuSg-kdrWB3&s=10"}
+  ],
+  "Multicolor Pens":[
+    {name:"Multicolor Ballpoint Pen",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw6dlvFluhgpZ-V5a8qXtIRaaRi5fug1MDmzo4pvS0vQ&s=10"},
+    {name:"Multicolor Gel Pen",price:189,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJyOT1uMiCp9Nz-CHjGkw3NkpzWLiXYA1tMbvKYfDDAQ&s=10"}
+  ],
+  "Refills":[
+    {name:"Fountain Pen Refill",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA37dANrYbKyugZtuLGI6nyVPN-iFAieD3SnRBS7erna5yu1_OWf6C5cE&s=10"},
+    {name:"Octane Fountain Refill",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdydEEV1Ad9tKGKylaflng3OWVUiMSG9H_iEni_5JMzKLeSjqA25DSV18&s=10"},
+    {name:"Pilot V7 and V5 Refill",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR25zCukw2vn52aY_YRLacDuvK3aveVTTiheIc-hQpR0g&s=10"},
+    {name:"Trimax Refill",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGEwf2e1fSwAOlrbLNsmY3prk62wUHOuronEXqY9keLq_sHbF1CdSZ7Hhg&s=10"},
+    {name:"Hauser 2.0 mm Penpencil Refill",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRZ1ck_NpWiUTmSaqvwSz-SNMRnq2Fje9qkQ&s"},
+    {name:"Camlin 0.7 mm Refill",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZd2TtRrjcvIPfs4muRYdG8Jx30mOddzCuow&s"},
+    {name:"0.5 mm Penpencil Refill",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVJb0jhUhN5X-4rdKZPLEKtY8KSBW89gqXJw&s"}
+  ],
+  "Kits & Sets":[
+    {name:"Art Kit",price:1000,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLBiI7bzZJfSVuP_gkx92apmAHF-YzHVMQJw&s"},
+    {name:"Stationery Kit",price:150,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN3d8VNIhigtOlQJtNUYA3OqqbpeMfExZhMg&s"},
+    {name:"Stationery Kit Small",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU3ddRtqcMBlMtpIZ1EUpgF7nlkgULfLTf_A&s"},
+    {name:"Art Strokes Doms",price:225,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqAxltZrwtA25pTir877uL-hOru0Sc9I0VGg&s"}
+  ],
+  "Pencils & Mechanical":[
+    {name:"Apsara Princess Pencils",price:90,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuDpThsjabTt3QE_otT0Wn6LutPe9Nw5n4w&s"},
+    {name:"Doms Groove",price:65,img:"https://sbcstore.in/wp-content/uploads/2023/11/71m0aq5u1kL._SL1500_.jpg"},
+    {name:"Doms Yodo Pencils",price:60,img:"https://static1.industrybuying.com/products/office-supplies/pens-pencils-writing-supplies/pencils/OFF.PEN.927159175_1724732549179.webp"},
+    {name:"Apsara Spacekids",price:60,img:"https://paperquirks.in/cdn/shop/files/SpacekidsPencils.jpg?v=1705926195"},
+    {name:"Doms Xi Pencils",price:50,img:"https://m.media-amazon.com/images/I/71g9ntCnpYL.jpg"},
+    {name:"Apsara Platinum",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTl-lHXQQFDmDnzCOWt9XuUIFdnCHeIrmfNg&s"},
+    {name:"Natraj Bold",price:50,img:"https://www.rapiddeliveryservices.in/uploads/webp/78247-.webp"},
+    {name:"Flair Penpencil 0.7",price:20,img:"https://truewholesale.in/storage/product-images/17389133481.jpg"},
+    {name:"Hauser 2.0 Penpencils",price:20,img:"https://truewholesale.in/storage/product-images/17356355410.jpg"},
+    {name:"Flair Penpencil 2.0",price:10,img:"https://truewholesale.in/storage/product-images/17512666270.jpg"},
+    {name:"Reynolds 0.5 Penpencil",price:6,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS17-LPR8v2rPJ_5TNdvi5--7I6ILP6XlvT4A&s"},
+    {name:"Doms Neon Pencil",price:50,img:"https://domsindia.com/wp-content/uploads/2025/04/158-scaled.webp"},
+    {name:"Doms Fusion Pencil",price:75,img:"https://images.meesho.com/images/products/388728801/tctjn_512.webp?width=512"},
+    {name:"Hauser XO Pencil",price:65,img:"https://chetna.store/cdn/shop/files/images_8910cfc3-07b5-4ebb-a5ef-7b36c33ec92e.jpg?v=1760100731"},
+    {name:"Apsara Writing Pencils",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8Yw3FUGatkRqf8oQa8qwBF_1FIypATVsKMg&s"},
+    {name:"Red Margin",price:53,img:"https://m.media-amazon.com/images/I/615USQqrqrL.jpg"},
+    {name:"Blue Margin",price:53,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSFPk2UWlldAwGsQfsOWetuujRVx2DKRcgTg&s"},
+    {name:"Apsara Matt Magic",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2WnYC6Nb555zi86NBefVRmDfaH3IzJ9UuFw&s"},
+    {name:"Apsara Avengers Pencils",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFnthbHb19-Cl6CRC9xMwSsRQxUryz70Z5kg&s"},
+    {name:"Endless Charcoal Graphite",price:22,img:"https://m.media-amazon.com/images/I/61LUp7y6a3L.jpg"},
+    {name:"Flair Carbonix 0.7",price:10,img:"https://i0.wp.com/grovertechno.com/wp-content/uploads/2024/08/39.png?fit=1000%2C1000&ssl=1"},
+    {name:"Flair Move 0.7 Penpencils",price:20,img:"https://truewholesale.in/storage/product-images/17195547430.jpg"},
+    {name:"Hauser Superdark 0.7",price:15,img:"https://sharmag.co.in/wp-content/uploads/2025/01/IMG_20250131_101532.jpg"},
+    {name:"Flair 2.0 Glow Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5-J20NJPYfVz5n4MUcBTql7H47t0tuGNQDg&s"},
+    {name:"Flair Diva 2.0 Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI-tk-RsRdFocMbBEUM-Rmm5_yeTGzpn9o7w&s"},
+    {name:"Flair Thrill 2.0 Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7FkM02QFgpmHiOmUWwFKfUOLq_xloMBHxDA&s"},
+    {name:"Red Margin Single Piece",price:7,img:"https://www.stationerywalebhaiya.com/cdn/shop/files/rn-image_picker_lib_temp_9915a275-dadf-4eca-837b-9b27a145b77d.jpg?v=1762713432&width=416"},
+    {name:"Blue Margin Single Piece",price:7,img:"https://rukmini1.flixcart.com/image/300/300/pencil/x/t/8/nataraj-checking-pencils-blue-original-imadkxapgfszgnyr.jpeg"},
+    {name:"Unomax Click 0.7 mm Penpencil",price:10,img:"https://www.giftsandpens.com/cdn/shop/files/unomax-click-it-pearl-mechanical-pencil-0-7mm-294.webp?v=1779687479"}
+  ],
+  "Colors & Art":[
+    {name:"Acrylic Colours",price:350,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVQ7qSipKnN3PS5ozWNJfYnyLehV5JHQWOEqtuxWn5wwUFbWF7MQ_guilk&s=10"},
+    {name:"Plastic Crayons",price:56,img:"https://m.media-amazon.com/images/I/617izevZSlS.jpg"},
+    {name:"Soft Pastels Munvyo",price:344,img:"https://3.imimg.com/data3/OG/HI/MY-681822/soft-pastels-general-series-24-assorted-colors-500x500.jpg"},
+    {name:"Fabric Colour",price:400,img:"https://5.imimg.com/data5/ANDROID/Default/2021/4/PV/ID/KV/4682934/product-jpeg.jpg"},
+    {name:"Brush Pen",price:200,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/sketch-pen/z/z/r/-original-imagrf67eymxfkxx.jpeg?q=70"},
+    {name:"Luxor Pastel",price:125,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_sPpdkp4tNiyKabpzOa8gOIg9_sSBrxe9tA&s"},
+    {name:"Luxor Flouroscent",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-Odg8I1RRDOEnurkccfqg0P0lbk3KszZnXw&s"},
+    {name:"Doms Colour Pencils",price:60,img:"https://topperskit.com/cdn/shop/files/59_bf843c4d-b738-48fc-804e-5f1af99573cd.jpg?v=1706101006"},
+    {name:"Drawing Pencils",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFGn_EZ2HVgVts2xicr7wOHDD8nyShcDjwRg&s"},
+    {name:"Paint Brush",price:50,img:"https://www.kheliyatoys.com/wp-content/uploads/2025/03/DOMS-Colourmate-Synthetic-Hair-Paint-Brush.jpg"},
+    {name:"Sketch Pens",price:40,img:"https://www.quickpantry.in/cdn/shop/files/Doms_Sketch_Pen_12_Shades_Big.webp?v=1727296259"},
+    {name:"Water Colour",price:20,img:"https://amd.deodap.com/cdn/shop/files/doms-tempera-colours-12-shades-1000x1000_1200x1200.webp?v=1695803847"},
+    {name:"Crayons",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-zvpMipEtsM0kCrTXlGuxa-rKs2nsAZkjTg&s"},
+    {name:"Camel Brush Pen",price:372,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDSNtIgLb-SldJnDEbEmnoFWV8Zf3t5SqnFIpKoNcFjQ&s=10"},
+    {name:"Camel Oil Pastels",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD5nWXdUtIVWdvFWacNzVSJMaIgN-nyGtlwA&s"},
+    {name:"Drawing Copy",price:45,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJnVu4DZI4wOKtF9b7sTK1ETYjZyMSSLNjQw&s"},
+    {name:"Brush Pen Pastel",price:200,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/shopsy-pen/v/b/4/13-pastel-brush-tip-sketch-pens-doms-original-imahjejhyr3yzrnr.jpeg?q=70"},
+    {name:"Gliter Pens",price:100,img:"https://kundantraders.co.in/cdn/shop/products/FlairGlitterGelPenSet_1024x.webp?v=1680262496"},
+    {name:"Doms Neon Highlighter",price:127,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyr3VeePpyPTvlAm53mIWnGQylOzJeVYrG0A&s"}
+  ],
+  "Gaming Cards":[
+    {name:"Uno Flip",price:85,img:"https://upload.wikimedia.org/wikipedia/en/d/d0/Uno_Flip_Cover.jpg"},
+    {name:"Uno Mercy",price:450,img:"https://m.media-amazon.com/images/I/61-FBLI+khL._AC_UF1000,1000_QL80_.jpg"},
+    {name:"Uno",price:90,img:"https://m.media-amazon.com/images/I/71n61AtC+VL._AC_UF1000,1000_QL80_.jpg"},
+    {name:"Pokemon",price:10,img:"https://m.media-amazon.com/images/I/8118Xdf8K8L._AC_UF350,350_QL80_.jpg"},
+    {name:"Black Copper Pokemon",price:203,img:"https://5.imimg.com/data5/SELLER/Default/2023/1/SS/WU/QD/122336875/pokemon-cards-in-black-gold-colour-10-cards-in-one-packet-for-playing.jpg"},
+    {name:"Silver Pokemon Card",price:199,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIf1Q4QVwZ4HkKf2CMCDnBQo204AtjFDHZpA&s"},
+    {name:"Gold Pokemon Card",price:160,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROoJXH1BvNA9w8Xc0NjaisJYnXMw7q5uN5rg&s"},
+    {name:"Spiderman Cards",price:342,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQy8joIYcL2NWJr_wc_gTBxO386hM1-v2PyQ&s"},
+    {name:"Spiderman Card 2",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrlJoJQGjGt6OWczOQdWvGjpx4QEr1-YJmYw&s"}
+  ],
+  "Notebooks":[
+    {name:"Zingy Apple 140 Pages",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyptGB4Zv1DZMwZua4O5vwn2cBH2JrY0mjhw&s"},
+    {name:"Classmate 172 Pages",price:80,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3wQHWK_ucPn0tU1f4dTK0fFc3iBc51-twEw&s"},
+    {name:"Apple Zingy 172 Pages",price:40,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/diary-notebook/0/8/o/2914-target-publications-original-imahexdauybxkjty.jpeg?q=70"},
+    {name:"Classmate 140 Pages",price:58,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwF1D9PKTlYsO9YiSaoxxGRgm4Zm3GPoXIiA&s"},
+    {name:"Zingy Apple Ruled",price:62,img:"https://5.imimg.com/data5/ANDROID/Default/2023/9/347702074/MP/XK/RD/199079416/product-jpeg.jpg"},
+    {name:"Classmate Ruled A4",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyrq79FYjRpbx4TpaTtDFGdoEu5d95LAeXWw&s"},
+    {name:"Classmate2 Ruled 140",price:55,img:"https://5.imimg.com/data5/SELLER/Default/2023/9/343463827/JR/FN/SR/30903313/classmate-longbook-a4-notebook-unruled-140-pages-multicolor-pack-of-12-250x250.jpg"},
+    {name:"Classmate Thin 24 Pages",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO6Bo7hEtwEcAqYK1_Ah6yv_QFwxJj9ESOSA&s"},
+    {name:"Classmate Pulse Spiral",price:180,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREpiSo0KQcapeSu4JvSPALO13xHxuarYmLkQ&s"},
+    {name:"Classmate Spiral Small",price:65,img:"https://m.media-amazon.com/images/I/71+ghNW6BDL._AC_UF1000,1000_QL80_.jpg"},
+    {name:"Doms 172 Pages Notebook",price:48,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ3gCRdXHSK2fArFD8rx_YJ3pR3J5N1Swg2Q&s"},
+    {name:"Classmate Bar Graph Copy",price:32,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQIkcOOObIBNnWM31JLvMZr14J0FHulKDlmw&s"},
+    {name:"Clasmate Geometry Copy 140 Pages",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1rCu-U_vWDICg91Z2bU6h-LsPFQNOWkTcPQ&s"},
+    {name:"Maths Practical Spiral Notebook",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTINAotvBk6eJMywL2m6JJkAPNH4eMEDz8H7A&s"}
+  ],
+  "Essentials":[
+    {name:"Doms Colour Plate",price:100,img:"https://m.media-amazon.com/images/I/819683ID-vL.jpg"},
+    {name:"Hauser Highlighter",price:125,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQevM0SB3ClF_OoVLGoezpfYNkucduVXFqPh4bwZF3rbA&s"},
+    {name:"Doms Sketch Book",price:169,img:"https://images.meesho.com/images/products/471201502/vywqr_512.webp?width=512"},
+    {name:"Youva Pocket Diary",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxcdG5O98KwWn_c9Cj3CVQ_sV2Zns9CBUe4V-6g-1p8Q&s=10"},
+    {name:"Examination Board Transparent",price:75,img:"https://m.media-amazon.com/images/I/31UtYG4GjjL._AC_UF894,1000_QL80_.jpg"},
+    {name:"Sticky Note",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX2C91siKq7f-zkeh1myE3tsAspqI053-FxnkwyzZQ6g&s=10"},
+    {name:"Folder",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMfGgXwG8PWpsyyiccn4hF_rdsRlPMwzKJ-BUtwVPvvQ&s=10"},
+    {name:"Natraj Sharpner Set",price:55,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlhe9Qx92_5eOyWmi6M-bH0YbLTi5HVU02wQoyhIlpBQ&s=10"},
+    {name:"Natraj Eraser Set",price:55,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRasz1sM-0L9GGC7m-2qqk__5ddTXP4j6h9PK9qrR71fg&s=10"},
+    {name:"Hauser Glow Eraser",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm318xLD9K23choqJOdwd4Y7q412NRnEcgW90nDeVh7c-fclMx13t5WBfU&s=10"},
+    {name:"Sticky Notes",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQETjSy9DsuCHDtjBz5LUEPkZk4NvMZtGVnZ6ZwtV1mIw&s=10"},
+    {name:"Doms Cubo Eraser Set",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSURO_ObOENT49aKn2au7CWDStWVcFS9PF0pnaEtIEptw&s=10"},
+    {name:"Scissors",price:148,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbMNfD75CgKEfXTNuQDuq4lbmX_yjAQWgJ_68BrX40Dg&s=10"},
+    {name:"2 in 1 Eraser + Sharpner",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkvLMyQRACR8UCoow9Q939sNDrB1wQquzlIlSp7iOhXQ&s=10"},
+    {name:"Brown Cover",price:63,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWr4VsY3W12_VBP84hQsMvs6EyMiIpVDwLXQ&s"},
+    {name:"Stick File",price:11,img:"https://rukminim2.flixcart.com/image/1600/2140/xif0q/file-folder/f/v/n/transparent-stick-file-folder-strip-file-file-folders-classone-original-imahh23htrs8w2yn.jpeg?q=60"},
+    {name:"Transparent Cover Roll",price:80,img:"https://truewholesale.in/storage/product-images/17423722421.jpg"},
+    {name:"Geometry Box",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9ieHRPcJDXEkgkPaTRrXlHq8BDonm34IN7Q&s"},
+    {name:"Doms Mechanical Eraser",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNDySL4jEVCbrW-1KT36WuOvIeMcz_uWi2IA&s"},
+    {name:"Apsara Eraser Set",price:56,img:"https://topperskit.com/cdn/shop/files/190_ecfc0ea9-1c31-4b2d-ac88-46ab810197c0.jpg?v=1709274524"},
+    {name:"Apsara Eraser",price:5,img:"https://dukaan.b-cdn.net/700x700/webp/media/5dd47447-93da-45e4-8a79-8c038d005a8f.jpg"},
+    {name:"Apsara Sharpner",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTonrCo57A8Srewua1UHilqf1ip2yTZYu8DbA&s"},
+    {name:"Digital Pad",price:499,img:"https://rukminim2.flixcart.com/image/1536/1536/ks4yz680/learning-toy/u/m/b/drawing-tablet-with-battery-free-stylus-ruffpad-for-kids-and-original-imag5ruwrwpbbvan.jpeg?q=90"},
+    {name:"Glue Gun",price:199,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiy9sFhByWlUg7J3NnH89m7quwy4m6kyLGgI3RpKU9d5K3piRASN3BWtUq&s=10"},
+    {name:"Glue Stick",price:10,img:"https://djl2kq23xfhqi.cloudfront.net/productimages/WebP/GSTK10PC_2.webp"},
+    {name:"Electrical Tape",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwZZaLgnaxACW6Cbt4ieCvnKmHVsMewYif9TRdgmxMPw&s=10"},
+    {name:"Brown Covering and Packaging Tape",price:68,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDLxMGma2275XtHDPMCshEA7FJSmpBVvBpmAIf5yPvLNE1gtcGZkfliYjb&s=10"},
+    {name:"Whiteboard Marker",price:33,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa3TARThKNgdRgVnLrGBsMfVllCWKneA6to4F0LJkXYA&s=10"},
+    {name:"Hauser Glow Eraser Set",price:200,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzFMR5aJPY0-hLTVB0_idZGpHSe14OVFX0UW_6wv822g&s"},
+    {name:"Portable Fan + Eraser",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmArnvVDRth8F1EEBNTj8Wzsaql0u7E366_JTlO4x1ag&s=10"},
+    {name:"Natraj Eraser",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc4ZzArclfQExxyM_uzSitKaVWwe8lHtW-EYqTWFBHPg&s=10"},
+    {name:"Doms Cubo Erasers",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBQu2HqDNwOCMVeDnKAfSr-LQL8Ze5UiA9pGfBnAR73A&s=10"},
+    {name:"Apsara White Chalks",price:35,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQicztlFM0Ho0bTgdKsvfRWHk_E00wgO32FxRGb-06wqw&s=10"},
+    {name:"Apsara Colour Chalks",price:35,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYosHE5iYgD0CIEK5Fuvqz9V8LwRZ11I9tn3CfsEtd-g&s=10"},
+    {name:"Doms White Chalk",price:33,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6A78bLl1HBZz3XlLvFV9BDdWVpUncvBH5qpMcycXugw&s"},
+    {name:"Doms Chalk Holder",price:20,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzjr3REdWPuhz13r5JNpzf9HxPcVf6Q6KfUXkhpdaKZ5TXdAZfCafPNK3T&s=10"},
+    {name:"Board Pins",price:33,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwW3TYbWpIaGOmTBZnSqOo0_iKOCYzaAvMMg&s"},
+    {name:"Duster",price:134,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVKk9uwKo794R88AFk1YpGy928-bndW6ChvA&s"},
+    {name:"Board Clip",price:55,img:"https://5.imimg.com/data5/SELLER/Default/2022/7/YK/UH/CQ/25484915/drawing-board-clip.jpg"},
+    {name:"Kneedable Eraser",price:100,img:"https://amarizindia.com/cdn/shop/files/5_92d5193e-5cc7-4daa-aa89-bfebcee9bf08.png?v=1758713264"},
+    {name:"Science Calculator",price:500,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwYXodTBsJJd3ZPq0uDYdBlJeDpXZlV3P-_Q&s"},
+    {name:"Calculator",price:670,img:"https://rukminim2.flixcart.com/image/480/640/calculator/m/x/s/casio-mj-120d-original-imaedhpgfepcbmgw.jpeg?q=90"},
+    {name:"Origami Paper",price:20,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI_qh6M6rPdNB3g3Ar7lSKDq9fbZVecvmQ3Q&s"},
+    {name:"Stencil",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZzvhfFSbMwAzX0j88_ae8zx-QOxjwzY53A&s"},
+    {name:"Pocket Diary",price:10,img:"https://storage.googleapis.com/shy-pub/367727/SKU-1477_2-1760440005127.png"},
+    {name:"Glitters",price:10,img:"https://rukminim2.flixcart.com/image/480/640/kvgzyq80/art-craft-kit/i/w/1/6-pack-of-20-pc-packet-sparkling-glitter-powder-for-art-and-original-imag8dceqptxa72x.jpeg?q=90"},
+    {name:"Scale",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5FWz_tJvY3GZd7MmJfaaUnINuCi5BPImaUg&s"},
+    {name:"Eraser",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuDd3IcoQAsm5vx0MO1T0pxOY70JTexqArIQ&s"},
+    {name:"Sharpner",price:5,img:"https://rukminim2.flixcart.com/image/480/640/xif0q/sharpener/f/3/m/-original-imagqzfwmzdfwugk.jpeg?q=90"},
+    {name:"Sanitizer",price:38,img:"https://m.media-amazon.com/images/I/61zkydHcPdL.jpg"},
+    {name:"Stapler",price:100,img:"https://www.rapiddeliveryservices.in/uploads/webp/5250-.webp"},
+    {name:"Stapler Pins",price:12,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNk4vxqikMRajQ8L_XwQ2DENdTVsaVkJG9w&s"},
+    {name:"Keychains",price:110,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiuCdQasCld81Nti4RvNKFKQCROcrAulg_Fw&s"},
+    {name:"Whitener",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbUfd68grMIsFa_q0OC1sq0YkRFzlDwJt92A&s"},
+    {name:"Whitener Premium",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF6xUvwjCaEbcIu-iNQSOwo5yNZgAZIRBoIA&s"},
+    {name:"Correction Tape",price:45,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBTDKsagVGsdLIPvO01HIIYrKAgc6l_YsqAw&s"},
+    {name:"Transparent Tape",price:65,img:"https://www.stationeryplug.com/cdn/shop/products/CelloTape2inch.jpg?v=1660027502"},
+    {name:"A4 Size Sheet",price:3,img:"https://m.media-amazon.com/images/I/31BG82hS2CL._AC_UF1000,1000_QL80_.jpg"},
+    {name:"A4 Colour Sheet",price:3,img:"https://www.bbassets.com/media/uploads/p/l/40280994_1-se7en-a4-size-premium-colour-paper-for-arts-crafts-assorted.jpg"},
+    {name:"A4 Hard Sheet",price:6,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWWlNlap9kE1B9is0tpxyvBuPe8zXwBy7zgA&s"},
+    {name:"A4 Colour Hard Sheet",price:6,img:"https://m.media-amazon.com/images/I/71BS8A1eeoL.jpg"},
+    {name:"Stickers",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEMzDZ8iuJFNE2DU2bLRb9ijQ2GYsMuq6DDw&s"},
+    {name:"Markers",price:10,img:"https://sbcstore.in/wp-content/uploads/2022/01/71OT5CpK8kL._SL1280_.jpg"},
+    {name:"Fevicol 1",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLs0Mh0ygdYWADV-HViLoVnRgmFk3anaYF0h2x_zmnWA&s=10"},
+    {name:"Glue Stick 1",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSppCFYf4u-I6uFG8DmCYKCMGiKtsRScg_O8fBwfVLLg&s"},
+    {name:"Fevicol 2",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJzpdctu6r_ogQAB-mc2xJI4D69NcJUWs5W6iMXRGJzA&s=10"},
+    {name:"Fevicol 3",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj-qdCf48kDw3R8z9aFX6D8BjfyRyurMU-nfO2CJqKow&s=10"},
+    {name:"Fevicol 4",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMz-5IJsOyRxNwljOXNVAw2xQszWhBLqBSp2BraC0j4A&s"},
+    {name:"Glue Stick 2",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ7gf7YNr3rWgMxsKA1ZqngtZ9LgGfSRO2tCWyFX6WIw&s=10"},
+    {name:"Pentonic Glue Stick",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf52YeFDi7397WWXWDM_HcCxiZduZcTdIvQDVBCB4WzQ&s=10"},
+    {name:"Doms Sharpner Set",price:55,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv2QBGzJ1fPXgV6UcqoTQ0akkPiC_l6j0aDv-6dUZRqw&s=10"},
+    {name:"Apsara Sharpner Set",price:55,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTODZcRLo3pp2C2x3W9WX0p64pz5URd0MMNPjguoiq3DA&s=10"},
+    {name:"doms dust sharpner",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMCWgmBY_RMbR_gfztzdPzMAcHsEK9Iv6jkt8ysYVjHw&s=10"},
+    {name:"doms dust collector set",price:199,img:"https://m.media-amazon.com/images/I/71GsmDahh2L._AC_UF1000,1000_QL80_.jpg"},
+    {name:"drawing copy",price:45,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0d_7vIs5x-pZMJ2P_v_7R5tw09T7nkDcXy0vUWyKbwA&s=10"}
+  ]
 };
 </script>
 </body>
