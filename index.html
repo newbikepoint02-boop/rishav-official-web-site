@@ -478,7 +478,7 @@ function validateForm() {
   const phone = document.getElementById('customerPhone').value.trim();
   const address = document.getElementById('customerAddress').value.trim();
   const hasItems = Object.keys(cart).length > 0;
-  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const emailValid = /^[^\s@]+@[^\\s@]+\.[^\s@]+$/.test(email);
   const phoneValid = /^\d{10}$/.test(phone);
   document.getElementById('orderBtn').disabled = !(name && emailValid && phoneValid && address && hasItems);
 }
@@ -548,8 +548,8 @@ const inventory = {
     {name:"Trimax",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW9eHcenwuqsivMCrAxFySE8OBWW0wrEFLtA&s"},
     {name:"Pilot V7",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWUums4ThOXLKUqgcdJzCH_UFI3bmQvsm5HQ&s"},
     {name:"Pilot V5",price:67,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKlb7sK784eP7WWyr1xdz-mxnH2x0ajUpZog&s"},
-    {name:"Pilot Hitectpoint",price:55,img:"https://m.media-amazon.com/images/I/410iO7bzO9L.jpg"},
     {name:"Pilot V2",price:20,img:"https://m.media-amazon.com/images/I/312kOs51DiL._AC_UF1000,1000_QL80_.jpg"},
+    {name:"Uniball Air Micro",price:200,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlAqKhg_pWKzZ3Jk6yVmFgfKsuilerX8XIYw&s"},
     {name:"Fountain Pen",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR69f62vQvEvSPq03CwiECT9OUHkmBJ7jYWIQ&s"},
     {name:"Calligraphy Pen",price:55,img:"https://m.media-amazon.com/images/I/61yUrXiaVBL._AC_UF1000,1000_QL80_.jpg"},
     {name:"Robomax",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX5XsfNwUZKdNG4pR481b0HVXcYyr1NRDUVQ&s"},
@@ -557,8 +557,10 @@ const inventory = {
     {name:"Zoox U7 Pen",price:110,img:"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSw726-wAGmFoOxKGuCQ-xzjQD7l8ZMpIZVFe65q99CVpxiKIvT4xSHrbXDB8R1r32yshrgzVyfuUTk8h53Bi_lpjds8NaQ4sAIARf0gqYpIKPNKeTnLbcQRw"},
     {name:"Maxtron",price:65,img:"https://rukminim2.flixcart.com/image/480/640/kdnf98w0pkrrdj/pen/y/b/c/rorito-original-imafumsfp96q5ffn.jpeg?q=90"},
     {name:"Maxtron Gold",price:130,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8f2sUbEIQBBIOb3lJ3HK2FF7vcDluY9Zk8A&s"},
-    {name:"Uniball Air Micro",price:200,img:"https://bbag.in/cdn/shop/files/OFF.GEL.127796383_1732184228745.webp?v=1742993549&width=1080"},
-    {name:"Frixion Eraseable Pen",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXZPHflkdmFtVh-migyg9WJvR0iSETVYbenA&s"}
+    {name:"Uniball eye Micro",price:195,img:"https://www.uniball.in/wp-content/uploads/2019/09/airnew.jpg"},
+    {name:"pilot hitechpoint",price:200,img:"https://m.media-amazon.com/images/I/410iO7bzO9L.jpg"},
+    {name:"Frixion Eraseable Pen",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXZPHflkdmFtVh-migyg9WJvR0iSETVYbenA&s"},
+    {name:"Golden Parker",price:999,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwsdfrwIqHPcGRBV2RID5Ho-NAIgvVpkm-VQ&s"}
   ],
   "Budget Pens":[
     {name:"Jotex Gel Pen",price:40,img:"https://storage.googleapis.com/shy-pub/367727/SKU-0382_0-1727081713823.png"},
@@ -615,11 +617,17 @@ const inventory = {
     {name:"Multicolour Ball Pen Pentonic",price:128,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVDAUKOK8WfgxDSAYoGcuhfL20UqQHrudJ6Q&s"},
     {name:"Multicolour Gel Pen Pentonic",price:203,img:"https://m.media-amazon.com/images/I/61wHWLOlmDL.jpg"},
     {name:"Hauser Multicolour Gel Pen Set",price:123,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGGT_xh43iIM-OJBFnNvFMWv0YGu4TYz65Og&s"},
-    {name:"doms inxtra 0.7 ball",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzKsU3S6lmlhQxDvGvV2UGzepSAgl8jcSqer5fGL0ksbLTdbuSg-kdrWB3&s=10"}
+    {name:"doms inxtra 0.7 ball",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzKsU3S6lmlhQxDvGvV2UGzepSAgl8jcSqer5fGL0ksbLTdbuSg-kdrWB3&s=10"},
+    {name:"Luxor Nox",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNBORSeUVlYu8Kz5AYBVHEXo0P3QtGXI24EQ&s"},
+    {name:"Luxor Graphic 0.5",price:15,img:"https://rukmini1.flixcart.com/image/1500/1500/kwpam4w0/pen/t/u/y/graphic-plus-ball-pen-black-luxor-original-imag9bhds2wgyxhm.jpeg?q=70"},
+    {name:"doms inxpop ball pen",price:10,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/pen/z/a/6/inxpop-ball-point-pens-doms-original-imahjmh73htq4tkm.jpeg?q=70"},
+    {name:"doms inxklik ball pen",price:10,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/pen/m/v/k/80861-doms-original-imahjtw4jjahxb7v.jpeg?q=70"},
+    {name:"liquid ggt pop",price:10,img:"https://www.rapiddeliveryservices.in/uploads/webp/liquid_gt_pop_liquid_ink_pen_blue_57447-.webp"},
+    {name:"liquid gt ink pen",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTjBf74K6aghp-CK3bqLacQN6eJ6pAamBkFA&s"},
   ],
   "Multicolor Pens":[
     {name:"Multicolor Ballpoint Pen",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw6dlvFluhgpZ-V5a8qXtIRaaRi5fug1MDmzo4pvS0vQ&s=10"},
-    {name:"Multicolor Gel Pen",price:189,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbCGAPwUKzJnT-7FK5NqcOmRQ6HOlYJWRIgoO-TKuYrg&s"}
+    {name:"Multicolor Gel Pen",price:189,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbCGAPwUKzJnT-7FK5NqcOmRQ6HOlYJWRIgoO-TKuYrg&s"},
   ],
   "Refills":[
     {name:"Fountain Pen Refill",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA37dANrYbKyugZtuLGI6nyVPN-iFAieD3SnRBS7erna5yu1_OWf6C5cE&s=10"},
@@ -664,9 +672,10 @@ const inventory = {
     {name:"Flair Diva 2.0 Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI-tk-RsRdFocMbBEUM-Rmm5_yeTGzpn9o7w&s"},
     {name:"Flair Thrill 2.0 Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7FkM02QFgpmHiOmUWwFKfUOLq_xloMBHxDA&s"},
     {name:"Red Margin Single Piece",price:7,img:"https://www.stationerywalebhaiya.com/cdn/shop/files/rn-image_picker_lib_temp_9915a275-dadf-4eca-837b-9b27a145b77d.jpg?v=1762713432&width=416"},
-    {name:"Blue Margin Single Piece",price:7,img:"https://rukmini1.flixcart.com/image/300/300/pencil/x/t/8/nataraj-checking-pencils-blue-original-imadkxapgfszgnyr.jpeg"},
+    {name:"Blue Margin Single Piece",price:7,img:"https://rukminim1.flixcart.com/image/300/300/pencil/x/t/8/nataraj-checking-pencils-blue-original-imadkxapgfszgnyr.jpeg"},
     {name:"Unomax Click 0.7 mm Penpencil",price:10,img:"https://www.giftsandpens.com/cdn/shop/files/unomax-click-it-pearl-mechanical-pencil-0-7mm-294.webp?v=1779687479"},
-    {name:"Flair Tuff 0.9 mm Penpencil",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa5WnoY5V1ue4GHYXEdUUcxuoGXj9VQRqY7KGWgQ3Rdg&s=10"}
+    {name:"Flair Tuff 0.9 mm Penpencil",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa5WnoY5V1ue4GHYXEdUUcxuoGXj9VQRqY7KGWgQ3Rdg&s=10"},
+    {name:"Pentonic 0.7mm Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzmEnDiUppIF1SdZQ9oPwCHUE0LzUqKBAx9A&s"}
   ],
   "Colors & Art":[
     {name:"Acrylic Colours",price:350,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVQ7qSipKnN3PS5ozWNJfYnyLehV5JHQWOEqtuxWn5wwUFbWF7MQ_guilk&s=10"},
@@ -687,7 +696,8 @@ const inventory = {
     {name:"Drawing Copy",price:45,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJnVu4DZI4wOKtF9b7sTK1ETYjZyMSSLNjQw&s"},
     {name:"Brush Pen Pastel",price:200,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/shopsy-pen/v/b/4/13-pastel-brush-tip-sketch-pens-doms-original-imahjejhyr3yzrnr.jpeg?q=70"},
     {name:"Gliter Pens",price:100,img:"https://kundantraders.co.in/cdn/shop/products/FlairGlitterGelPenSet_1024x.webp?v=1680262496"},
-    {name:"Doms Neon Highlighter",price:127,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyr3VeePpyPTvlAm53mIWnGQylOzJeVYrG0A&s"}
+    {name:"Doms Neon Highlighter",price:127,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyr3VeePpyPTvlAm53mIWnGQylOzJeVYrG0A&s"},
+    
   ],
   "Gaming Cards":[
     {name:"Uno Flip",price:85,img:"https://upload.wikimedia.org/wikipedia/en/d/d0/Uno_Flip_Cover.jpg"},
@@ -698,7 +708,8 @@ const inventory = {
     {name:"Silver Pokemon Card",price:199,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIf1Q4QVwZ4HkKf2CMCDnBQo204AtjFDHZpA&s"},
     {name:"Gold Pokemon Card",price:160,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROoJXH1BvNA9w8Xc0NjaisJYnXMw7q5uN5rg&s"},
     {name:"Spiderman Cards",price:342,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQy8joIYcL2NWJr_wc_gTBxO386hM1-v2PyQ&s"},
-    {name:"Spiderman Card 2",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrlJoJQGjGt6OWczOQdWvGjpx4QEr1-YJmYw&s"}
+    {name:"Spiderman Card 2",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrlJoJQGjGt6OWczOQdWvGjpx4QEr1-YJmYw&s"},
+    {name:"pokemon rainbow Card",price:199,img:"https://images.meesho.com/images/products/365782062/begqk_512.webp?width=512"}
   ],
   "Notebooks":[
     {name:"Zingy Apple 140 Pages",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyptGB4Zv1DZMwZua4O5vwn2cBH2JrY0mjhw&s"},
@@ -714,7 +725,10 @@ const inventory = {
     {name:"Doms 172 Pages Notebook",price:48,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ3gCRdXHSK2fArFD8rx_YJ3pR3J5N1Swg2Q&s"},
     {name:"Classmate Bar Graph Copy",price:32,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQIkcOOObIBNnWM31JLvMZr14J0FHulKDlmw&s"},
     {name:"Clasmate Geometry Copy 140 Pages",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1rCu-U_vWDICg91Z2bU6h-LsPFQNOWkTcPQ&s"},
-    {name:"Maths Practical Spiral Notebook",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTINAotvBk6eJMywL2m6JJkAPNH4eMEDz8H7A&s"}
+    {name:"Maths Practical Spiral Notebook",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTINAotvBk6eJMywL2m6JJkAPNH4eMEDz8H7A&s"},
+    {name:"Doms A4 Register Notebook",price:69,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ80M4QpfEGB1iklh9R5TFbsxKLhJqTlWiGAg&s"},
+    {name:"Doms Spiral Notebook",price:180,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkKk3UTo90xFfiaiJ2UrHbZjyBBk-TZsTjuw&s"},
+    {name:"diary",price:150,img:"https://tiimg.tistatic.com/fp/1/007/974/rexine-blue-cover-100-gsm-rectangular-a4-size-notebook-diary-418.jpg"},
   ],
   "Essentials":[
     {name:"Doms Colour Plate",price:100,img:"https://m.media-amazon.com/images/I/819683ID-vL.jpg"},
@@ -782,6 +796,7 @@ const inventory = {
     {name:"Markers",price:10,img:"https://sbcstore.in/wp-content/uploads/2022/01/71OT5CpK8kL._SL1280_.jpg"},
     {name:"Fevicol 1",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLs0Mh0ygdYWADV-HViLoVnRgmFk3anaYF0h2x_zmnWA&s=10"},
     {name:"Glue Stick 1",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSppCFYf4u-I6uFG8DmCYKCMGiKtsRScg_O8fBwfVLLg&s"},
+    {name:"apsara avenjers eraser",price:5,img:"https://truewholesale.in/storage/product-images/17206042500.jpg"},
     {name:"Fevicol 2",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJzpdctu6r_ogQAB-mc2xJI4D69NcJUWs5W6iMXRGJzA&s=10"},
     {name:"Fevicol 3",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj-qdCf48kDw3R8z9aFX6D8BjfyRyurMU-nfO2CJqKow&s=10"},
     {name:"Fevicol 4",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMz-5IJsOyRxNwljOXNVAw2xQszWhBLqBSp2BraC0j4A&s"},
@@ -795,7 +810,16 @@ const inventory = {
     {name:"0.9 mm Lead",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0OqrGeLdmTXe1cGWhirG8Twb2ZyOskp8KQEX872-60w&s=10"},
     {name:"Transparent Box",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyxAViKu80HH-menvP-tudPGN39QaPYmkrpAhiMXOWdg&s=10"},
     {name:"Cutting Blade",price:15,img:"https://static1.industrybuying.com/products/office-supplies/stationary-items/paper-cutter-knife/OFF.PAP.527150078_1724216738965.webp"},
-    {name:"Youva Pocket Small Notebook",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0VCOTiDyLysnwfAwyvPRoEw_1GPMTMcN46_-_zgHTrg&s=10"}
+    {name:"Youva Pocket Small Notebook",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0VCOTiDyLysnwfAwyvPRoEw_1GPMTMcN46_-_zgHTrg&s=10"},
+    {name:"Carbon Paper",price:5,img:"https://rukminim2.flixcart.com/image/480/640/joonafk0/paper/u/x/r/carbon10211077-carbon-paper-kores-original-imafb3n6vbgwgg2t.jpeg?q=90"},
+    {name:"Stamp Pad",price:45,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmcWd6-Oqtjud93q4xoKFSoxVXrQZHlKIoMQ&s"},
+    {name:"Doms Neon Eraser",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJzGFcRZC1VYHqDmYIpy-oXIn-IKv3t69Brw&s"},
+    {name:"Doms Eracer Tyre Eraser",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRragcGe6HRYgxczxp4lcLwFPnnZdET72LrLw&s"},
+    {name:"3x3 Rubik Cube",price:129.5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE2kIWXvFZiLfxvRKXkatMsMxwz7vg7A0tHA&s"},
+    {name:"doms sports eraser",price:15,img:"https://lathiyanstationery.com/wp-content/uploads/2025/05/DOMS-Sports-Car-Non-Toxic-Eraser-Set-of-12-Multicolor-n1.jpg"},
+    {name:"doms erasers set",price:59,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJVN5dDDzQ4v-1XzusG6WO9V7-_P7qYLkd8w&s"},
+    {name:"doms neon eraser set",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVAP_bQ2IhtfZo9TiJEj6s5y6dPAm39l8xbg&s"},
+    {name:"doms eraser",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_NyVvTRjF-xS5H1s6TQGs3Ni30Dbph7EOlg&s"}
   ]
 };
 </script>
