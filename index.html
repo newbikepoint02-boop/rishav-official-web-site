@@ -23,6 +23,25 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
 body.dark{background:#111;color:#f3f3f3;}
 body.dark .card, body.dark .modal-content, body.dark .system-box, body.dark .map-box, body.dark .sale-banner{background:#1d1d1d;color:#f3f3f3;}
 body.dark .search-box input, body.dark .summary-section, body.dark .checkout-list{background:#222;color:#f3f3f3;}
+body.dark .category-title{background:#2a2a2a;color:#fff3c4;border-left-color:var(--primary);}
+body.dark .action-btn{background:#2a2a2a;color:#fff;}
+body.dark .add-btn{background:var(--primary);color:#fff;}
+body.dark .remove-btn{background:#3a3a3a;color:#fff;}
+body.dark .remove-btn.active{background:#d40000;color:#fff;}
+body.dark .setting-row button,
+body.dark .system-actions button,
+body.dark .map-actions button,
+body.dark .close-btn,
+body.dark .order-btn,
+body.dark .action-btn{color:#fff;opacity:1;}
+body.dark .customer-form h3,
+body.dark .modal-content h2,
+body.dark .sale-title,
+body.dark .sale-subtitle,
+body.dark .price{color:#fff;}
+body.dark .handling-note,
+body.dark .small,
+body.dark .cart-item .item-breakdown{color:#cfcfcf;}
 #loadingScreen{position:fixed;inset:0;background:var(--accent);display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:99999;transition:.4s ease-out;}
 .loader-logo{font-size:55px;font-weight:900;color:var(--primary);}
 .spinner{width:65px;height:65px;margin-top:20px;border:6px solid white;border-top:6px solid var(--primary);border-radius:50%;animation:spin .8s linear infinite;}
@@ -33,7 +52,7 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 .header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .logo{font-size:34px;font-weight:900;color:var(--primary);}
 .actions{display:flex;gap:10px;flex-wrap:wrap;}
-.action-btn{background:white;padding:10px 16px;border-radius:30px;font-weight:bold;border:2px solid var(--primary);cursor:pointer;position:relative;display:flex;align-items:center;gap:8px;transition:.15s transform ease;}
+.action-btn{background:white;padding:10px 16px;border-radius:30px;font-weight:bold;border:2px solid var(--primary);cursor:pointer;position:relative;display:flex;align-items:center;gap:8px;transition:.15s transform ease;color:#111;}
 .action-btn:active{transform:scale(.98);}
 .badge{position:absolute;top:-8px;right:-8px;background:red;color:white;font-size:10px;padding:2px 6px;border-radius:50%;display:none;}
 .search-box{margin-top:12px;}
@@ -48,16 +67,16 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 .sale-timer{margin-top:10px;display:inline-block;padding:10px 16px;border-radius:999px;background:#111;color:#fff;font-size:18px;font-weight:900;letter-spacing:1px;border:2px solid #fff;min-width:220px;}
 .banner{padding:15px 15px 0;}
 .banner img{width:100%;max-height:260px;object-fit:cover;border-radius:18px;border:3px solid var(--primary);box-shadow:0 4px 12px rgba(0,0,0,.12);}
-.category-title{background:#fff0b0;margin:18px 15px 10px;padding:12px;font-size:20px;font-weight:bold;border-left:6px solid var(--primary);border-radius:10px;}
+.category-title{background:#fff0b0;margin:18px 15px 10px;padding:12px;font-size:20px;font-weight:bold;border-left:6px solid var(--primary);border-radius:10px;color:#111;}
 .container{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px;padding:0 15px 20px;}
 .card{background:rgba(255,255,255,.92);border:2px solid var(--primary);border-radius:18px;padding:15px;text-align:center;box-shadow:0 10px 22px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:space-between;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
-.card h4{min-height:48px;font-size:15px;margin-bottom:10px;}
+.card h4{min-height:48px;font-size:15px;margin-bottom:10px;color:inherit;}
 .product-img{width:100%;height:140px;object-fit:contain;border-radius:14px;background:#f8f2d7;margin-bottom:10px;}
 .price{font-size:20px;font-weight:bold;color:var(--primary);margin-bottom:5px;}
 .handling-note{font-size:11px;color:#666;margin-bottom:10px;}
 .btn-group{display:flex;gap:6px;}
 .add-btn{flex:2;background:var(--primary);color:white;border:none;padding:10px 8px;border-radius:10px;font-weight:bold;cursor:pointer;}
-.remove-btn{flex:1;background:#ddd;border:none;border-radius:10px;font-weight:bold;cursor:pointer;}
+.remove-btn{flex:1;background:#ddd;border:none;border-radius:10px;font-weight:bold;cursor:pointer;color:#111;}
 .remove-btn.active{background:red;color:white;}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center;z-index:9999;padding:14px;}
 .modal-content{background:white;width:92%;max-width:620px;padding:20px;border-radius:18px;border:3px solid var(--primary);max-height:85vh;overflow:auto;}
@@ -69,6 +88,7 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 .summary-section{background:#f9f9f9;padding:15px;border-radius:12px;margin-top:15px;}
 .summary-row{display:flex;justify-content:space-between;padding:5px 0;font-size:14px;}
 .summary-row.total{font-size:20px;font-weight:bold;color:var(--primary);border-top:2px solid var(--primary);padding-top:10px;margin-top:10px;}
+.customer-care-box{margin-top:12px;padding:12px;border:2px solid var(--primary);border-radius:12px;background:#fff8e6;font-weight:700;text-align:center;}
 .customer-form{margin-top:20px;padding-top:15px;border-top:2px dashed #ccc;}
 .customer-form h3{margin-bottom:12px;color:#333;font-size:16px;}
 .form-group{margin-bottom:12px;}
@@ -78,7 +98,7 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 .form-group textarea{resize:vertical;min-height:60px;}
 .modal-buttons{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
 .modal-buttons button{flex:1;padding:12px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;}
-.close-btn{background:#ddd;}
+.close-btn{background:#ddd;color:#111;}
 .order-btn{background:var(--primary);color:white;}
 .order-btn:disabled{background:#ccc;cursor:not-allowed;}
 .setting-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:12px;border:2px solid var(--primary);border-radius:10px;}
@@ -102,7 +122,7 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
     <div class="logo">🛒 Blinkart</div>
     <div class="actions">
       <div class="action-btn" onclick="sendAlertEmail()">⚠️ Alert</div>
-      <div class="action-btn" onclick="openCart()">🛍️ Cart (<span id="cartCount">0</span>)<span class="badge" id="badge">0</span></div>
+      <div class="action-btn" onclick="openCart()">🛍️ Cart<span class="badge" id="badge">0</span></div>
       <div class="action-btn" onclick="openSettings()">⚙️ Settings</div>
     </div>
   </div>
@@ -118,7 +138,7 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 </div>
 
 <div class="banner" id="bannerWrap" style="display:block;">
-  <img src="https://i.ibb.co/1tmxc88f/image.png" alt="Transparent Banner" onerror="this.onerror=null;this.src='https://placehold.co/1200x300?text=Banner+Not+Found';">
+  <img src="https://i.ibb.co/1tmxc88f/image.png" alt="Blinkart Banner" onerror="this.onerror=null;this.src='https://placehold.co/1200x300?text=Blinkart+Banner';">
 </div>
 
 <div id="main"></div>
@@ -148,23 +168,30 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
       </div>
       <div class="small" id="updateStatus">No monthly update selected.</div>
     </div>
+
     <div class="checkout-list" id="checkoutList"></div>
     <div id="cartItems"></div>
+
     <div class="summary-section">
       <div class="summary-row"><span>Subtotal</span><span id="subtotalAmount">₹0</span></div>
       <div class="summary-row"><span>Handling Charges (₹2 × items)</span><span id="handlingAmount">₹0</span></div>
       <div class="summary-row total"><span>Total</span><span id="totalBill">₹0</span></div>
     </div>
+
+    <div class="customer-care-box">Customer Care: +91 92108 51432</div>
+
     <div class="customer-form">
       <h3>📦 Delivery Details</h3>
       <div class="form-group"><label>Full Name *</label><input type="text" id="customerName" placeholder="Enter your full name"></div>
       <div class="form-group"><label>Email *</label><input type="email" id="customerEmail" placeholder="Enter your email"></div>
       <div class="form-group"><label>Phone Number *</label><input type="tel" id="customerPhone" placeholder="Enter 10-digit phone number"></div>
       <div class="form-group"><label>Delivery Address *</label><textarea id="customerAddress" placeholder="Enter complete delivery address"></textarea></div>
+      <div class="form-group"><label>Payment Method</label><input type="text" value="Cash" readonly></div>
     </div>
+
     <div class="modal-buttons">
       <button class="close-btn" onclick="closeCart()">Close</button>
-      <button class="order-btn" id="orderBtn" onclick="placeOrder()">Place Order</button>
+      <button class="order-btn" id="orderBtn" onclick="placeOrder()">Submit Order</button>
     </div>
   </div>
 </div>
@@ -185,33 +212,160 @@ setTimeout(()=>{document.getElementById('loadingScreen').style.display='none';},
 
 let cart={}, notificationsEnabled=true, updateDay='';
 const emailAddress='newbikepoint02@gmail.com', phoneNumber='+919210851432', HANDLING_CHARGE=2;
-const SALE_START=new Date('2026-07-20T15:00:00');
-const SALE_END=new Date('2026-07-20T16:00:00');
+const SALE_START=new Date(2026, 6, 20, 15, 0, 0);
+const SALE_END=new Date(2026, 6, 20, 16, 0, 0);
 const SALE_PLAN=[{startMin:0,endMin:2,label:'Sale normal hai'},{startMin:2,endMin:3,label:'Flash sale shuru!'},{startMin:3,endMin:5,label:'Sale wapas normal'},{startMin:5,endMin:6,label:'Dusra flash sale!'},{startMin:6,endMin:60,label:'Sale normal till end'}];
-function notify(msg){ if(!notificationsEnabled) return; const n=document.getElementById('notification'); n.innerText=msg; n.classList.add('show'); clearTimeout(window.nt); window.nt=setTimeout(()=>n.classList.remove('show'),2600); }
+
+function notify(msg){
+  if(!notificationsEnabled) return;
+  const n=document.getElementById('notification');
+  n.innerText=msg;
+  n.classList.add('show');
+  clearTimeout(window.nt);
+  window.nt=setTimeout(()=>n.classList.remove('show'),2600);
+}
+
 function updateSaleUI(){
-  const banner=document.getElementById('saleBanner'), timer=document.getElementById('saleTimer'), stageText=document.getElementById('saleStageText'), bannerWrap=document.getElementById('bannerWrap'), now=new Date();
-  if(now>=SALE_END){ banner.style.display='none'; bannerWrap.style.display='none'; return false; }
+  const banner=document.getElementById('saleBanner');
+  const timer=document.getElementById('saleTimer');
+  const stageText=document.getElementById('saleStageText');
+  const bannerWrap=document.getElementById('bannerWrap');
+  const now=new Date();
+
+  if(now>=SALE_END){
+    banner.style.display='none';
+    bannerWrap.style.display='none';
+    stageText.innerText='Sale ended';
+    timer.innerText='00:00:00';
+    return false;
+  }
+
   if(now<SALE_START){
     banner.style.display='block';
     bannerWrap.style.display='block';
-    timer.innerText=`${String(Math.floor((SALE_START-now)/3600000)).padStart(2,'0')}:${String(Math.floor(((SALE_START-now)%3600000)/60000)).padStart(2,'0')}:${String(Math.floor(((SALE_START-now)%60000)/1000)).padStart(2,'0')}`;
+    const diff=SALE_START-now;
+    timer.innerText=
+      String(Math.floor(diff/3600000)).padStart(2,'0')+':' +
+      String(Math.floor((diff%3600000)/60000)).padStart(2,'0')+':' +
+      String(Math.floor((diff%60000)/1000)).padStart(2,'0');
     stageText.innerText='Countdown to flash sale';
     return true;
   }
+
   const totalSec=Math.max(0,Math.floor((SALE_END-now)/1000));
-  timer.innerText=`${String(Math.floor(totalSec/3600)).padStart(2,'0')}:${String(Math.floor((totalSec%3600)/60)).padStart(2,'0')}:${String(totalSec%60).padStart(2,'0')}`;
+  timer.innerText=
+    String(Math.floor(totalSec/3600)).padStart(2,'0')+':' +
+    String(Math.floor((totalSec%3600)/60)).padStart(2,'0')+':' +
+    String(totalSec%60).padStart(2,'0');
+
   const elapsedMin=(now-SALE_START)/60000;
   const stage=SALE_PLAN.find(x=>elapsedMin>=x.startMin&&elapsedMin<x.endMin);
   if(stage) stageText.innerText=stage.label;
+
   banner.style.display='block';
   bannerWrap.style.display='block';
   return true;
 }
-function renderShop(filterTerm=""){ const mainDiv=document.getElementById('main'); mainDiv.innerHTML=""; for(const category in inventory){ const filteredItems=inventory[category].filter(item=>item.name.toLowerCase().includes(filterTerm.toLowerCase())); if(filteredItems.length===0) continue; const catTitle=document.createElement('div'); catTitle.className='category-title'; catTitle.innerText=`${category} (${filteredItems.length})`; mainDiv.appendChild(catTitle); const container=document.createElement('div'); container.className='container'; filteredItems.forEach(item=>{ const qty=cart[item.name]?cart[item.name].qty:0; const card=document.createElement('div'); card.className='card'; card.innerHTML=`<div><img class="product-img" src="${item.img}" alt="${item.name}" onerror="this.src='https://placehold.co/150?text=No+Image'"><h4>${item.name}</h4></div><div><div class="price">₹${item.price}</div><div class="handling-note">Base: ₹${item.price} + ₹${HANDLING_CHARGE} handling charge</div><div class="btn-group"><button class="add-btn" onclick="addToCart('${item.name.replace(/'/g,"\\'")}', ${item.price})">${qty > 0 ? `Add (${qty})` : 'Add To Cart'}</button><button class="remove-btn ${qty > 0 ? 'active' : ''}" onclick="removeFromCart('${item.name.replace(/'/g,"\\'")}')">×</button></div></div>`; container.appendChild(card); }); mainDiv.appendChild(container); } }
-function addToCart(name, price){ if(cart[name]) cart[name].qty++; else cart[name]={price,qty:1}; updateCartDOM(); renderShop(document.getElementById('searchInput').value); }
-function removeFromCart(name){ if(!cart[name]) return; cart[name].qty--; if(cart[name].qty<=0) delete cart[name]; updateCartDOM(); renderShop(document.getElementById('searchInput').value); }
-function updateCartDOM(){ let count=0, subtotal=0, handlingTotal=0; const cartItemsDiv=document.getElementById('cartItems'), checkoutList=document.getElementById('checkoutList'); cartItemsDiv.innerHTML=""; checkoutList.innerHTML=""; for(const name in cart){ count+=cart[name].qty; const totalItemCost=cart[name].price*cart[name].qty; subtotal+=totalItemCost; handlingTotal+=HANDLING_CHARGE*cart[name].qty; const row=document.createElement('div'); row.className='cart-item'; row.innerHTML=`<div class="item-details"><div class="item-name">${name}</div><div class="item-breakdown">₹${cart[name].price} × ${cart[name].qty}</div></div><div style="font-weight:bold; align-self:center;">₹${totalItemCost}</div>`; cartItemsDiv.appendChild(row); const c=document.createElement('div'); c.className='checkout-item'; c.innerHTML=`<span>${name} × ${cart[name].qty}</span><span>₹${totalItemCost}</span>`; checkoutList.appendChild(c); } document.getElementById('cartCount').innerText=count; const badge=document.getElementById('badge'); if(count>0){ badge.innerText=count; badge.style.display='block'; } else { badge.style.display='none'; cartItemsDiv.innerHTML="<p style='text-align:center;color:#666;padding:20px 0;'>Your cart is empty.</p>"; checkoutList.innerHTML="<p style='text-align:center;color:#666;padding:10px 0;'>No items in checkout.</p>"; } document.getElementById('subtotalAmount').innerText=`₹${subtotal}`; document.getElementById('handlingAmount').innerText=`₹${handlingTotal}`; document.getElementById('totalBill').innerText=`₹${subtotal+handlingTotal}`; }
+
+function renderShop(filterTerm=""){
+  const mainDiv=document.getElementById('main');
+  mainDiv.innerHTML="";
+
+  for(const category in inventory){
+    const filteredItems=inventory[category].filter(item=>item.name.toLowerCase().includes(filterTerm.toLowerCase()));
+    if(filteredItems.length===0) continue;
+
+    const catTitle=document.createElement('div');
+    catTitle.className='category-title';
+    catTitle.innerText=`${category} (${filteredItems.length})`;
+    mainDiv.appendChild(catTitle);
+
+    const container=document.createElement('div');
+    container.className='container';
+
+    filteredItems.forEach(item=>{
+      const qty=cart[item.name]?cart[item.name].qty:0;
+      const safeName=item.name.replace(/'/g,"\\'");
+
+      const card=document.createElement('div');
+      card.className='card';
+      card.innerHTML=
+        '<div>'+
+          '<img class="product-img" src="'+item.img+'" alt="'+item.name+'" onerror="this.src=\'https://placehold.co/150?text=No+Image\'">'+
+          '<h4>'+item.name+'</h4>'+
+        '</div>'+
+        '<div>'+
+          '<div class="price">₹'+item.price+'</div>'+
+          '<div class="handling-note">Base: ₹'+item.price+' + ₹'+HANDLING_CHARGE+' handling charge</div>'+
+          '<div class="btn-group">'+
+            '<button class="add-btn" onclick="addToCart(\''+safeName+'\', '+item.price+')">'+(qty>0?('Add ('+qty+')'):'Add To Cart')+'</button>'+
+            '<button class="remove-btn '+(qty>0?'active':'')+'" onclick="removeFromCart(\''+safeName+'\')">×</button>'+
+          '</div>'+
+        '</div>';
+      container.appendChild(card);
+    });
+
+    mainDiv.appendChild(container);
+  }
+}
+
+function addToCart(name, price){
+  if(cart[name]) cart[name].qty++;
+  else cart[name]={price,qty:1};
+  updateCartDOM();
+  renderShop(document.getElementById('searchInput').value);
+}
+
+function removeFromCart(name){
+  if(!cart[name]) return;
+  cart[name].qty--;
+  if(cart[name].qty<=0) delete cart[name];
+  updateCartDOM();
+  renderShop(document.getElementById('searchInput').value);
+}
+
+function updateCartDOM(){
+  let count=0, subtotal=0, handlingTotal=0;
+  const cartItemsDiv=document.getElementById('cartItems');
+  const checkoutList=document.getElementById('checkoutList');
+  cartItemsDiv.innerHTML="";
+  checkoutList.innerHTML="";
+
+  for(const name in cart){
+    count+=cart[name].qty;
+    const totalItemCost=cart[name].price*cart[name].qty;
+    subtotal+=totalItemCost;
+    handlingTotal+=HANDLING_CHARGE*cart[name].qty;
+
+    const row=document.createElement('div');
+    row.className='cart-item';
+    row.innerHTML=
+      '<div class="item-details">'+
+        '<div class="item-name">'+name+'</div>'+
+        '<div class="item-breakdown">₹'+cart[name].price+' × '+cart[name].qty+'</div>'+
+      '</div>'+
+      '<div style="font-weight:bold; align-self:center;">₹'+totalItemCost+'</div>';
+    cartItemsDiv.appendChild(row);
+
+    const c=document.createElement('div');
+    c.className='checkout-item';
+    c.innerHTML='<span>'+name+' × '+cart[name].qty+'</span><span>₹'+totalItemCost+'</span>';
+    checkoutList.appendChild(c);
+  }
+
+  document.getElementById('badge').innerText=count;
+  document.getElementById('badge').style.display=count>0?'block':'none';
+
+  if(count===0){
+    cartItemsDiv.innerHTML="<p style='text-align:center;color:#666;padding:20px 0;'>Your cart is empty.</p>";
+    checkoutList.innerHTML="<p style='text-align:center;color:#666;padding:10px 0;'>No items in checkout.</p>";
+  }
+
+  document.getElementById('subtotalAmount').innerText='₹'+subtotal;
+  document.getElementById('handlingAmount').innerText='₹'+handlingTotal;
+  document.getElementById('totalBill').innerText='₹'+(subtotal+handlingTotal);
+}
+
 function openCart(){document.getElementById('cartModal').style.display='flex';}
 function closeCart(){document.getElementById('cartModal').style.display='none';}
 function openSettings(){document.getElementById('settingsModal').style.display='flex';}
@@ -219,11 +373,40 @@ function closeSettings(){document.getElementById('settingsModal').style.display=
 function clearCart(){cart={};updateCartDOM();renderShop();closeSettings();notify('Cart cleared');}
 function toggleDarkMode(){document.body.classList.toggle('dark');document.getElementById('darkBtn').innerText=document.body.classList.contains('dark')?'ON':'OFF';}
 function toggleNotifications(){notificationsEnabled=!notificationsEnabled;document.getElementById('notifyBtn').innerText=notificationsEnabled?'ON':'OFF';}
-function setMonthlyUpdate(day){ updateDay=day; document.getElementById('updateStatus').innerText=`Monthly update selected: ${day}th`; notify(`Monthly update set to ${day}th`); }
-function detectMyLocation(){ if(!navigator.geolocation){ notify('Geolocation not supported'); return; } navigator.geolocation.getCurrentPosition(pos=>{ const lat=pos.coords.latitude, lng=pos.coords.longitude; document.getElementById('locationStatus').innerText=`Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}`; document.getElementById('mapFrame').src=`https://www.google.com/maps?q=${lat},${lng}&z=16&output=embed`; notify('Location detected'); },()=>notify('Location access denied')); }
-function goToCurrentLocation(){ const map=document.getElementById('mapFrame'); map.src='https://www.google.com/maps?q=98F6%2B237%2C%20Irgu%20Toli%20Rd%2C%20Kishore%20Ganj%2C%20Kumhartoli%2C%20Ranchi%2C%20Jharkhand%20834001%2C%20India&z=16&output=embed'; document.getElementById('locationStatus').innerText='98F6+237, Irgu Toli Rd, Kishore Ganj, Kumhartoli, Ranchi, Jharkhand 834001, India'; notify('Map reset'); }
-function sendAlertEmail(){window.location.href=`mailto:${emailAddress}?subject=Blinkart%20Alert&body=Emergency%20or%20Alert%20Triggered%20from%20Store%20Front.`;}
-function placeOrder(){window.location.href=`tel:${phoneNumber}`;}
+function setMonthlyUpdate(day){ updateDay=day; document.getElementById('updateStatus').innerText='Monthly update selected: '+day+'th'; notify('Monthly update set to '+day+'th'); }
+function detectMyLocation(){
+  if(!navigator.geolocation){ notify('Geolocation not supported'); return; }
+  navigator.geolocation.getCurrentPosition(pos=>{
+    const lat=pos.coords.latitude, lng=pos.coords.longitude;
+    document.getElementById('locationStatus').innerText='Lat: '+lat.toFixed(5)+', Lng: '+lng.toFixed(5);
+    document.getElementById('mapFrame').src='https://www.google.com/maps?q='+lat+','+lng+'&z=16&output=embed';
+    notify('Location detected');
+  },()=>notify('Location access denied'));
+}
+function goToCurrentLocation(){
+  document.getElementById('mapFrame').src='https://www.google.com/maps?q=98F6%2B237%2C%20Irgu%20Toli%20Rd%2C%20Kishore%20Ganj%2C%20Kumhartoli%2C%20Ranchi%2C%20Jharkhand%20834001%2C%20India&z=16&output=embed';
+  document.getElementById('locationStatus').innerText='98F6+237, Irgu Toli Rd, Kishore Ganj, Kumhartoli, Ranchi, Jharkhand 834001, India';
+  notify('Map reset');
+}
+function sendAlertEmail(){window.location.href='mailto:'+emailAddress+'?subject=Blinkart%20Alert&body=Emergency%20or%20Alert%20Triggered%20from%20Store%20Front.';}
+function placeOrder(){
+  const name=document.getElementById('customerName').value.trim();
+  const email=document.getElementById('customerEmail').value.trim();
+  const phone=document.getElementById('customerPhone').value.trim();
+  const address=document.getElementById('customerAddress').value.trim();
+  if(!name || !email || !phone || !address){ notify('Please fill all delivery details'); return; }
+  const subject='Blinkart Order';
+  const body=
+    'Name: '+name+'%0D%0A'+
+    'Email: '+email+'%0D%0A'+
+    'Phone: '+phone+'%0D%0A'+
+    'Address: '+address+'%0D%0A'+
+    'Payment Method: Cash%0D%0A%0D%0A'+
+    'Cart Items:%0D%0A'+
+    Object.keys(cart).map(k=>k+' x '+cart[k].qty+' = ₹'+(cart[k].price*cart[k].qty)).join('%0D%0A');
+  window.location.href='mailto:'+emailAddress+'?subject='+encodeURIComponent(subject)+'&body='+body;
+}
+
 document.getElementById('searchInput').addEventListener('input', e=>renderShop(e.target.value));
 
 const inventory = {
@@ -314,7 +497,11 @@ const inventory = {
     {name:"Teacher Day Special Octane Red Pen 12pcs",price:125,img:"https://images.meesho.com/images/products/369023674/92tan_512.jpg"},
     {name:"Writo Meter Silkina Ball Pen",price:20,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbmBthNvjSmOxrew54Q_vnniR4nWHyKk4PohlKc0YdMe3wg9ye9ZFDqa98&s=10"},
     {name:"Whrito Meter Jumbo Gel Pen",price:33,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYSTMX6l-IxYbQvLNIlU6V6YuN6JYFLCrP6_E3uLA2YCGQOkNbEO2Ab99&s"},
-    {name:"Luxor Multicolor Pen",price:199,img:"https://m.media-amazon.com/images/I/71KO0UYdoBL._AC_UF1000,1000_QL80_.jpg"}
+    {name:"Luxor Multicolor Pen",price:199,img:"https://m.media-amazon.com/images/I/71KO0UYdoBL._AC_UF1000,1000_QL80_.jpg"},
+    {name:"doms inxo gel",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfTSuxsordjyX_x399hPtt2ya2c_LJOPgOyb8oFWuzig&s"},
+    {name:"doms inxtra wood",price:6,img:"https://m.media-amazon.com/images/I/71TC6Xd4OYL.jpg"},
+    {name:"doms neoklik ball pen",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0J7qJbwHE8-uefrF1Q9xZ1NM5aT4bgdhEQHM3Lmu66Q&s"},
+    {name:"rolla ink fluid pens",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_J64LdqFkEnnCUcLdGqQNjIvgtUdVXX3DxZBClN63Fw&s=10"},
   ],
   "Multicolor Pens":[
     {name:"Multicolor Ballpoint Pen",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw6dlvFluhgpZ-V5a8qXtIRaaRi5fug1MDmzo4pvS0vQ&s=10"},
@@ -398,7 +585,7 @@ const inventory = {
     {name:"A4 Hard Sheet",price:6,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWWlNlap9kE1B9is0tpxyvBuPe8zXwBy7zgA&s"},
     {name:"A4 Colour Hard Sheet",price:6,img:"https://m.media-amazon.com/images/I/71BS8A1eeoL.jpg"},
     {name:"Stickers",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEMzDZ8iuJFNE2DU2bLRb9ijQ2GYsMuq6DDw&s"},
-    {name:"Markers",price:10,img:"https://sbcstore.in/wp-content/uploads/2022/01/71OT5CpK8kL.jpg"},
+    {name:"Markers",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdt8cKug6X2EZRuHZvarth07MPrI5BSI3_ThW6Nh-QVA&s=10"},
     {name:"Fevicol 1",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLs0Mh0ygdYWADV-HViLoVnRgmFk3anaYF0h2x_zmnWA&s=10"},
     {name:"Glue Stick 1",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSppCFYf4u-I6uFG8DmCYKCMGiKtsRScg_O8fBwfVLLg&s"},
     {name:"apsara avenjers eraser",price:5,img:"https://truewholesale.in/storage/product-images/17206042500.jpg"},
@@ -474,7 +661,8 @@ const inventory = {
     {name:"Gold Pokemon Card",price:160,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROoJXH1BvNA9w8Xc0NjaisJYnXMw7q5uN5rg&s"},
     {name:"Spiderman Cards",price:342,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQy8joIYcL2NWJr_wc_gTBxO386hM1-v2PyQ&s"},
     {name:"Spiderman Card 2",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrlJoJQGjGt6OWczOQdWvGjpx4QEr1-YJmYw&s"},
-    {name:"pokemon rainbow Card",price:199,img:"https://images.meesho.com/images/products/365782062/begqk_512.webp?width=512"}
+    {name:"pokemon rainbow Card",price:199,img:"https://images.meesho.com/images/products/365782062/begqk_512.webp?width=512"},
+    {name:"namruto gaming cards",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp7D2plzr4nHMIDpqGY8hAhq8tamyXgHEHA2PvzHxiJg&s=10"},
   ],
   "Notebooks":[
     {name:"Zingy Apple 140 Pages",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyptGB4Zv1DZMwZua4O5vwn2cBH2JrY0mjhw&s"},
