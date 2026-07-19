@@ -285,23 +285,21 @@ function renderShop(filterTerm=""){
 
     filteredItems.forEach(item=>{
       const qty=cart[item.name]?cart[item.name].qty:0;
-      const safeName=item.name.replace(/'/g,"\\'");
-
       const card=document.createElement('div');
       card.className='card';
-      card.innerHTML=
-        '<div>'+
-          '<img class="product-img" src="'+item.img+'" alt="'+item.name+'" onerror="this.src=\'https://placehold.co/150?text=No+Image\'">'+
-          '<h4>'+item.name+'</h4>'+
-        '</div>'+
-        '<div>'+
-          '<div class="price">₹'+item.price+'</div>'+
-          '<div class="handling-note">Base: ₹'+item.price+' + ₹'+HANDLING_CHARGE+' handling charge</div>'+
-          '<div class="btn-group">'+
-            '<button class="add-btn" onclick="addToCart(\''+safeName+'\', '+item.price+')">'+(qty>0?('Add ('+qty+')'):'Add To Cart')+'</button>'+
-            '<button class="remove-btn '+(qty>0?'active':'')+'" onclick="removeFromCart(\''+safeName+'\')">×</button>'+
-          '</div>'+
-        '</div>';
+      card.innerHTML = `
+        <div>
+          <img class="product-img" src="${item.img}" alt="${item.name}" onerror="this.src='https://placehold.co/150?text=No+Image'">
+          <h4>${item.name}</h4>
+        </div>
+        <div>
+          <div class="price">₹${item.price}</div>
+          <div class="handling-note">Base: ₹${item.price} + ₹${HANDLING_CHARGE} handling charge</div>
+          <div class="btn-group">
+            <button class="add-btn" onclick="addToCart('${item.name.replace(/'/g,"\\'")}', ${item.price})">${qty>0?`Add (${qty})`:'Add To Cart'}</button>
+            <button class="remove-btn ${qty>0?'active':''}" onclick="removeFromCart('${item.name.replace(/'/g,"\\'")}')">×</button>
+          </div>
+        </div>`;
       container.appendChild(card);
     });
 
@@ -491,7 +489,7 @@ const inventory = {
     {name:"Luxor Graphic 0.5",price:15,img:"https://rukmini1.flixcart.com/image/1500/1500/kwpam4w0/pen/t/u/y/graphic-plus-ball-pen-black-luxor-original-imag9bhds2wgyxhm.jpeg?q=70"},
     {name:"doms inxpop ball pen",price:10,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/pen/z/a/6/inxpop-ball-point-pens-doms-original-imahjmh73htq4tkm.jpeg?q=70"},
     {name:"doms inxklik ball pen",price:10,img:"https://rukmini1.flixcart.com/image/1500/1500/xif0q/pen/m/v/k/80861-doms-original-imahjtw4jjahxb7v.jpeg?q=70"},
-    {name:"liquid ggt pop",price:10,img:"https://www.rapiddeliveryservices.in/uploads/webp/liquid_gt_pop_liquid_ink_pen_blue_57447-.webp"},
+    {name:"liquid gt pop",price:10,img:"https://www.rapiddeliveryservices.in/uploads/webp/liquid_gt_pop_liquid_ink_pen_blue_57447-.webp"},
     {name:"liquid gt ink pen",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTjBf74K6aghp-CK3bqLacQN6eJ6pAamBkFA&s"},
     {name:"Jottek Classic",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3Ajn0UUdbMEK6kb1-uURnN9phHje4jlJK2nWzWgEIDH0ZckZK8JxunP0&s=10"},
     {name:"Teacher Day Special Octane Red Pen 12pcs",price:125,img:"https://images.meesho.com/images/products/369023674/92tan_512.jpg"},
@@ -520,7 +518,43 @@ const inventory = {
     {name:"Art Kit",price:1000,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLBiI7bzZJfSVuP_gkx92apmAHF-YzHVMQJw&s"},
     {name:"Stationery Kit",price:150,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN3d8VNIhigtOlQJtNUYA3OqqbpeMfExZhMg&s"},
     {name:"Stationery Kit Small",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU3ddRtqcMBlMtpIZ1EUpgF7nlkgULfLTf_A&s"},
-    {name:"Art Strokes Doms",price:225,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqAxltZrwtA25pTir877uL-hOru0Sc9I0VGg&s"}
+    {name:"Art Strokes Doms",price:225,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqAxltZrwtA25pTir877uL-hOru0Sc9I0VGg&s"},
+    ],
+    "Pencils & Mechanical":[
+    {name:"Apsara Princess Pencils",price:90,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo08TiHKy6NP6-STiZJweuoFY9jzDgzaUzAqnak-DB1A&s=10"},
+    {name:"Doms Groove",price:65,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReY_jcz3xwETatZV7zTRBOt84pLECUa4Mc0nOfya_NJw&s=10"},
+    {name:"Apsara Spacekids",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs_fR3-4eqYvKURICXGEI6AWATt2Gr8rrO7cBnUxz7cA&s=10"},
+    {name:"Doms Xi Pencils",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFMsrnGlcqzaTYNSuPpOsacIwZm9hIcEj0k6RrsH2oDw&s=10"},
+    {name:"Apsara Platinum",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqXJyG82OEfqESQOg90OB7jJ2pzbn0fzf_9MTwsNeE2GVeiXXrWKaNd9kJ&s=10"},
+    {name:"Natraj Bold",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR04sY1LJZ_qFgQ0Z6VOYp1OW2UB4UL2Xu3yYwo7R08iQ&s=10"},
+    {name:"Flair Penpencil 0.7",price:20,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS59QWccV_dyqux0RoGZEdIa1EQPAhvEKrBVQyolV9rYA&s=10"},
+    {name:"Hauser 2.0 Penpencils",price:20,img:"https://www.rapiddeliveryservices.in/uploads/webp/hexon_mechanical_pencil_20_mm_62408-.webp"},
+    {name:"Flair Penpencil 2.0",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSDLeBPynJVjeZM52zwV2b1TBvfa-dQMRdiP8Kib9TtA&s=10"},
+    {name:"Flair Glow 2.0 Penpencils",price:10,img:"https://m.media-amazon.com/images/I/41bDKA0w5IL._AC_UF1000,1000_QL80_.jpg"},
+    {name:"Flair Diva 2.0 Penpencils",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7SWZFlF5W5J8edpEhRDk5Mjr2Ze7MGE9fxNKyWsFZaQ&s=10"},
+    {name:"Flair Thrill 2.0 Penpencils",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9j5VNsEE4XpvRFqbTZp_Tt5HEiEArg5jAK-yBk1CgsA&s=10"},
+    {name:"Apsara Avenjers Pencils",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQodkAnfjlR9sMyCt-u1GtEWMHKmo2mBYd_lTqhZ8IUg&s=10"},
+    {name:"Doms Karbon Pencils",price:65,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG-U5XtQ72inI0mxb9IgklVMxv_W6axURdSAfO_DhQuA&s=10"},
+    {name:"Flair Carbonix 0.7 Penpencils",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzdY7mWhoqiJxNNtNDr_lXR341hYv9AohBw_H6Yvzzuw&s=10"},
+    {name:"Hauser Superdark 0.7 Penpencils",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbFihJt7BCS_jNcyRkvpLxGLh3L0ojHYOoJRrg8epZnw&s=10"},
+    {name:"Doms Fusion Pencils",price:70,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQldBKBTk9fep3ejSZXjyvEp9spSeWZRUsMFB82Pq_rQw&s=10"},
+    {name:"Drawing Pencils",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOU9BpCsK6ND1TCn7L9TDXyb2Lhi9_73Obklz5Iq5WHQ&s=10"},
+    {name:"Hauser Pencils",price:100,img:"https://www.flipkart.com/hauser-xo-2-0mm-triangular-mechanical-pencil-set-20-pencils-inbuilt-sharpener/p/itmbd6adb505be45"},
+    {name:"Rynolds 0.7 mm Penpencil",price:6,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT19u4yVWZaN_4431_1LtoUacP5IansLXMoxl1GwzEuGw&s=10"},
+    {name:"Flair Tuff 0.9 mm Penpencils",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnpEHzGmeL9NC0Q0b5mIazSVKNDtBlA1_QckwWPnFrZg&s=10"},
+    {name:"Doms Neon Pencils",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGSfy0xj6LmQnEM7r1TwntPerVSK_a1Fc5XXTCkROLjCu7Kda4yC3mFJmg&s=10"},
+    {name:"Apsara Writing Pencils",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQr5v3rQjBZbncwqZWIAtjYP1TLCDRHyw63004JzR2Yg&s=10"},
+    {name:"Unomax Clikk 0.7 mm Penpencils",price:10,img:"https://www.giftsandpens.com/cdn/shop/files/unomax-click-it-pearl-mechanical-pencil-0-7mm-294.webp?v=1779687479"},
+    {name:"Apsara Matt Magic Pencils",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvd-RCmlM1E5l8j5WYd50j09LfBqHcyst7NWRs7KNEDQ&s=10"},
+    {name:"Apsara Gold Pencils",price:55,img:"https://topperskit.com/cdn/shop/files/162_b680c883-daaa-4a06-9fe1-049a23d3b474.jpg?v=1761888736"},
+    {name:"Flair Play 2.0 mm Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRNujgUQ1Ex7Jf_UeHipLb60wBkBW3-HBjCqEt8CismA&s=10"},
+    {name:"Red Margin",price:55,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIfPp7-jA6YfU87lUIzDTJRqmN653fQEUHy-lOGFVaqQWCd7FTQ4-u_Io3&s=10"},
+    {name:"Blue Margin",price:55,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cxaS5r3Mq2VjKV4fpS-Y5tKHWy7tg14hfbtRVqqSuQ&s=10"},
+    {name:"Red Margin Single Piece",price:7,img:"https://m.media-amazon.com/images/I/615USQqrqrL.jpg"},
+    {name:"Blue Margin Single Piece",price:7,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROZI3zKqqvEd_AC1Lr7grFWvwNgjynl4K1njWxErEBMrdLxUjZR9r8ml5d&s=10"},
+    {name:"Doms 0.7 Penpencils",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZFy7io6mRxIV99HsbK7FiipXUxujbmGW9dto1hC8f2w&s=10"},
+    {name:"Flair Move 0.7 mm Penpencils",price:20,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgzDatzt88aXaNxR-8DUcyFzBYHyTNaVvKX4gSit3_Ti8H1W7kdizcFq9r&s=10"},
+    {name:"doms y1 pencils",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDp4_K2hwPi56ul-UiCfMpUuBeOFCQdoujwkGNfHxnXg&s=10"},
   ],
   "Essentials":[
     {name:"Doms Colour Plate",price:100,img:"https://m.media-amazon.com/images/I/819683ID-vL.jpg"},
@@ -611,7 +645,8 @@ const inventory = {
     {name:"doms sports eraser",price:15,img:"https://lathiyanstationery.com/wp-content/uploads/2025/05/DOMS-Sports-Car-Non-Toxic-Eraser-Set-of-12-Multicolor-n1.jpg"},
     {name:"doms erasers set",price:59,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJVN5dDDzQ4v-1XzusG6WO9V7-_P7qYLkd8w&s"},
     {name:"doms neon eraser set",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVAP_bQ2IhtfZo9TiJEj6s5y6dPAm39l8xbg&s"},
-    {name:"doms eraser",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_NyVvTRjF-xS5H1s6TQGs3Ni30Dbph7EOlg&s"}
+    {name:"doms eraser",price:5,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_NyVvTRjF-xS5H1s6TQGs3Ni30Dbph7EOlg&s"},
+    {name:"doms stationery pencilbox kit",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNvakhceOf6d1CWoGt1ySex957ryKky0h_Yexs_qUm1A&s=10"}
   ],
   "Colors & Art":[
     {name:"Acrylic Colours",price:350,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVQ7qSipKnN3PS5ozWNJfYnyLehV5JHQWOEqtuxWn5wwUFbWF7MQ_guilk&s=10"},
@@ -662,7 +697,7 @@ const inventory = {
     {name:"Spiderman Cards",price:342,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQy8joIYcL2NWJr_wc_gTBxO386hM1-v2PyQ&s"},
     {name:"Spiderman Card 2",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrlJoJQGjGt6OWczOQdWvGjpx4QEr1-YJmYw&s"},
     {name:"pokemon rainbow Card",price:199,img:"https://images.meesho.com/images/products/365782062/begqk_512.webp?width=512"},
-    {name:"namruto gaming cards",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp7D2plzr4nHMIDpqGY8hAhq8tamyXgHEHA2PvzHxiJg&s=10"},
+    {name:"naruto gaming cards",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp7D2plzr4nHMIDpqGY8hAhq8tamyXgHEHA2PvzHxiJg&s=10"},
   ],
   "Notebooks":[
     {name:"Zingy Apple 140 Pages",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyptGB4Zv1DZMwZua4O5vwn2cBH2JrY0mjhw&s"},
