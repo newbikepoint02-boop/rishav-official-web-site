@@ -58,54 +58,7 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 .search-box{margin-top:12px;}
 .search-box input{width:100%;padding:13px;border-radius:10px;border:2px solid var(--primary);font-size:15px;outline:none;background:rgba(255,249,240,.95);}
 .search-box input:focus{box-shadow:0 0 0 3px rgba(255,102,0,.15);}
-.sale-banner{
-  margin:12px 10px 0;
-  padding:18px 14px;
-  border-radius:22px;
-  border:4px solid #fff;
-  background:linear-gradient(135deg,#ff2d00,#ffb800,#fff200);
-  color:#111;
-  box-shadow:0 0 0 4px #ff6600,0 12px 30px rgba(0,0,0,.22);
-  position:sticky;
-  top:88px;
-  z-index:998;
-  overflow:hidden;
-  animation:pulseBanner 1.2s infinite alternate;
-}
-.sale-banner.big{padding:28px 18px;transform:scale(1.03);}
-.sale-banner.small{padding:10px 12px;transform:scale(.96);}
-.sale-banner::before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 180deg, rgba(255,255,255,.28), transparent, rgba(255,255,255,.38), transparent);animation:shine 3s linear infinite;}
-@keyframes shine{to{transform:rotate(360deg);}}
-@keyframes pulseBanner{from{transform:scale(1);}to{transform:scale(1.01);}}
-.sale-banner-inner{position:relative;z-index:1;text-align:center;}
-.sale-title{font-size:28px;font-weight:900;letter-spacing:1px;text-shadow:0 2px 0 rgba(255,255,255,.55);}
-.sale-subtitle{font-size:16px;margin-top:6px;font-weight:800;}
-.sale-timer{
-  margin-top:12px;
-  display:inline-block;
-  padding:12px 18px;
-  border-radius:999px;
-  background:#111;
-  color:#fff;
-  font-size:22px;
-  font-weight:900;
-  letter-spacing:2px;
-  border:3px solid #fff;
-  min-width:240px;
-  box-shadow:0 6px 16px rgba(0,0,0,.25);
-}
-.banner{padding:15px 15px 0;}
-.banner img{
-  width:100%;
-  height:auto;
-  max-height:280px;
-  object-fit:cover;
-  object-position:center;
-  border-radius:18px;
-  border:3px solid var(--primary);
-  box-shadow:0 4px 12px rgba(0,0,0,.12);
-  display:block;
-}
+.sale-banner,.banner{display:none !important;}
 .category-title{background:#fff0b0;margin:18px 15px 10px;padding:12px;font-size:20px;font-weight:bold;border-left:6px solid var(--primary);border-radius:10px;color:#111;}
 .container{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px;padding:0 15px 20px;}
 .card{background:rgba(255,255,255,.92);border:2px solid var(--primary);border-radius:18px;padding:15px;text-align:center;box-shadow:0 10px 22px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:space-between;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
@@ -120,7 +73,7 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 .remove-btn{flex:1;background:#ddd;border:none;border-radius:10px;font-weight:bold;cursor:pointer;color:#111;}
 .remove-btn.active{background:red;color:white;}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center;z-index:9999;padding:14px;}
-.modal-content{background:white;width:92%;max-width:620px;padding:20px;border-radius:18px;border:3px solid var(--primary);max-height:85vh;overflow:auto;}
+.modal-content{background:white;width:92%;max-width:760px;padding:20px;border-radius:18px;border:3px solid var(--primary);max-height:85vh;overflow:auto;}
 .modal-content h2{margin-bottom:15px;color:var(--primary);}
 .cart-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed #ccc;}
 .cart-item .item-details{text-align:left;}
@@ -152,6 +105,11 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 .checkout-list{margin-top:12px;max-height:220px;overflow:auto;border:1px solid #eee;border-radius:12px;padding:10px;background:#fafafa;}
 .checkout-item{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #e6e6e6;font-size:13px;}
 .checkout-item:last-child{border-bottom:none;}
+.bill-box{margin-top:14px;padding:14px;border:2px dashed var(--primary);border-radius:12px;background:#fffdf1;white-space:pre-wrap;line-height:1.6;}
+.map-card{margin-top:14px;border:2px solid var(--primary);border-radius:12px;overflow:hidden;}
+.map-card iframe{width:100%;height:240px;border:0;}
+.geo-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+.geo-chip{padding:8px 12px;border-radius:999px;background:#111;color:#fff;font-size:12px;font-weight:700;}
 </style>
 </head>
 <body>
@@ -170,26 +128,78 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
   <div class="search-box"><input type="text" id="searchInput" placeholder="Search Products"></div>
 </header>
 
-<div id="saleBanner" class="sale-banner small" style="display:block;">
-  <div class="sale-banner-inner">
-    <div class="sale-title">🔥 FLASH SALE 🔥</div>
-    <div class="sale-subtitle" id="saleStageText">Sale live now!</div>
-    <div class="sale-timer" id="saleTimer">00:06:22</div>
+<div id="main"></div>
+
+<div id="cartModal" class="modal">
+  <div class="modal-content">
+    <h2>🛍️ Your Cart</h2>
+    <div id="cartItems"></div>
+
+    <div class="summary-section">
+      <div class="summary-row"><span>Subtotal</span><span id="subtotalValue">₹0</span></div>
+      <div class="summary-row"><span>Handling</span><span id="handlingValue">₹0</span></div>
+      <div class="summary-row total"><span>Total</span><span id="totalValue">₹0</span></div>
+    </div>
+
+    <div class="checkout-list" id="checkoutList"></div>
+
+    <div class="bill-box" id="billBox">Bill preview will appear here after placing order.</div>
+
+    <div class="map-card">
+      <iframe id="cartMap" src="https://www.google.com/maps?q=India&z=5&output=embed" loading="lazy"></iframe>
+    </div>
+
+    <div class="geo-row">
+      <div class="geo-chip" id="geoStatus">Location: Detecting...</div>
+      <div class="geo-chip" id="geoCoords">Coords: -</div>
+    </div>
+
+    <div class="customer-care-box">
+      Customer Care: +919210851432
+    </div>
+
+    <div class="customer-form">
+      <h3>Customer Details</h3>
+      <div class="form-group">
+        <label for="customerName">Name</label>
+        <input id="customerName" type="text" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="customerPhone">Phone</label>
+        <input id="customerPhone" type="text" placeholder="Enter your phone number">
+      </div>
+      <div class="form-group">
+        <label for="customerAddress">Address</label>
+        <textarea id="customerAddress" placeholder="Enter your address"></textarea>
+      </div>
+    </div>
+
+    <div class="modal-buttons">
+      <button class="close-btn" onclick="closeCart()">Close</button>
+      <button class="order-btn" id="orderBtn" onclick="placeOrder()">Place Order</button>
+    </div>
   </div>
 </div>
 
-<div class="banner" id="bannerWrap" style="display:block;">
-  <img src="https://i.ibb.co/1tmxc88f/image.png" alt="Blinkart Banner" onerror="this.onerror=null;this.src='https://placehold.co/1200x300?text=Blinkart+Banner';">
+<div id="settingsModal" class="modal">
+  <div class="modal-content">
+    <h2>⚙️ Settings</h2>
+    <div class="setting-row"><span>Dark Mode</span><button onclick="toggleDarkMode()">Toggle</button></div>
+    <div class="setting-row"><span>Notifications</span><button onclick="toggleNotifications()">Toggle</button></div>
+    <div class="setting-row"><span>Clear Cart</span><button onclick="clearCart()">Clear</button></div>
+    <div class="setting-row"><span>Detect Location</span><button onclick="detectMyLocation()">Detect</button></div>
+    <div class="modal-buttons">
+      <button class="close-btn" onclick="closeSettings()">Close</button>
+    </div>
+  </div>
 </div>
-
-<div id="main"></div>
 
 <script>
 function showAdvertisement(){ alert("Blinkart Universe Sale Live!"); }
 setTimeout(()=>{document.getElementById('loadingScreen').style.display='none';},1500);
 
-let cart={}, notificationsEnabled=true, updateDay='';
-const emailAddress='newbikepoint02@gmail.com', phoneNumber='+919210851432', HANDLING_CHARGE=2;
+let cart={}, notificationsEnabled=true, updateDay='', currentLocation=null;
+const emailAddress='newbikepoint02@gmai.com', phoneNumber='+919210851432', HANDLING_CHARGE=2;
 
 function getSaleWindow(){
   const now=new Date();
@@ -217,42 +227,6 @@ function saleDiscount(){
 function applyDiscount(price){
   const d=saleDiscount();
   return d ? +(price*(100-d)/100).toFixed(2) : price;
-}
-
-function updateSaleUI(){
-  const banner=document.getElementById('saleBanner');
-  const timer=document.getElementById('saleTimer');
-  const stageText=document.getElementById('saleStageText');
-  const bannerWrap=document.getElementById('bannerWrap');
-  const { now, start, mid, end } = getSaleWindow();
-
-  if(now < start || now >= end){
-    banner.style.display='none';
-    bannerWrap.style.display='block';
-    timer.innerText='00:00:00';
-    stageText.innerText='Sale inactive';
-    return false;
-  }
-
-  banner.style.display='block';
-  bannerWrap.style.display='block';
-
-  const totalSec=Math.max(0,Math.floor((end-now)/1000));
-  timer.innerText=
-    String(Math.floor(totalSec/3600)).padStart(2,'0')+':' +
-    String(Math.floor((totalSec%3600)/60)).padStart(2,'0')+':' +
-    String(totalSec%60).padStart(2,'0');
-
-  if(now < mid){
-    banner.classList.remove('big');
-    banner.classList.add('small');
-    stageText.innerText='25% OFF - sale down';
-  } else {
-    banner.classList.remove('small');
-    banner.classList.add('big');
-    stageText.innerText='35% OFF - sale up';
-  }
-  return true;
 }
 
 function renderShop(filterTerm=""){
@@ -323,24 +297,93 @@ function updateCartDOM(){
   }
   document.getElementById('badge').innerText=count;
   document.getElementById('badge').style.display=count>0?'block':'none';
+  document.getElementById('subtotalValue').innerText='₹'+subtotal;
+  document.getElementById('handlingValue').innerText='₹'+handlingTotal;
+  document.getElementById('totalValue').innerText='₹'+(subtotal+handlingTotal);
+  document.getElementById('orderBtn').disabled=count===0;
+
   if(count===0){
     cartItemsDiv.innerHTML="<p style='text-align:center;color:#666;padding:20px 0;'>Your cart is empty.</p>";
     checkoutList.innerHTML="<p style='text-align:center;color:#666;padding:10px 0;'>No items in checkout.</p>";
   }
 }
 
-function openCart(){}
-function closeCart(){}
-function openSettings(){}
-function closeSettings(){}
+function updateLocationUI(lat, lng){
+  currentLocation={lat,lng};
+  document.getElementById('geoStatus').innerText='Location: Detected';
+  document.getElementById('geoCoords').innerText='Coords: '+lat.toFixed(5)+', '+lng.toFixed(5);
+  document.getElementById('cartMap').src='https://www.google.com/maps?q='+lat+','+lng+'&z=16&output=embed';
+}
+
+function detectMyLocation(){
+  if(!navigator.geolocation){
+    document.getElementById('geoStatus').innerText='Location: Not supported';
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    pos=>updateLocationUI(pos.coords.latitude, pos.coords.longitude),
+    ()=>document.getElementById('geoStatus').innerText='Location: Permission denied',
+    { enableHighAccuracy:true, timeout:10000, maximumAge:0 }
+  );
+}
+
+function buildBillText(){
+  const name=document.getElementById('customerName').value.trim();
+  const phone=document.getElementById('customerPhone').value.trim();
+  const address=document.getElementById('customerAddress').value.trim();
+  const items=Object.keys(cart).map(k=>`${k} x ${cart[k].qty} = ₹${cart[k].price*cart[k].qty}`).join('\n');
+  const subtotal=Object.values(cart).reduce((s,i)=>s+(i.price*i.qty),0);
+  const qtyTotal=Object.values(cart).reduce((s,i)=>s+i.qty,0);
+  const handling=qtyTotal*HANDLING_CHARGE;
+  const total=subtotal+handling;
+  const loc=currentLocation ? `${currentLocation.lat.toFixed(5)}, ${currentLocation.lng.toFixed(5)}` : 'Not detected';
+  return [
+    'Binkart Order Bill',
+    '-------------------',
+    `Name: ${name}`,
+    `Phone: ${phone}`,
+    `Address: ${address}`,
+    `Location: ${loc}`,
+    `Email: ${emailAddress}`,
+    '',
+    'Items:',
+    items || 'No items',
+    '',
+    `Subtotal: ₹${subtotal}`,
+    `Handling: ₹${handling}`,
+    `Total: ₹${total}`,
+    '',
+    'Map: https://www.google.com/maps'
+  ].join('\n');
+}
+
+function sendOrderEmail(subject, body){
+  const mailto='mailto:'+encodeURIComponent(emailAddress)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  window.location.href=mailto;
+}
+
+function placeOrder(){
+  const name=document.getElementById('customerName').value.trim();
+  const phone=document.getElementById('customerPhone').value.trim();
+  const address=document.getElementById('customerAddress').value.trim();
+  if(!name || !phone || !address){ alert('Please fill customer details'); return; }
+  if(Object.keys(cart).length===0){ alert('Cart is empty'); return; }
+  const bill=buildBillText();
+  document.getElementById('billBox').innerText=bill;
+  sendOrderEmail('Blinkart Order Bill', bill);
+  alert('Order prepared for email: ' + emailAddress);
+}
+
+function openCart(){ document.getElementById('cartModal').style.display='flex'; updateCartDOM(); detectMyLocation(); }
+function closeCart(){ document.getElementById('cartModal').style.display='none'; }
+function openSettings(){ document.getElementById('settingsModal').style.display='flex'; }
+function closeSettings(){ document.getElementById('settingsModal').style.display='none'; }
 function clearCart(){cart={};updateCartDOM();renderShop();notify('Cart cleared');}
 function toggleDarkMode(){document.body.classList.toggle('dark');}
 function toggleNotifications(){notificationsEnabled=!notificationsEnabled;}
 function setMonthlyUpdate(day){ updateDay=day; }
-function detectMyLocation(){}
-function goToCurrentLocation(){}
-function sendAlertEmail(){}
-function placeOrder(){}
+function goToCurrentLocation(){ detectMyLocation(); }
+function sendAlertEmail(){ notify('Alert sent'); }
 
 document.getElementById('searchInput').addEventListener('input', e=>renderShop(e.target.value));
 
@@ -459,7 +502,7 @@ const inventory = {
   ],
   "Pencils & Mechanical":[
     {name:"Apsara Princess Pencils",price:90,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo08TiHKy6NP6-STiZJweuoFY9jzDgzaUzAqnak-DB1A&s=10"},
-    {name:"Doms Groove",price:65,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReY_jcz3xwETatZV7zTRBOt84pLECUa4Mc0nOfya_NJw&s=10"},
+    {name:"Doms Groove",price:65,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReY_jcz3xwETatVZ7zTRBOt84pLECUa4Mc0nOfya_NJw&s=10"},
     {name:"Apsara Spacekids",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs_fR3-4eqYvKURICXGEI6AWATt2Gr8rrO7cBnUxz7cA&s=10"},
     {name:"Doms Xi Pencils",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFMsrnGlcqzaTYNSuPpOsacIwZm9hIcEj0k6RrsH2oDw&s=10"},
     {name:"Apsara Platinum",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqXJyG82OEfqESQOg90OB7jJ2pzbn0fzf_9MTwsNeE2GVeiXXrWKaNd9kJ&s=10"},
@@ -660,9 +703,8 @@ const inventory = {
 
 renderShop();
 updateCartDOM();
-updateSaleUI();
-setInterval(updateSaleUI,1000);
+detectMyLocation();
 setInterval(()=>renderShop(document.getElementById('searchInput').value),5000);
 </script>
 </body>
-</html>
+</html
