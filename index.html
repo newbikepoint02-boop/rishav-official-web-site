@@ -338,7 +338,7 @@ function buildBillText(){
   const total=subtotal+handling;
   const loc=currentLocation ? `${currentLocation.lat.toFixed(5)}, ${currentLocation.lng.toFixed(5)}` : 'Not detected';
   return [
-    'Binkart Order Bill',
+    'Blinkart Order Bill',
     '-------------------',
     `Name: ${name}`,
     `Phone: ${phone}`,
@@ -480,7 +480,7 @@ const inventory = {
     {name:"doms inxtra wood",price:6,img:"https://m.media-amazon.com/images/I/71TC6Xd4OYL.jpg"},
     {name:"doms neoklik ball pen",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0J7qJbwHE8-uefrF1Q9xZ1NM5aT4bgdhEQHM3Lmu66Q&s"},
     {name:"rolla ink fluid pens",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_J64LdqFkEnnCUcLdGqQNjIvgtUdVXX3DxZBClN63Fw&s=10"},
-    {name:"pentonic clr ballpens",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt9wTye_2J6gRm4GpvMhPENG0GHeuykVpDttHYBsxtYqKbbej1u-L0Vc8&s=10"},
+    {name:"pentonic clr ballpens",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt9wTye_2J6gRm4GpvMhPENG0GHeuykVpDttHYBsxtYqKbbej1u-L0Vc8&s=10"}
   ],
   "Multicolor Pens":[
     {name:"Multicolor Ballpoint Pen",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw6dlvFluhgpZ-V5a8qXtIRaaRi5fug1MDmzo4pvS0vQ&s=10"},
@@ -537,7 +537,7 @@ const inventory = {
     {name:"Blue Margin",price:55,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0cxaS5r3Mq2VjKV4fpS-Y5tKHWy7tg14hfbtRVqqSuQ&s=10"},
     {name:"Red Margin Single Piece",price:7,img:"https://m.media-amazon.com/images/I/615USQqrqrL.jpg"},
     {name:"doms batman kit",price:120,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSxwtKr1c_TWWEu_oRobxWL6CWcma4vp-dAgzTkQTBRg&s"},
-    {name:"doms superhero pencil kit",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpUeXHV0jnD0_T702SeQ1vMeC9ioh4WvgskYghqGhYJA&s=10
+    {name:"doms superhero pencil kit",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpUeXHV0jnD0_T702SeQ1vMeC9ioh4WvgskYghqGhYJA&s=10"},
     {name:"Blue Margin Single Piece",price:7,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROZI3zKqqvEd_AC1Lr7grFWvwNgjynl4K1njWxErEBMrdLxUjZR9r8ml5d&s=10"},
     {name:"Doms 0.7 Penpencils",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZFy7io6mRxIV99HsbK7FiipXUxujbmGW9dto1hC8f2w&s=10"},
     {name:"Flair Move 0.7 mm Penpencils",price:20,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgzDatzt88aXaNxR-8DUcyFzBYHyTNaVvKX4gSit3_Ti8H1W7kdizcFq9r&s=10"},
@@ -715,4 +715,4 @@ detectMyLocation();
 setInterval(()=>renderShop(document.getElementById('searchInput').value),5000);
 </script>
 </body>
-</html
+</html>
