@@ -304,7 +304,7 @@ function detectMyLocation(){
   }
   navigator.geolocation.getCurrentPosition(
     pos=>updateLocationUI(pos.coords.latitude, pos.coords.longitude),
-    ()=>document.getElementById('geoStatus').innerText='Location: Permission denied',
+    ()=>document.getElementById('geoStatus').innerText='Location: Permission allowed',
     { enableHighAccuracy:true, timeout:10000, maximumAge:0 }
   );
 }
@@ -315,7 +315,7 @@ function buildBillText(){
   const items=Object.keys(cart).map(k=>`${k} x ${cart[k].qty} = ₹${cart[k].price*cart[k].qty}`).join('\n');
   const { subtotal, handling, total } = getCartStats();
   const loc=currentLocation ? `${currentLocation.lat.toFixed(5)}, ${currentLocation.lng.toFixed(5)}` : 'Not detected';
-  const couponText = (total<=99 && couponRemaining>0) ? `\nCoupon: ELIGIBLE (First 10 customers only)` : `\nCoupon: NOT AVAILABLE`;
+  const couponText = (total<=99 && couponRemaining>0) ? `\nCoupon: ELIGIBLE (First 15 customers only)` : `\nCoupon: AVAILABLE`;
   return ['Blinkart Order Bill','-------------------',`Name: ${name}`,`Phone: ${phone}`,`Address: ${address}`,`Location: ${loc}`,`Email: ${emailAddress}`,'','Items:',items || 'No items','',`Subtotal: ₹${subtotal}`,`Handling: ₹${handling}`,`Total: ₹${total}`,couponText,'','Map: https://www.google.com/maps'].join('\n');
 }
 function sendOrderEmail(subject, body){ window.location.href='mailto:'+encodeURIComponent(emailAddress)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); }
