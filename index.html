@@ -21,27 +21,14 @@ body{
 }
 body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at top left, rgba(255,102,0,.12), transparent 35%),radial-gradient(circle at bottom right, rgba(255,242,0,.14), transparent 38%);z-index:-1;}
 body.dark{background:#111;color:#f3f3f3;}
-body.dark .card, body.dark .modal-content, body.dark .system-box, body.dark .map-box, body.dark .sale-banner{background:#1d1d1d;color:#f3f3f3;}
+body.dark .card, body.dark .modal-content{background:#1d1d1d;color:#f3f3f3;}
 body.dark .search-box input, body.dark .summary-section, body.dark .checkout-list{background:#222;color:#f3f3f3;}
 body.dark .category-title{background:#2a2a2a;color:#fff3c4;border-left-color:var(--primary);}
 body.dark .action-btn{background:#2a2a2a;color:#fff;}
 body.dark .add-btn{background:var(--primary);color:#fff;}
 body.dark .remove-btn{background:#3a3a3a;color:#fff;}
 body.dark .remove-btn.active{background:#d40000;color:#fff;}
-body.dark .setting-row button,
-body.dark .system-actions button,
-body.dark .map-actions button,
-body.dark .close-btn,
-body.dark .order-btn,
-body.dark .action-btn{color:#fff;opacity:1;}
-body.dark .customer-form h3,
-body.dark .modal-content h2,
-body.dark .sale-title,
-body.dark .sale-subtitle,
-body.dark .price{color:#fff;}
-body.dark .handling-note,
-body.dark .small,
-body.dark .cart-item .item-breakdown{color:#cfcfcf;}
+body.dark .close-btn, body.dark .order-btn, body.dark .action-btn{color:#fff;opacity:1;}
 #loadingScreen{position:fixed;inset:0;background:var(--accent);display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:99999;transition:.4s ease-out;}
 .loader-logo{font-size:55px;font-weight:900;color:var(--primary);}
 .spinner{width:65px;height:65px;margin-top:20px;border:6px solid white;border-top:6px solid var(--primary);border-radius:50%;animation:spin .8s linear infinite;}
@@ -58,7 +45,11 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 .search-box{margin-top:12px;}
 .search-box input{width:100%;padding:13px;border-radius:10px;border:2px solid var(--primary);font-size:15px;outline:none;background:rgba(255,249,240,.95);}
 .search-box input:focus{box-shadow:0 0 0 3px rgba(255,102,0,.15);}
-.sale-banner,.banner{display:none !important;}
+.timer-box{margin-top:12px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;font-weight:700;text-align:center;border:2px solid var(--primary);}
+.timer-box span{color:var(--accent);}
+.banner-image{width:100%;max-width:1200px;margin:14px auto 0;border-radius:18px;overflow:hidden;border:3px solid var(--primary);box-shadow:0 10px 22px rgba(0,0,0,.12);background:#fff;}
+.banner-image img{display:block;width:100%;height:auto;max-height:220px;object-fit:cover;}
+@media (max-width:768px){.banner-image{max-width:100%;border-radius:14px;margin-top:10px;}.banner-image img{max-height:140px;object-position:center;}}
 .category-title{background:#fff0b0;margin:18px 15px 10px;padding:12px;font-size:20px;font-weight:bold;border-left:6px solid var(--primary);border-radius:10px;color:#111;}
 .container{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px;padding:0 15px 20px;}
 .card{background:rgba(255,255,255,.92);border:2px solid var(--primary);border-radius:18px;padding:15px;text-align:center;box-shadow:0 10px 22px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:space-between;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
@@ -97,11 +88,6 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 .order-btn:disabled{background:#ccc;cursor:not-allowed;}
 .setting-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:12px;border:2px solid var(--primary);border-radius:10px;}
 .setting-row button{padding:8px 12px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;background:#111;color:#fff;}
-.system-box,.map-box{background:#fff6cc;padding:14px;border:2px solid var(--primary);border-radius:12px;margin:18px 15px 0;}
-.system-actions,.map-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
-.system-actions button,.map-actions button{padding:10px 14px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;background:#111;color:#fff;}
-.map-wrap{margin-top:12px;border-radius:14px;overflow:hidden;border:2px solid var(--primary);}
-.small{font-size:12px;color:#666;}
 .checkout-list{margin-top:12px;max-height:220px;overflow:auto;border:1px solid #eee;border-radius:12px;padding:10px;background:#fafafa;}
 .checkout-item{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #e6e6e6;font-size:13px;}
 .checkout-item:last-child{border-bottom:none;}
@@ -110,6 +96,8 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 .map-card iframe{width:100%;height:240px;border:0;}
 .geo-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
 .geo-chip{padding:8px 12px;border-radius:999px;background:#111;color:#fff;font-size:12px;font-weight:700;}
+.coupon-box{margin-top:14px;padding:14px;border:2px solid var(--primary);border-radius:12px;background:#fff8d9;text-align:center;}
+.coupon-img{width:100%;max-width:300px;border-radius:12px;border:2px solid var(--primary);display:block;margin:0 auto 10px;}
 </style>
 </head>
 <body>
@@ -125,6 +113,10 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
       <div class="action-btn" onclick="openSettings()">⚙️ Settings</div>
     </div>
   </div>
+  <div class="timer-box" id="saleTimer">Sale starts in: --</div>
+  <div class="banner-image">
+    <img src="https://i.ibb.co/4ZtW7R7h/image.png" alt="Blinkart Banner">
+  </div>
   <div class="search-box"><input type="text" id="searchInput" placeholder="Search Products"></div>
 </header>
 
@@ -134,50 +126,24 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
   <div class="modal-content">
     <h2>🛍️ Your Cart</h2>
     <div id="cartItems"></div>
-
     <div class="summary-section">
       <div class="summary-row"><span>Subtotal</span><span id="subtotalValue">₹0</span></div>
       <div class="summary-row"><span>Handling</span><span id="handlingValue">₹0</span></div>
       <div class="summary-row total"><span>Total</span><span id="totalValue">₹0</span></div>
     </div>
-
+    <div class="coupon-box" id="couponBox" style="display:none;"></div>
     <div class="checkout-list" id="checkoutList"></div>
-
     <div class="bill-box" id="billBox">Bill preview will appear here after placing order.</div>
-
-    <div class="map-card">
-      <iframe id="cartMap" src="https://www.google.com/maps?q=India&z=5&output=embed" loading="lazy"></iframe>
-    </div>
-
-    <div class="geo-row">
-      <div class="geo-chip" id="geoStatus">Location: Detecting...</div>
-      <div class="geo-chip" id="geoCoords">Coords: -</div>
-    </div>
-
-    <div class="customer-care-box">
-      Customer Care: +919210851432
-    </div>
-
+    <div class="map-card"><iframe id="cartMap" src="https://www.google.com/maps?q=India&z=5&output=embed" loading="lazy"></iframe></div>
+    <div class="geo-row"><div class="geo-chip" id="geoStatus">Location: Detecting...</div><div class="geo-chip" id="geoCoords">Coords: -</div></div>
+    <div class="customer-care-box">Customer Care: +919210851432</div>
     <div class="customer-form">
       <h3>Customer Details</h3>
-      <div class="form-group">
-        <label for="customerName">Name</label>
-        <input id="customerName" type="text" placeholder="Enter your name">
-      </div>
-      <div class="form-group">
-        <label for="customerPhone">Phone</label>
-        <input id="customerPhone" type="text" placeholder="Enter your phone number">
-      </div>
-      <div class="form-group">
-        <label for="customerAddress">Address</label>
-        <textarea id="customerAddress" placeholder="Enter your address"></textarea>
-      </div>
+      <div class="form-group"><label for="customerName">Name</label><input id="customerName" type="text" placeholder="Enter your name"></div>
+      <div class="form-group"><label for="customerPhone">Phone</label><input id="customerPhone" type="text" placeholder="Enter your phone number"></div>
+      <div class="form-group"><label for="customerAddress">Address</label><textarea id="customerAddress" placeholder="Enter your address"></textarea></div>
     </div>
-
-    <div class="modal-buttons">
-      <button class="close-btn" onclick="closeCart()">Close</button>
-      <button class="order-btn" id="orderBtn" onclick="placeOrder()">Place Order</button>
-    </div>
+    <div class="modal-buttons"><button class="close-btn" onclick="closeCart()">Close</button><button class="order-btn" id="orderBtn" onclick="placeOrder()">Place Order</button></div>
   </div>
 </div>
 
@@ -188,9 +154,7 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
     <div class="setting-row"><span>Notifications</span><button onclick="toggleNotifications()">Toggle</button></div>
     <div class="setting-row"><span>Clear Cart</span><button onclick="clearCart()">Clear</button></div>
     <div class="setting-row"><span>Detect Location</span><button onclick="detectMyLocation()">Detect</button></div>
-    <div class="modal-buttons">
-      <button class="close-btn" onclick="closeSettings()">Close</button>
-    </div>
+    <div class="modal-buttons"><button class="close-btn" onclick="closeSettings()">Close</button></div>
   </div>
 </div>
 
@@ -198,17 +162,14 @@ header{background:rgba(255,242,0,.88);backdrop-filter:blur(10px);-webkit-backdro
 function showAdvertisement(){ alert("Blinkart Universe Sale Live!"); }
 setTimeout(()=>{document.getElementById('loadingScreen').style.display='none';},1500);
 
-let cart={}, notificationsEnabled=true, updateDay='', currentLocation=null;
-const emailAddress='newbikepoint02@gmai.com', phoneNumber='+919210851432', HANDLING_CHARGE=2;
+let cart={}, notificationsEnabled=true, currentLocation=null, couponRemaining=10;
+const emailAddress='newbikepoint02@gmai.com', HANDLING_CHARGE=2;
 
 function getSaleWindow(){
-  const now=new Date();
-  const start=new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0, 0);
-  const end=new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 0, 0);
-  const mid=new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 30, 0);
-  return { now, start, mid, end };
+  const start=new Date(2026, 7, 2, 6, 0, 0);
+  const end=new Date(2026, 7, 4, 20, 0, 0);
+  return { now:new Date(), start, end };
 }
-
 function notify(msg){
   if(!notificationsEnabled) return;
   const n=document.getElementById('notification');
@@ -217,18 +178,50 @@ function notify(msg){
   clearTimeout(window.nt);
   window.nt=setTimeout(()=>n.classList.remove('show'),2600);
 }
-
 function saleDiscount(){
-  const { now, start, mid, end } = getSaleWindow();
-  if(now < start || now >= end) return 0;
-  return now < mid ? 25 : 35;
+  const { now, start, end } = getSaleWindow();
+  return (now >= start && now < end) ? 20 : 0;
 }
-
 function applyDiscount(price){
   const d=saleDiscount();
   return d ? +(price*(100-d)/100).toFixed(2) : price;
 }
-
+function getCartStats(){
+  const items=Object.values(cart);
+  const subtotal=items.reduce((s,i)=>s+(i.price*i.qty),0);
+  const qtyTotal=items.reduce((s,i)=>s+i.qty,0);
+  const handling=qtyTotal*HANDLING_CHARGE;
+  const total=subtotal+handling;
+  return { subtotal, qtyTotal, handling, total };
+}
+function renderCouponBox(){
+  const box=document.getElementById('couponBox');
+  const { total } = getCartStats();
+  if(total<=99 && couponRemaining>0){
+    box.style.display='block';
+    box.innerHTML=`<img class="coupon-img" src="https://i.ibb.co/67rD02tp/image.png" alt="Coupon"><div><b>First 10 customers only</b></div><div>Coupon available: ${couponRemaining} left</div><div>Valid on order total up to ₹99</div>`;
+  }else{
+    box.style.display='none';
+    box.innerHTML='';
+  }
+}
+function updateTimer(){
+  const box=document.getElementById('saleTimer');
+  const { now, start, end } = getSaleWindow();
+  let diff = start - now;
+  if(now >= start && now < end){
+    diff = end - now;
+    const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+    box.innerText=`Sale live! Ends in: ${d}d ${h}h ${m}m ${s}s`;
+    return;
+  }
+  if(now >= end){
+    box.innerText='Sale ended';
+    return;
+  }
+  const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+  box.innerText=`Sale starts in: ${d}d ${h}h ${m}m ${s}s`;
+}
 function renderShop(filterTerm=""){
   const mainDiv=document.getElementById('main');
   mainDiv.innerHTML="";
@@ -247,7 +240,7 @@ function renderShop(filterTerm=""){
       const salePrice=applyDiscount(item.price);
       const card=document.createElement('div');
       card.className='card';
-      card.innerHTML = `
+      card.innerHTML=`
         <div>
           <img class="product-img" src="${item.img}" alt="${item.name}" onerror="this.src='https://placehold.co/150?text=No+Image'">
           <h4>${item.name}</h4>
@@ -265,17 +258,13 @@ function renderShop(filterTerm=""){
     mainDiv.appendChild(container);
   }
 }
-
 function addToCart(name, price){ if(cart[name]) cart[name].qty++; else cart[name]={price,qty:1}; updateCartDOM(); renderShop(document.getElementById('searchInput').value); }
 function removeFromCart(name){ if(!cart[name]) return; cart[name].qty--; if(cart[name].qty<=0) delete cart[name]; updateCartDOM(); renderShop(document.getElementById('searchInput').value); }
-
 function updateCartDOM(){
   let count=0, subtotal=0, handlingTotal=0;
   const cartItemsDiv=document.getElementById('cartItems');
   const checkoutList=document.getElementById('checkoutList');
-  if(!cartItemsDiv || !checkoutList) return;
-  cartItemsDiv.innerHTML="";
-  checkoutList.innerHTML="";
+  cartItemsDiv.innerHTML=""; checkoutList.innerHTML="";
   for(const name in cart){
     count+=cart[name].qty;
     const totalItemCost=cart[name].price*cart[name].qty;
@@ -283,16 +272,11 @@ function updateCartDOM(){
     handlingTotal+=HANDLING_CHARGE*cart[name].qty;
     const row=document.createElement('div');
     row.className='cart-item';
-    row.innerHTML=
-      '<div class="item-details">'+
-        '<div class="item-name">'+name+'</div>'+
-        '<div class="item-breakdown">₹'+cart[name].price+' × '+cart[name].qty+'</div>'+
-      '</div>'+
-      '<div style="font-weight:bold; align-self:center;">₹'+totalItemCost+'</div>';
+    row.innerHTML=`<div class="item-details"><div class="item-name">${name}</div><div class="item-breakdown">₹${cart[name].price} × ${cart[name].qty}</div></div><div style="font-weight:bold; align-self:center;">₹${totalItemCost}</div>`;
     cartItemsDiv.appendChild(row);
     const c=document.createElement('div');
     c.className='checkout-item';
-    c.innerHTML='<span>'+name+' × '+cart[name].qty+'</span><span>₹'+totalItemCost+'</span>';
+    c.innerHTML=`<span>${name} × ${cart[name].qty}</span><span>₹${totalItemCost}</span>`;
     checkoutList.appendChild(c);
   }
   document.getElementById('badge').innerText=count;
@@ -301,20 +285,18 @@ function updateCartDOM(){
   document.getElementById('handlingValue').innerText='₹'+handlingTotal;
   document.getElementById('totalValue').innerText='₹'+(subtotal+handlingTotal);
   document.getElementById('orderBtn').disabled=count===0;
-
+  renderCouponBox();
   if(count===0){
     cartItemsDiv.innerHTML="<p style='text-align:center;color:#666;padding:20px 0;'>Your cart is empty.</p>";
     checkoutList.innerHTML="<p style='text-align:center;color:#666;padding:10px 0;'>No items in checkout.</p>";
   }
 }
-
 function updateLocationUI(lat, lng){
   currentLocation={lat,lng};
   document.getElementById('geoStatus').innerText='Location: Detected';
   document.getElementById('geoCoords').innerText='Coords: '+lat.toFixed(5)+', '+lng.toFixed(5);
   document.getElementById('cartMap').src='https://www.google.com/maps?q='+lat+','+lng+'&z=16&output=embed';
 }
-
 function detectMyLocation(){
   if(!navigator.geolocation){
     document.getElementById('geoStatus').innerText='Location: Not supported';
@@ -326,54 +308,30 @@ function detectMyLocation(){
     { enableHighAccuracy:true, timeout:10000, maximumAge:0 }
   );
 }
-
 function buildBillText(){
   const name=document.getElementById('customerName').value.trim();
   const phone=document.getElementById('customerPhone').value.trim();
   const address=document.getElementById('customerAddress').value.trim();
   const items=Object.keys(cart).map(k=>`${k} x ${cart[k].qty} = ₹${cart[k].price*cart[k].qty}`).join('\n');
-  const subtotal=Object.values(cart).reduce((s,i)=>s+(i.price*i.qty),0);
-  const qtyTotal=Object.values(cart).reduce((s,i)=>s+i.qty,0);
-  const handling=qtyTotal*HANDLING_CHARGE;
-  const total=subtotal+handling;
+  const { subtotal, handling, total } = getCartStats();
   const loc=currentLocation ? `${currentLocation.lat.toFixed(5)}, ${currentLocation.lng.toFixed(5)}` : 'Not detected';
-  return [
-    'Blinkart Order Bill',
-    '-------------------',
-    `Name: ${name}`,
-    `Phone: ${phone}`,
-    `Address: ${address}`,
-    `Location: ${loc}`,
-    `Email: ${emailAddress}`,
-    '',
-    'Items:',
-    items || 'No items',
-    '',
-    `Subtotal: ₹${subtotal}`,
-    `Handling: ₹${handling}`,
-    `Total: ₹${total}`,
-    '',
-    'Map: https://www.google.com/maps'
-  ].join('\n');
+  const couponText = (total<=99 && couponRemaining>0) ? `\nCoupon: ELIGIBLE (First 10 customers only)` : `\nCoupon: NOT AVAILABLE`;
+  return ['Blinkart Order Bill','-------------------',`Name: ${name}`,`Phone: ${phone}`,`Address: ${address}`,`Location: ${loc}`,`Email: ${emailAddress}`,'','Items:',items || 'No items','',`Subtotal: ₹${subtotal}`,`Handling: ₹${handling}`,`Total: ₹${total}`,couponText,'','Map: https://www.google.com/maps'].join('\n');
 }
-
-function sendOrderEmail(subject, body){
-  const mailto='mailto:'+encodeURIComponent(emailAddress)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-  window.location.href=mailto;
-}
-
+function sendOrderEmail(subject, body){ window.location.href='mailto:'+encodeURIComponent(emailAddress)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); }
 function placeOrder(){
   const name=document.getElementById('customerName').value.trim();
   const phone=document.getElementById('customerPhone').value.trim();
   const address=document.getElementById('customerAddress').value.trim();
   if(!name || !phone || !address){ alert('Please fill customer details'); return; }
   if(Object.keys(cart).length===0){ alert('Cart is empty'); return; }
+  const { total } = getCartStats();
+  if(total<=99 && couponRemaining>0) couponRemaining--;
   const bill=buildBillText();
   document.getElementById('billBox').innerText=bill;
   sendOrderEmail('Blinkart Order Bill', bill);
   alert('Order prepared for email: ' + emailAddress);
 }
-
 function openCart(){ document.getElementById('cartModal').style.display='flex'; updateCartDOM(); detectMyLocation(); }
 function closeCart(){ document.getElementById('cartModal').style.display='none'; }
 function openSettings(){ document.getElementById('settingsModal').style.display='flex'; }
@@ -381,11 +339,9 @@ function closeSettings(){ document.getElementById('settingsModal').style.display
 function clearCart(){cart={};updateCartDOM();renderShop();notify('Cart cleared');}
 function toggleDarkMode(){document.body.classList.toggle('dark');}
 function toggleNotifications(){notificationsEnabled=!notificationsEnabled;}
-function setMonthlyUpdate(day){ updateDay=day; }
-function goToCurrentLocation(){ detectMyLocation(); }
 function sendAlertEmail(){ notify('Alert sent'); }
-
 document.getElementById('searchInput').addEventListener('input', e=>renderShop(e.target.value));
+setInterval(updateTimer,1000);
 
 const inventory = {
   "Premium Pens":[
@@ -515,7 +471,7 @@ const inventory = {
     {name:"Apsara Princess Pencils",price:90,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo08TiHKy6NP6-STiZJweuoFY9jzDgzaUzAqnak-DB1A&s=10"},
     {name:"Doms Groove",price:65,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNwBIo4zJgTL3lRn_VHqbMICJ9A-hY8CzEdzM3wGbujA&s=10"},
     {name:"unomax smartclick 0.7 mm penpencil",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdHdoWXDH2oIbgNUsycVAv8N2JkdYeiEOVADvicZPFoFxp6-FkjoiqKys&s=10"},
-    {name:"doms wonder women kit",price:110,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHr0Eqn0w24qpxtG1qJ5rpPr-MnM-2-XIWeLuNUpwNNw&s=10"},
+    {name:"doms wonder women kit",price:110,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHr0Eqn0w24qpxtG1qJ5rpPr-MmN-2-XIWeLuNUpwNNw&s=10"},
     {name:"doms zillion pencils",price:75,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAhMLvzEAunysWmNB_Bjpq24Oi6blfRved6z0QXGDUUdCsRy12HZ7XgKc&s=10"}
   ],
   "Essentials":[
@@ -611,6 +567,11 @@ const inventory = {
     {name:"doms stationery pencilbox kit",price:15,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNvakhceOf6d1CWoGt1ySex957ryKky0h_Yexs_qUm1A&s=10"},
     {name:"flair 2.0 sharp pro",price:10,img:"https://www.rapiddeliveryservices.in/uploads/webp/pro-sharp-20_67489-.webp"}
   ],
+  " bag locks":[
+  {name:"number lock",price:45,img:"https://images.meesho.com/images/products/537810501/vyfsv_512.webp?width=256"},
+  {name:"padlock",price:35,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwEw4UkUlvteIqJoIu_NDySa9AoLDJLSgxA-XuX9Bl8G7dfiKbFqL8bnw&s=10"},
+  {name:"normal lock",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDz4pe3H-LR0V_ZiVmM5jfSnmggMN1qbvurqyAmpnPbUjoBEKJgvvQ2FP8&s=10"},
+  ],
   "Colors & Art":[
     {name:"Acrylic Colours",price:350,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVQ7qSipKnN3PS5ozWNJfYnyLehV5JHQWOEqtuxWn5wwUFbWF7MQ_guilk&s=10"},
     {name:"Plastic Crayons",price:56,img:"https://m.media-amazon.com/images/I/617izevZSlS.jpg"},
@@ -661,8 +622,48 @@ const inventory = {
     {name:"Spiderman Cards",price:342,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQy8joIYcL2NWJr_wc_gTBxO386hM1-v2PyQ&s"},
     {name:"Spiderman Card 2",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrlJoJQGjGt6OWczOQdWvGjpx4QEr1-YJmYw&s"},
     {name:"pokemon rainbow Card",price:199,img:"https://images.meesho.com/images/products/365782062/begqk_512.webp?width=512"},
-    {name:"naruto gaming cards",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp7D2plzr4nHMIDpqGY8hAhq8tamyXgHEHA2PvzHxiJg&s=10"}
-  ],
+    {name:"naruto gaming cards",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp7D2plzr4nHMIDpqGY8hAhq8tamyXgHEHA2PvzHxiJg&s=10"},
+    ],
+    "Pencils & Mechanical":[
+{name:"Apsara Princess Pencils",price:90,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuDpThsjabTt3QE_otT0Wn6LutPe9Nw5n4w&s"},
+{name:"Doms Groove",price:65,img:"https://sbcstore.in/wp-content/uploads/2023/11/71m0aq5u1kL._SL1500_.jpg"},
+{name:"Doms Yodo Pencils",price:60,img:"https://static1.industrybuying.com/products/office-supplies/pens-pencils-writing-supplies/pencils/OFF.PEN.927159175_1724732549179.webp"},
+{name:"Apsara Spacekids",price:60,img:"https://paperquirks.in/cdn/shop/files/SpacekidsPencils.jpg?v=1705926195"},
+{name:"Doms Xi Pencils",price:50,img:"https://m.media-amazon.com/images/I/71g9ntCnpYL.jpg"},
+{name:"Apsara Platinum",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTl-lHXQQFDmDnzCOWt9XuUIFdnCHeIrmfNg&s"},
+{name:"Natraj Bold",price:50,img:"https://www.rapiddeliveryservices.in/uploads/webp/78247-.webp"},
+{name:"Flair Penpencil 0.7",price:20,img:"https://truewholesale.in/storage/product-images/17389133481.jpg"},
+{name:"Hauser 2.0 Penpencils",price:20,img:"https://truewholesale.in/storage/product-images/17356355410.jpg"},
+{name:"Flair Penpencil 2.0",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0TJT61tyehid_dfvM09wW8XqNzWWwTqLNHrc8-_Iefpi35jPuzY954EM&s=10"},
+{name:"Reynolds 0.5 Penpencil",price:6,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS17-LPR8v2rPJ_5TNdvi5--7I6ILP6XlvT4A&s"},
+{name:"Doms Neon Pencil",price:50,img:"https://domsindia.com/wp-content/uploads/2025/04/158-scaled.webp"},
+{name:"Doms Fusion Pencil",price:75,img:"https://images.meesho.com/images/products/388728801/tctjn_512.webp?width=512"},
+{name:"Hauser XO Pencil",price:65,img:"https://chetna.store/cdn/shop/files/images_8910cfc3-07b5-4ebb-a5ef-7b36c33ec92e.jpg?v=1760100731"},
+{name:"Apsara Writing Pencils",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8Yw3FUGatkRqf8oQa8qwBF_1FIypATVsKMg&s"},
+{name:"Red Margin",price:53,img:"https://m.media-amazon.com/images/I/615USQqrqrL.jpg"},
+{name:"Blue Margin",price:53,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSFPk2UWlldAwGsQfsOWetuujRVx2DKRcgTg&s"},
+{name:"Apsara Matt Magic",price:60,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2WnYC6Nb555zi86NBefVRmDfaH3IzJ9UuFw&s"},
+{name:"Apsara Avengers Pencils",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFnthbHb19-Cl6CRC9xMwSsRQxUryz70Z5kg&s"},
+{name:"Endless Charcoal Graphite",price:22,img:"https://m.media-amazon.com/images/I/61LUp7y6a3L.jpg"},
+{name:"Flair Carbonix 0.7",price:10,img:"https://i0.wp.com/grovertechno.com/wp-content/uploads/2024/08/39.png?fit=1000%2C1000&ssl=1"},
+{name:"Flair Move 0.7 Penpencils",price:20,img:"https://truewholesale.in/storage/product-images/17195547430.jpg"},
+{name:"Hauser Superdark 0.7",price:15,img:"https://sharmag.co.in/wp-content/uploads/2025/01/IMG_20250131_101532.jpg"},
+{name:"Flair 2.0 Glow Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5-J20NJPYfVz5n4MUcBTql7H47t0tuGNQDg&s"},
+{name:"Flair Diva 2.0 Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI-tk-RsRdFocMbBEUM-Rmm5_yeTGzpn9o7w&s"},
+{name:"Flair Thrill 2.0 Penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7FkM02QFgpmHiOmUWwFKfUOLq_xloMBHxDA&s"},
+{name:"Red Margin Single Piece",price:7,img:"https://www.stationerywalebhaiya.com/cdn/shop/files/rn-image_picker_lib_temp_9915a275-dadf-4eca-837b-9b27a145b77d.jpg?v=1762713432&width=416"},
+{name:"Blue Margin Single Piece",price:7,img:"https://rukmini1.flixcart.com/image/300/300/pencil/x/t/8/nataraj-checking-pencils-blue-original-imadkxapgfszgnyr.jpeg"},
+{name:"Unomax SmartClick 0.7 mm Penpencil",price:10,img:"https://www.giftsandpens.com/cdn/shop/files/unomax-click-it-pearl-mechanical-pencil-0-7mm-294.webp?v=1779687479"},
+{name:"doms superhero kit",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpUeXHV0jnD0_T702SeQ1vMeC9ioh4WvgskYghqGhYJA&s=10"},
+{name:"doms wonder women kids pencil kit",price:120,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4ysAIhkpW3-cHLPGaGkeL3W1fodLG9jGb2s6JAA0kew&s"},
+{name:"doms batman pencil kit",price:110,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFLg0XTF7BFERh5YDyKFJbMuxtLoj4o6L2fCZRIcbO5w&s"},
+{name:"unomax smartclick 0.7 mm penpencil",price:25,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTU8yh4jqyCb31pX7RpDjMlOk4c6eMi_gcaWEDt-2s3g&s"},
+{name:"camlin techno mechanical 0.7 mm penpencil",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5npoX29Oz6W1cuLi1kwelPDUHwxEv5bKfOKLHq8nQH4_NIMeutO_WUJ0&s=10"},
+{name:"camlin klick 0.7 mm penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9mU-4h5PDIu7Rs8hirXLQhJWrq7xJED_0cnuBixoJwQ4uBrdUM6iVcC2p&s=10"},
+{name:"doms zoom pencils",price:62,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQIAMUkU1bCEnGH3pSMpLU52X8WZQqBt14Qzp3_xTSjw&s=10"},
+{name:"doms ultraclick 0.7 mm penpencil",price:10,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgFl-X7_mJz0_1ATw6yzpQ9jzWf5I1AHTa9W3wSw9Nlg&s=10"},
+{name:"apsara micky mouse pencils",price:100,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTujCCoSc_EVYyL9VYVd7G7sI3_gwKEkvRZ6sPOYUEUBA&s=10"}
+],
   "Notebooks":[
     {name:"Zingy Apple 140 Pages",price:30,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyptGB4Zv1DZMwZua4O5vwn2cBH2JrY0mjhw&s"},
     {name:"apple zingy plus spiral copy",price:75,img:"https://quickcartapp.in/media/image?path=uploads%2Fmedia%2F2026%2FApple-spider-notebook-200page.jpeg&width=610&quality=80"},
@@ -678,17 +679,17 @@ const inventory = {
     {name:"Doms 172 Pages Notebook",price:48,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ3gCRdXHSK2fArFD8rx_YJ3pR3J5N1Swg2Q&s"},
     {name:"Classmate Bar Graph Copy",price:32,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQIkcOOObIBNnWM31JLvMZr14J0FHulKDlmw&s"},
     {name:"Clasmate Geometry Copy 140 Pages",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1rCu-U_vWDICg91Z2bU6h-LsPFQNOWkTcPQ&s"},
-    {name:"Maths Practical Spiral Notebook",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTINAotvBk6eJMywL2m6JJkAPNH4eMEDz8H7A&s"},
+    {name:"Maths Practical Spiral Notebook",price:50,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTINAotvBk6eJMywL2m6JJkAPNH4eMեդz8H7A&s"},
     {name:"Doms A4 Register Notebook",price:69,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ80M4QpfEGB1iklh9R5TFbsxKLhJqTlWiGAg&s"},
     {name:"Doms Spiral Notebook",price:180,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkKk3UTo90xFfiaiJ2UrHbZjyBBk-TZsTjuw&s"},
-    {name:"diary",price:150,img:"https://tiimg.tistatic.com/fp/1/007/974/rexine-blue-cover-100-gsm-rectangular-a4-size-notebook-diary-418.jpg"}
+    {name:"diary",price:150,img:"https://tiimg.tistatic.com/fp/1/007/974/rexine-blue-cover-100-gsm-rectangular-a4-size-notebook-diary-418.jpg"},
+    {name:"zingy apple 172 pages copy",price:40,img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG5JiKuYPi_1nPwooWzx3F6gwhWVB8UGDbP7NMNFfcJw&s"}
   ]
 };
-
 renderShop();
 updateCartDOM();
 detectMyLocation();
-setInterval(()=>renderShop(document.getElementById('searchInput').value),5000);
+updateTimer();
 </script>
 </body>
 </html>
